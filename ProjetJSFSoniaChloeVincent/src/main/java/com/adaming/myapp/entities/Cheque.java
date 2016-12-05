@@ -1,5 +1,27 @@
+/*===================================
+*CLASS: Cheque
+*VERSION: v1
+*NAME: chloe
+*DATE: 05-12-2016
+*====================================*/
 package com.adaming.myapp.entities;
 
-public class Cheque {
+import java.sql.Date;
+
+/*@Entity
+@DiscriminatorValue("Cheq")*/
+public class Cheque extends Payement{
+
+	public Cheque() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Cheque(long idPayement, double coutTotal, Date date) {
+		super(idPayement, coutTotal, date);
+		// TODO Auto-generated constructor stub
+	}
+	
+	
 
 }

@@ -1,26 +1,25 @@
 /*===================================
-*CLASS: ChambreSuite
+*CLASS: CarteBancaire
 *VERSION: v1
 *NAME: chloe
 *DATE: 05-12-2016
 *====================================*/
-
 package com.adaming.myapp.entities;
 
-/*@Entity
-@DiscriminatorValue("ChSuite")*/
-public class ChambreSuite extends Chambre{
+import java.sql.Date;
 
-	public ChambreSuite() {
+/*@Entity
+@DiscriminatorValue("CaBanc")*/
+public class CarteBancaire extends Payement{
+
+	public CarteBancaire() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public ChambreSuite(long idChambre, long numChambre, String description) {
-		super(idChambre, numChambre, description);
+	public CarteBancaire(long idPayement, double coutTotal, Date date) {
+		super(idPayement, coutTotal, date);
 		// TODO Auto-generated constructor stub
 	}
-	
-	
-	
+
 }
