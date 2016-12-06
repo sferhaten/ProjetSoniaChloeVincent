@@ -10,18 +10,26 @@ package com.adaming.myapp.entities;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+@Entity
 public class Facture {
 	
 //==========================
 //	ATTRIBUTS
 //==========================	
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY) 
 	private long idFacture;
 	private double coutResa;
 	private double coutConso;
@@ -34,8 +42,8 @@ public class Facture {
 	private Set<Consomation> consomation = new HashSet<Consomation>();
 	
 	@OneToOne
-	@JoinColumn (name ="payment")
-	private Payement payment;
+	@JoinColumn (name ="payement")
+	private Payement payement;
 	
 	@ManyToOne
 	@JoinColumn (name= "hotel")
@@ -96,13 +104,13 @@ public class Facture {
 	}
 
 
-	public Payement getPayment() {
-		return payment;
+	public Payement getPayement() {
+		return payement;
 	}
 
 
-	public void setPayment(Payement payment) {
-		this.payment = payment;
+	public void setPayement(Payement payement) {
+		this.payement = payement;
 	}
 
 

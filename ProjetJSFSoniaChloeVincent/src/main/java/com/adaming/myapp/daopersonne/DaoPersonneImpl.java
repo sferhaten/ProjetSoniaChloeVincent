@@ -6,6 +6,6 @@ import javax.persistence.PersistenceContext;
 public class DaoPersonneImpl implements IDaoPersonne {
 	
 	@PersistenceContext
-	private EntityManager em;
+	protected EntityManager em;
 
 }

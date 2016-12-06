@@ -16,6 +16,9 @@ import javax.persistence.DiscriminatorType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
@@ -28,6 +31,9 @@ public abstract class Chambre {
 //==========================
 //	ATTRIBUTS
 //==========================
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY) 
 	private long idChambre;
 	private long numChambre;
 	private String description;

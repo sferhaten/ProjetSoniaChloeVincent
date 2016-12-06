@@ -6,19 +6,27 @@
 *==================================*/
 package com.adaming.myapp.entities;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+@Entity
 public class Consomation {
 	
 	//==========================
 	//Attributs
 	//==========================
-	
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY) 
 	private Long idConsommation;
 	private Integer quantite;
 	
 	
+	//produit
 	@ManyToOne
 	@JoinColumn(name = "produit")
 	private Produit produit;
