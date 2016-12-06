@@ -8,21 +8,66 @@
 
 package com.adaming.myapp.entities;
 
+import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
 
+@Entity
 public class Hotel {
 	
 	//==========================
 	//Attributs
 	//==========================
 	
-	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY) 
 	private Long idHotel;
 	private String nomHotel;
+	
+	@Embedded
 	private Adresse adresseHotel;
 	private String telephone;
 	private Integer qualite;
+	
+	//==========================
+	//Associations
+	//==========================
+	
+	//Produit
+	
+	@OneToMany(fetch=FetchType.EAGER)
+	@JoinTable(name ="produit_to_hotel")
+	private Set<Produit> produits = new HashSet<Produit>();
+	
+	
+	//Chambre
+	
+	@OneToMany(fetch=FetchType.EAGER)
+	@JoinTable(name ="chambre_to_hotel")
+	private Set<Chambre> chambres = new HashSet<Chambre>();
+	
+	//Personne
+	@OneToMany(fetch=FetchType.EAGER)
+	@JoinTable(name ="personne_to_hotel")
+	private Set<Personne> personnes = new HashSet<Personne>();
+	
+	
+	//reservation
+	@OneToMany(mappedBy="hotel", fetch=FetchType.EAGER)
+	private Set<Reservation> reservations = new HashSet<Reservation>();
+	
+	
+	//facture
+	@OneToMany(mappedBy="hotel", fetch=FetchType.EAGER)
+	private Set<Facture> factures = new HashSet<Facture>();
 	
 	
 	//==========================
@@ -108,10 +153,72 @@ public class Hotel {
 		this.qualite = qualite;
 	}
 	
+	public Set<Produit> getProduits() {
+		return produits;
+	}
+
+
+
+	public void setProduits(Set<Produit> produits) {
+		this.produits = produits;
+	}
+
+
+
+	public Set<Chambre> getChambres() {
+		return chambres;
+	}
+
+
+
+	public void setChambres(Set<Chambre> chambres) {
+		this.chambres = chambres;
+	}
+
+
+
+	public Set<Personne> getPersonnes() {
+		return personnes;
+	}
+
+
+
+	public void setPersonnes(Set<Personne> personnes) {
+		this.personnes = personnes;
+	}
+
+
+
+	public Set<Reservation> getReservations() {
+		return reservations;
+	}
+
+
+
+	public void setReservations(Set<Reservation> reservations) {
+		this.reservations = reservations;
+	}
+
+
+
+	public Set<Facture> getFactures() {
+		return factures;
+	}
+
+
+
+	public void setFactures(Set<Facture> factures) {
+		this.factures = factures;
+	}
+
+
+	
 	//==========================
 	//To string
 	//==========================
 	
+
+
 	@Override
 	public String toString() {
 		return "Hotel [idHotel=" + idHotel + ", nomHotel=" + nomHotel

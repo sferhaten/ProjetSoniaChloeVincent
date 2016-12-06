@@ -6,8 +6,11 @@
 *====================================*/
 package com.adaming.myapp.entities;
 
-/*@Entity
-@DiscriminatorValue("ChSim)*/
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+
+@Entity
+@DiscriminatorValue("Simple")
 public class ChambreSimple extends Chambre {
 
 	public ChambreSimple() {

@@ -7,6 +7,9 @@
 
 package com.adaming.myapp.entities;
 
+import javax.persistence.Embeddable;
+
+@Embeddable
 public class Adresse {
 	
 	//==========================

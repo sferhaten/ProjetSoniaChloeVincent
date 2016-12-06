@@ -8,7 +8,16 @@ package com.adaming.myapp.entities;
 
 import java.util.Date;
 
-public class Employe extends Personne {
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+
+@Entity
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+public abstract class  Employe extends Personne {
 	
 	//==========================
 	//Attributs

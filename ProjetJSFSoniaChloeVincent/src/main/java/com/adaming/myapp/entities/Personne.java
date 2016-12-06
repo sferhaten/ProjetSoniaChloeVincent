@@ -8,8 +8,22 @@
 package com.adaming.myapp.entities;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
-public class Personne {
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.OneToMany;
+
+@Entity
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name ="Typepersonne", discriminatorType=DiscriminatorType.STRING)
+public abstract class Personne {
 	
 	//==========================
 	//Attributs
@@ -19,9 +33,15 @@ public class Personne {
 	protected String nom;
 	protected String prenom;
 	protected Date dateDeNaissance;
+	
+	@Embedded
 	protected Adresse adressePersonne;
 	
+	@OneToMany(mappedBy="personne", fetch=FetchType.EAGER)
+	private Set<Consomation>consomations= new HashSet<Consomation>();
 	
+	@OneToMany(mappedBy = "reservation", fetch=FetchType.EAGER)
+	private Set<Reservation> reservations= new HashSet<Reservation>();
 	//==========================
 	//Constructeurs
 	//==========================
@@ -76,11 +96,29 @@ public class Personne {
 		this.adressePersonne = adressePersonne;
 	}
 	
+	
+	
+	
+	
+	
+	public Set<Consomation> getConsomations() {
+		return consomations;
+	}
+	public void setConsomations(Set<Consomation> consomations) {
+		this.consomations = consomations;
+	}
+	
+	
+	
+	public Set<Reservation> getReservations() {
+		return reservations;
+	}
+	public void setReservations(Set<Reservation> reservations) {
+		this.reservations = reservations;
+	}
 	//==========================
 	//To string
 	//==========================
-	
-	
 	@Override
 	public String toString() {
 		return "Personne [idPersonne=" + idPersonne + ", nom=" + nom

@@ -8,11 +8,22 @@
 
 package com.adaming.myapp.entities;
 
-/*@Entity
-@DiscriminatorValue("Chambre")
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.OneToMany;
+
+@Entity
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="TYPE",discriminatorType=DiscriminatorType.STRING)*/
-public class Chambre {
+@DiscriminatorColumn(name ="Type", discriminatorType=DiscriminatorType.STRING)
+public abstract class Chambre {
 	
 //==========================
 //	ATTRIBUTS
@@ -20,6 +31,12 @@ public class Chambre {
 	private long idChambre;
 	private long numChambre;
 	private String description;
+	
+	@OneToMany (mappedBy = "chambre", fetch=FetchType.EAGER)
+	private Set<Reservation> reservations = new HashSet<Reservation>();
+	
+	
+	
 	
 //==========================
 //	CONSTRUCTEURS
@@ -43,6 +60,14 @@ public class Chambre {
 	public long getIdChambre() {
 		return idChambre;
 	}
+	public Set<Reservation> getReservations() {
+		return reservations;
+	}
+
+	public void setReservations(Set<Reservation> reservations) {
+		this.reservations = reservations;
+	}
+
 	public void setIdChambre(long idChambre) {
 		this.idChambre = idChambre;
 	}

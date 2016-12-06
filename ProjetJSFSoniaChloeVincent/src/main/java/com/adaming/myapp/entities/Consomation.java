@@ -6,6 +6,9 @@
 *==================================*/
 package com.adaming.myapp.entities;
 
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 public class Consomation {
 	
 	//==========================
@@ -14,6 +17,16 @@ public class Consomation {
 	
 	private Long idConsommation;
 	private Integer quantite;
+	
+	
+	@ManyToOne
+	@JoinColumn(name = "produit")
+	private Produit produit;
+	
+	
+	@ManyToOne
+	@JoinColumn(name ="personne")
+	private Personne personne;
 	
 	//==========================
 	//Constructeurs
@@ -49,10 +62,26 @@ public class Consomation {
 		this.quantite = quantite;
 	}
 	
-	
+	public Produit getProduit() {
+		return produit;
+	}
+
+	public void setProduit(Produit produit) {
+		this.produit = produit;
+	}
+
+	public Personne getPersonne() {
+		return personne;
+	}
+
+	public void setPersonne(Personne personne) {
+		this.personne = personne;
+	}
 	//==========================
 	//To string
 	//==========================
+
+	
 
 	@Override
 	public String toString() {

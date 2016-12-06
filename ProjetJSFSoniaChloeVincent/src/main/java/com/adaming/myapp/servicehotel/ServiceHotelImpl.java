@@ -1,5 +1,15 @@
 package com.adaming.myapp.servicehotel;
 
-public class ServiceHotelImpl {
+import com.adaming.myapp.daohotel.IDaoHotel;
 
+public class ServiceHotelImpl implements IServiceHotel{
+
+	
+	private IDaoHotel dao;
+
+
+	public void setDao(IDaoHotel dao) {
+		this.dao = dao;
+	}
+	
 }

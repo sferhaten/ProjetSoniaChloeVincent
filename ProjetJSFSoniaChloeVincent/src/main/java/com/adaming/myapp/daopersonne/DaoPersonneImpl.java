@@ -1,5 +1,11 @@
 package com.adaming.myapp.daopersonne;
 
-public class DaoPersonneImpl {
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+public class DaoPersonneImpl implements IDaoPersonne {
+	
+	@PersistenceContext
+	private EntityManager em;
 
 }

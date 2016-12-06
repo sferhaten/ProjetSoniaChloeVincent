@@ -8,6 +8,10 @@ package com.adaming.myapp.entities;
 
 import java.util.Date;
 
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+@Entity
+@DiscriminatorValue("Client")
 public class Client extends Personne {
 	
 	//==========================

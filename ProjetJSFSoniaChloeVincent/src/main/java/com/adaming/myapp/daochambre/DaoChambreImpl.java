@@ -1,5 +1,11 @@
 package com.adaming.myapp.daochambre;
 
-public class DaoChambreImpl {
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+public class DaoChambreImpl implements IDaoChambre {
+	
+	@PersistenceContext
+	private EntityManager em;
 
 }

@@ -6,6 +6,12 @@
 *==================================*/
 package com.adaming.myapp.entities;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
+
 public class Produit {
 	
 	//==========================
@@ -17,6 +23,9 @@ public class Produit {
 	private Integer quantite;
 	private Double coutAchat;
 	private Double coutVente;
+	
+	@OneToMany(mappedBy = "produit", fetch=FetchType.EAGER)
+	private Set<Consomation> consomations =new HashSet<Consomation>();
 	
 	//==========================
 	//Constructeurs
@@ -71,11 +80,19 @@ public class Produit {
 		this.coutVente = coutVente;
 	}
 	
+	public Set<Consomation> getConsomations() {
+		return consomations;
+	}
+	public void setConsomations(Set<Consomation> consomations) {
+		this.consomations = consomations;
+	}
+	
 	
 	//==========================
 	//To string
 	//==========================
 	
+
 	@Override
 	public String toString() {
 		return "Produit [idProduit=" + idProduit + ", nom=" + nom

@@ -8,6 +8,10 @@ package com.adaming.myapp.entities;
 
 import java.util.Date;
 
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+
 public class Reservation {
 	
 	private long idReservation;
@@ -15,10 +19,21 @@ public class Reservation {
 	private Date dateSortie;
 	private double coutResa;
 	
+	@ManyToOne
+	@JoinColumn (name ="personne")
+	private Personne personne;
 	
-	/*Client
-	Chambre*/
+	@ManyToOne
+	@JoinColumn (name = "hotel")
+	private Hotel hotel;
 	
+	@ManyToOne
+	@JoinColumn (name = "chambre")
+	private Chambre chambre;
+	
+	@ManyToOne
+	@JoinColumn (name = "facture")
+	private Facture facture;
 //==========================
 //	CONSTRUCTEURS
 //=========================
@@ -63,11 +78,51 @@ public class Reservation {
 		this.coutResa = coutResa;
 	}
 
+	public Personne getPersonne() {
+		return personne;
+	}
 
+
+	public void setPersonne(Personne personne) {
+		this.personne = personne;
+	}
+
+
+	public Hotel getHotel() {
+		return hotel;
+	}
+
+
+	public void setHotel(Hotel hotel) {
+		this.hotel = hotel;
+	}
+
+
+	public Chambre getChambre() {
+		return chambre;
+	}
+
+
+	public void setChambre(Chambre chambre) {
+		this.chambre = chambre;
+	}
+
+
+	public Facture getFacture() {
+		return facture;
+	}
+
+
+	public void setFacture(Facture facture) {
+		this.facture = facture;
+	}
 
 //========================
 //		METHODES
 //========================
+
+	
+
 
 	@Override
 	public String toString() {

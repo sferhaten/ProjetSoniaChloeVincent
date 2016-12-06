@@ -7,11 +7,18 @@
 package com.adaming.myapp.entities;
 
 import java.sql.Date;
-/*@Entity
-@DiscriminatorValue("Payement")
+
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
+import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.OneToOne;
+
+@Entity
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="TYPE",discriminatorType=DiscriminatorType.STRING)*/
-public class Payement {
+@DiscriminatorColumn(name="type", discriminatorType=DiscriminatorType.STRING)
+public abstract class Payement {
 
 //==========================
 //	ATTRIBUTS
@@ -20,6 +27,8 @@ public class Payement {
 	private double coutTotal;
 	private Date date;
 	
+	@OneToOne (mappedBy ="payement")
+	private Facture facture;
 	
 //==========================
 //	CONSTRUCTEURS
@@ -55,12 +64,18 @@ public class Payement {
 	public void setDate(Date date) {
 		this.date = date;
 	}
-
+	public Facture getFacture() {
+		return facture;
+	}
+	public void setFacture(Facture facture) {
+		this.facture = facture;
+	}
 
 //========================
 //		METHODES
 //========================
 	
+
 	@Override
 	public String toString() {
 		return "Payement [idPayement=" + idPayement + ", coutTotal="

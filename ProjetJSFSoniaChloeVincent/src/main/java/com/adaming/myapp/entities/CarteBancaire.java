@@ -8,8 +8,11 @@ package com.adaming.myapp.entities;
 
 import java.sql.Date;
 
-/*@Entity
-@DiscriminatorValue("CaBanc")*/
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+
+@Entity
+@DiscriminatorValue("CB")
 public class CarteBancaire extends Payement{
 
 	public CarteBancaire() {

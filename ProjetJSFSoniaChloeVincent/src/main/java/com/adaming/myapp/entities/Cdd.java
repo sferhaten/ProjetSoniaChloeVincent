@@ -8,6 +8,12 @@ package com.adaming.myapp.entities;
 
 import java.util.Date;
 
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+
+
+@Entity
+@DiscriminatorValue("CDD")
 public class Cdd extends Employe {
 	
 	//==========================

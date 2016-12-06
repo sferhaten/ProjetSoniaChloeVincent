@@ -1,5 +1,12 @@
 package com.adaming.myapp.daopayement;
 
-public class DaoPayementImpl {
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+public class DaoPayementImpl implements IDaoPayement {
+	
+	
+	@PersistenceContext
+	private EntityManager em;
 
 }

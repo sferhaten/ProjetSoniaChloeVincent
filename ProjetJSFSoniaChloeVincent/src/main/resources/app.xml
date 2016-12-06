@@ -11,14 +11,15 @@
 
     <mvc:resources mapping="/resources/**" location="/resources/" />
 	<context:component-scan base-package="com.adaming.myapp" />
-    
+     <mvc:resources mapping="/webjars/**" location="/webjars/"/>
+   
      <!-- injcetion de dépendance Hotel -->
 	<bean id="DaoHotelImpl" class="com.adaming.myapp.daohotel.DaoHotelImpl"></bean>
     <bean id="ServiceHotelImpl" class="com.adaming.myapp.servicehotel.ServiceHotelImpl">
         <property name="dao" ref="DaoHotelImpl"></property>
     </bean>
     
-    <!-- injcetion de dépendance Chambre -->
+   <!-- injcetion de dépendance Chambre -->
     <bean id="DaoChambreImpl" class="com.adaming.myapp.daochambre.DaoChambreImpl"></bean>
     <bean id="ServiceChambreImpl" class="com.adaming.myapp.servicechambre.ServiceChambreImpl">
         <property name="dao" ref="DaoChambreImpl"></property>
@@ -33,7 +34,7 @@
     <!-- injcetion de dépendance Facture -->
     <bean id="DaoFactureImpl" class="com.adaming.myapp.daofacture.DaoFactureImpl"></bean>
     <bean id="ServiceFactureImpl" class="com.adaming.myapp.servicefacture.ServiceFactureImpl">
-        <property name="dao" ref="DaofactureImpl"></property>
+        <property name="dao" ref="DaoFactureImpl"></property>
     </bean>
 
     <!-- injcetion de dépendance Payement -->
@@ -54,7 +55,7 @@
         <property name="dao" ref="DaoProduitImpl"></property>
     </bean>
     
-       <!-- injcetion de dépendance Reservation -->
+       <!--injcetion de dépendance Reservation -->
     <bean id="DaoReservation Impl" class="com.adaming.myapp.daoreservation.DaoReservationImpl"></bean>
     <bean id="ServiceReservation Impl" class="com.adaming.myapp.servicereservation.ServiceReservationImpl">
         <property name="dao" ref="DaoReservation Impl"></property>

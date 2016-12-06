@@ -7,6 +7,16 @@
 
 package com.adaming.myapp.entities;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
 public class Facture {
 	
 //==========================
@@ -16,9 +26,20 @@ public class Facture {
 	private double coutResa;
 	private double coutConso;
 	
+	@OneToMany (mappedBy ="facture")
+	private Set<Reservation> reservations = new HashSet<Reservation>();
 	
-	/*private Client client;
-	private Employe Employe;*/
+	@OneToMany(fetch=FetchType.EAGER)
+	@JoinTable(name="conso_to_facture")
+	private Set<Consomation> consomation = new HashSet<Consomation>();
+	
+	@OneToOne
+	@JoinColumn (name ="payment")
+	private Payement payment;
+	
+	@ManyToOne
+	@JoinColumn (name= "hotel")
+	private Hotel hotel;
 	
 //==========================
 //	CONSTRUCTEURS
@@ -55,12 +76,52 @@ public class Facture {
 	public void setCoutConso(double coutConso) {
 		this.coutConso = coutConso;
 	}
+	public Set<Reservation> getReservations() {
+		return reservations;
+	}
 
+
+	public void setReservations(Set<Reservation> reservations) {
+		this.reservations = reservations;
+	}
+
+
+	public Set<Consomation> getConsomation() {
+		return consomation;
+	}
+
+
+	public void setConsomation(Set<Consomation> consomation) {
+		this.consomation = consomation;
+	}
+
+
+	public Payement getPayment() {
+		return payment;
+	}
+
+
+	public void setPayment(Payement payment) {
+		this.payment = payment;
+	}
+
+
+	public Hotel getHotel() {
+		return hotel;
+	}
+
+
+	public void setHotel(Hotel hotel) {
+		this.hotel = hotel;
+	}
 
 
 //========================
 //		METHODES
 //========================
+
+
+
 
 	@Override
 	public String toString() {
