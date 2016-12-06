@@ -11,6 +11,9 @@ import java.util.Date;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
+
 @Entity
 @DiscriminatorValue("Stagiaire")
 public class Stagiaire extends Employe {
@@ -19,6 +22,7 @@ public class Stagiaire extends Employe {
 	//Attributs
 	//==========================
 	
+	@DateTimeFormat(iso=ISO.DATE)
 	private Date dateDeSortie;
 	
 	//==========================
@@ -52,6 +56,12 @@ public class Stagiaire extends Employe {
 				+ getNom() + ", getPrenom()=" + getPrenom()
 				+ ", getDateDeNaissance()=" + getDateDeNaissance()
 				+ ", getAdressePersonne()=" + getAdressePersonne() + "]";
+	}
+
+	@Override
+	public Double salaireTotal() {
+		Long diff = (dateDeSortie.getTime() - dateEmbauuche.getTime()+1)/(3600*24*1000);		
+		return (salaire*diff);
 	}
 	
 	

@@ -15,6 +15,9 @@ import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
+
 @Entity
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 public abstract class  Employe extends Personne {
@@ -23,6 +26,7 @@ public abstract class  Employe extends Personne {
 	//Attributs
 	//==========================
 	
+	@DateTimeFormat(iso=ISO.DATE)
 	protected Date dateEmbauuche;
 	protected String role;
 	protected Double salaire;
@@ -97,7 +101,7 @@ public abstract class  Employe extends Personne {
 	}
 
 	
-	
+	public abstract Double salaireTotal();
 	
 
 }

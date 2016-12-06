@@ -11,6 +11,9 @@ import java.util.Date;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
+
 
 @Entity
 @DiscriminatorValue("CDD")
@@ -20,6 +23,7 @@ public class Cdd extends Employe {
 	//Attributs
 	//==========================
 	
+	@DateTimeFormat(iso=ISO.DATE)
 	private Date dateDeSortie;
 	private Double primePrecarite;
 	
@@ -72,6 +76,14 @@ public class Cdd extends Employe {
 				+ getNom() + ", getPrenom()=" + getPrenom()
 				+ ", getDateDeNaissance()=" + getDateDeNaissance()
 				+ ", getAdressePersonne()=" + getAdressePersonne() + "]";
+	}
+	
+	
+	@Override
+	public Double salaireTotal() {
+		
+		Long diff = (dateDeSortie.getTime() - dateEmbauuche.getTime()+1)/(3600*24*1000);		
+		return (salaire*diff + primePrecarite);
 	}
 
 	

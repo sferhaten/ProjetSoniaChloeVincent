@@ -17,4 +17,9 @@ public interface IDaoFacture {
 	List<Facture> getAllFacture ();
 	
 	Set<Consomation> getConsoByFacture ( Long idFacture);
+	Facture addResToFacture(Long idFacture, Long idReservation);
+	Facture addConTofacture(Long idFacture, Long idConsomation);
+	
+	
+	
 }

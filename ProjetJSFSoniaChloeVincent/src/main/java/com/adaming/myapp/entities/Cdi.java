@@ -46,6 +46,13 @@ public class Cdi extends Employe {
 				+ ", getAdressePersonne()=" + getAdressePersonne() + "]";
 	}
 
+	@Override
+	public Double salaireTotal() {
+		
+		Long diff = ((new Date()).getTime() - dateEmbauuche.getTime()+1)/(3600*24*1000);		
+		return (salaire*diff);
+	}
+
 
 	
 	

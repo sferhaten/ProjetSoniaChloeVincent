@@ -11,6 +11,7 @@ import org.jboss.logging.Logger;
 
 import com.adaming.myapp.entities.Consomation;
 import com.adaming.myapp.entities.Facture;
+import com.adaming.myapp.entities.Reservation;
 
 public class DaoFactureImpl implements IDaoFacture {
 	
@@ -53,5 +54,24 @@ public class DaoFactureImpl implements IDaoFacture {
 		LOGGER.info("la liste des consomation par facture: " + consomations);
 		return  consomations;
 	}
+
+	@Override
+	public Facture addResToFacture(Long idFacture, Long idReservation) {
+		Facture facture = em.find(Facture.class, idFacture);
+		Reservation reservation = em.find(Reservation.class, idReservation);
+		facture.getReservations().add(reservation);
+		em.merge(facture);
+		return facture;
+	}
+
+	@Override
+	public Facture addConTofacture(Long idFacture, Long idConsomation) {
+		Facture facture1 = em.find(Facture.class, idFacture);
+		Consomation consomation = em.find(Consomation.class, idConsomation);
+		facture1.getConsomation().add(consomation);
+		em.merge(facture1);
+		return facture1;
+	}
+
 
 }
