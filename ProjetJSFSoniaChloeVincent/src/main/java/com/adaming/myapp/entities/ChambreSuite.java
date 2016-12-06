@@ -14,15 +14,22 @@ import javax.persistence.Entity;
 @DiscriminatorValue("Suite")
 public class ChambreSuite extends Chambre{
 
-	public ChambreSuite() {
-		super();
-		// TODO Auto-generated constructor stub
+	private double prixSuite;
+
+	public double getPrixSuite() {
+		return prixSuite;
 	}
 
-	public ChambreSuite(long idChambre, long numChambre, String description) {
-		super(idChambre, numChambre, description);
-		// TODO Auto-generated constructor stub
+	public void setPrixSuite(double prixSuite) {
+		this.prixSuite = prixSuite;
 	}
+
+	public ChambreSuite(long idChambre, long numChambre, String description,
+			Boolean chambrelibre, double prixSuite) {
+		super(idChambre, numChambre, description, chambrelibre);
+		this.prixSuite = prixSuite;
+	}
+	
 	
 	
 	

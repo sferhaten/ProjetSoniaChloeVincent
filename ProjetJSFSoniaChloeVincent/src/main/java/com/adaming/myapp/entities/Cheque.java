@@ -14,17 +14,44 @@ import javax.persistence.Entity;
 @Entity
 @DiscriminatorValue("Cheque")
 public class Cheque extends Payement{
+	
+	
+	private int numCheque;
+	private String banqueCheque;
+	
 
-	public Cheque() {
-		super();
-		// TODO Auto-generated constructor stub
+	//===========================
+	//
+	//===========================
+	
+	public int getNumCheque() {
+		return numCheque;
 	}
-
-	public Cheque(long idPayement, double coutTotal, Date date) {
-		super(idPayement, coutTotal, date);
-		// TODO Auto-generated constructor stub
+	public void setNumCheque(int numCheque) {
+		this.numCheque = numCheque;
+	}
+	public String getBanqueCheque() {
+		return banqueCheque;
+	}
+	public void setBanqueCheque(String banqueCheque) {
+		this.banqueCheque = banqueCheque;
 	}
 	
+	//============================
+	//Constructeur
+	//=============================
+	public Cheque(long idPayement, double coutTotal, Date date, int numCheque,
+			String banqueCheque) {
+		super(idPayement, coutTotal, date);
+		this.numCheque = numCheque;
+		this.banqueCheque = banqueCheque;
+	}
+	public Cheque(long idPayement, double coutTotal, Date date) {
+		super(idPayement, coutTotal, date);
+	}
+	
+
+
 	
 
 }

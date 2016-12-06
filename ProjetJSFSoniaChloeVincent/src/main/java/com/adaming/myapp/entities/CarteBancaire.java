@@ -15,14 +15,39 @@ import javax.persistence.Entity;
 @DiscriminatorValue("CB")
 public class CarteBancaire extends Payement{
 
-	public CarteBancaire() {
-		super();
-		// TODO Auto-generated constructor stub
+	
+	private int numCarte;
+	private int typeCarte;
+	
+	//=========================
+	//  Getter setter
+	//==========================
+	public int getNumCarte() {
+		return numCarte;
 	}
-
+	public void setNumCarte(int numCarte) {
+		this.numCarte = numCarte;
+	}
+	public int getTypeCarte() {
+		return typeCarte;
+	}
+	public void setTypeCarte(int typeCarte) {
+		this.typeCarte = typeCarte;
+	}
+	
+	
+	//==========================
+	//	constructeur
+	//=========================
+	public CarteBancaire(long idPayement, double coutTotal, Date date,
+			int numCarte, int typeCarte) {
+		super(idPayement, coutTotal, date);
+		this.numCarte = numCarte;
+		this.typeCarte = typeCarte;
+	}
 	public CarteBancaire(long idPayement, double coutTotal, Date date) {
 		super(idPayement, coutTotal, date);
-		// TODO Auto-generated constructor stub
 	}
+	
 
 }

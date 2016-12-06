@@ -21,13 +21,6 @@ public class DaoChambreImpl implements IDaoChambre {
 	
 
 	@Override
-	public Chambre addChambre(Chambre c) {
-		em.persist(c);
-		LOGGER.info(c + "has been created");
-		return c;
-	}
-
-	@Override
 	public Chambre updateChambre(Chambre c) {
 		em.merge(c);
 		LOGGER.info(c + "has been updated");
@@ -45,6 +38,16 @@ public class DaoChambreImpl implements IDaoChambre {
 	public List<Chambre> getAllChambre() {
 		Query query = em.createQuery("from Chambre c");
 		return query.getResultList();
+	}
+
+	@Override
+	public Chambre addChambre(Chambre c, Long idHotel) {
+		Hotel h = em.find(Hotel.class, idHotel);
+		
+		em.persist(c);
+		h.getChambres().add(c);
+		LOGGER.info(c + "has been created");
+		return c;
 	}
 
 	

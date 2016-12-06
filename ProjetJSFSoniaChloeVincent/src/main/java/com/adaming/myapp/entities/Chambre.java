@@ -37,6 +37,8 @@ public abstract class Chambre {
 	private long idChambre;
 	private long numChambre;
 	private String description;
+	private Boolean Chambrelibre;
+	
 	
 	@OneToMany (mappedBy = "chambre", fetch=FetchType.EAGER)
 	private Set<Reservation> reservations = new HashSet<Reservation>();
@@ -48,16 +50,23 @@ public abstract class Chambre {
 //	CONSTRUCTEURS
 //=========================
 	
-	public Chambre(long idChambre, long numChambre, String description) {
-		super();
-		this.idChambre = idChambre;
-		this.numChambre = numChambre;
-		this.description = description;
-	}
-	
+
 	public Chambre() {
 		super();
 	}
+
+
+
+public Chambre(long idChambre, long numChambre, String description,
+		Boolean chambrelibre) {
+	super();
+	this.idChambre = idChambre;
+	this.numChambre = numChambre;
+	this.description = description;
+	Chambrelibre = chambrelibre;
+}
+
+
 
 //=========================
 //	GETTER SETTER
@@ -91,11 +100,19 @@ public abstract class Chambre {
 	}
 
 	
-
+	public Boolean getChambrelibre() {
+		return Chambrelibre;
+	}
+	public void setChambrelibre(Boolean chambrelibre) {
+		Chambrelibre = chambrelibre;
+	}
 //========================
 //		METHODES
 //========================
+
+
 	
+
 	@Override
 	public String toString() {
 		return "Chambre [idChambre=" + idChambre + ", numChambre=" + numChambre

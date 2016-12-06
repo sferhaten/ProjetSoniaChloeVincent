@@ -14,15 +14,32 @@ import javax.persistence.Entity;
 @Entity
 @DiscriminatorValue("Espece")
 public class Espece extends Payement{
+	
+	private String devise;
 
-	public Espece() {
-		super();
-		// TODO Auto-generated constructor stub
+
+	
+	//=======================
+	//	getter and setter
+	//=======================
+
+	public String getDevise() {
+		return devise;
 	}
 
-	public Espece(long idPayement, double coutTotal, Date date) {
+	public void setDevise(String devise) {
+		this.devise = devise;
+	}
+
+	//=======================
+	//	constructeur
+	//=======================
+	public Espece(long idPayement, double coutTotal, Date date, String devise) {
 		super(idPayement, coutTotal, date);
-		// TODO Auto-generated constructor stub
+		this.devise = devise;
 	}
+	
+	
+	
 
 }

@@ -7,7 +7,7 @@ import com.adaming.myapp.entities.Chambre;
 
 public interface IDaoChambre {
 
-	Chambre addChambre(final Chambre c);
+	Chambre addChambre(final Chambre c, Long idHotel);
 	
 	Chambre updateChambre(final Chambre c);
 	
