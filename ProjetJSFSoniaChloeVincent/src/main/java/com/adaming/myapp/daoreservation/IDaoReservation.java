@@ -13,4 +13,6 @@ public interface IDaoReservation {
 	Reservation getOneReservation(final Long  idReservation);
 	
 	List<Reservation> getAllReservation ();
+	
+	Reservation Annulation (final Long  idReservation);
 }
