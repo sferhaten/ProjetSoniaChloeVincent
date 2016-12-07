@@ -43,7 +43,7 @@ public class DaoChambreImpl implements IDaoChambre {
 	@Override
 	public Chambre addChambre(Chambre c, Long idHotel) {
 		Hotel h = em.find(Hotel.class, idHotel);
-		
+	
 		em.persist(c);
 		h.getChambres().add(c);
 		LOGGER.info(c + "has been created");
