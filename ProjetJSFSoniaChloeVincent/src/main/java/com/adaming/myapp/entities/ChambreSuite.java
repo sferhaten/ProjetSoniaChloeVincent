@@ -14,19 +14,25 @@ import javax.persistence.Entity;
 @DiscriminatorValue("Suite")
 public class ChambreSuite extends Chambre{
 
-	private double prixSuite;
+	private Double prixSuite = 500.0;
 
-	public double getPrixSuite() {
+	public Double getPrixSuite() {
 		return prixSuite;
 	}
 
-	public void setPrixSuite(double prixSuite) {
+	public void setPrixSuite(Double prixSuite) {
 		this.prixSuite = prixSuite;
 	}
 
-	public ChambreSuite(long numChambre, String description, double prixSuite) {
+	public ChambreSuite(long numChambre, String description) {
 		super(numChambre, description);
-		this.prixSuite = prixSuite;
+		
+	}
+
+	@Override
+	public Double cout() {
+		// TODO Auto-generated method stub
+		return prixSuite;
 	}
 	
 	

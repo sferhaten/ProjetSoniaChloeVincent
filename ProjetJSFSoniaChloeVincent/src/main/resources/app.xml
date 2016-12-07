@@ -56,9 +56,9 @@
     </bean>
     
        <!--injcetion de dépendance Reservation -->
-    <bean id="DaoReservation Impl" class="com.adaming.myapp.daoreservation.DaoReservationImpl"></bean>
-    <bean id="ServiceReservation Impl" class="com.adaming.myapp.servicereservation.ServiceReservationImpl">
-        <property name="dao" ref="DaoReservation Impl"></property>
+    <bean id="DaoReservationImpl" class="com.adaming.myapp.daoreservation.DaoReservationImpl"></bean>
+    <bean id="ServiceReservationImpl" class="com.adaming.myapp.servicereservation.ServiceReservationImpl">
+        <property name="dao" ref="DaoReservationImpl"></property>
     </bean>
     
     

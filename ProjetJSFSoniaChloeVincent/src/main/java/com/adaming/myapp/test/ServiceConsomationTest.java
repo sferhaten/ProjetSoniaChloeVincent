@@ -38,7 +38,7 @@ public class ServiceConsomationTest {
 	//========================
 	
 	@Test
-	@Ignore
+	//@Ignore
 	public void testAddConsommation() {
 		Consomation consomation = new Consomation(5);
 		serviceConsomation.addConsommation(consomation, 1L, 1L);

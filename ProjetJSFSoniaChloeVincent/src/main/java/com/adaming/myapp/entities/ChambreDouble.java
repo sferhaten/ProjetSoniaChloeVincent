@@ -21,13 +21,13 @@ public class ChambreDouble extends Chambre{
 	//
 	//
 	
-	private double prixDouble;
+	private Double prixDouble = 100.0;
 
-	public double getPrixDouble() {
+	public Double getPrixDouble() {
 		return prixDouble;
 	}
 
-	public void setPrixDouble(double prixDouble) {
+	public void setPrixDouble(Double prixDouble) {
 		this.prixDouble = prixDouble;
 	}
 
@@ -36,11 +36,17 @@ public class ChambreDouble extends Chambre{
 		// TODO Auto-generated constructor stub
 	}
 
-	public ChambreDouble(long numChambre, String description,
-		double prixDouble) {
+	public ChambreDouble(long numChambre, String description
+		) {
 		super(numChambre, description);
-		this.prixDouble = prixDouble;
+		
 		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public Double cout() {
+		// TODO Auto-generated method stub
+		return prixDouble;
 	}
 
 

@@ -23,18 +23,20 @@ public class DaoReservationImpl implements IDaoReservation {
 	private final Logger LOGGER = Logger.getLogger(DaoReservationImpl.class);
 	
 	@Override
-	public Reservation addReservation(Reservation r, Long IdPersonne) {
-		Client client =em.find(Client.class, r.getPersonne().getIdPersonne());
+	public Reservation addReservation(Reservation r, Long idClient, Long idHotel, Long idChambre) {
+		Client client =em.find(Client.class, idClient);
 		r.setPersonne(client);
+		
+		client.setNombreReservations(client.getNombreReservations());
+		Hotel h =em.find(Hotel.class, idHotel);
+		Chambre c = em.find(Chambre.class, idChambre);
+		
+		r.setHotel(h);
+		r.setChambre(c);
 		em.persist(r);
-		client.setNombreReservations(client.getNombreReservations()+1);
-		Hotel h = em.find(Hotel.class, r.getHotel().getIdHotel());
-		Chambre c = em.find(Chambre.class, r.getChambre().getIdChambre());
-		Facture f = em.find(Facture.class, r.getFacture().getIdFacture());
-		h.getReservations().add(r);
-		//p.getReservations().add(r);
-		c.getReservations().add(r);
-		f.getReservations().add(r);
+		Double coutReservation =0.0;
+		int nbJour = (int) ((r.getDateSortie().getTime() -r.getDateArrive().getTime())/(3600*24*1000));
+		coutReservation = c.cout()*nbJour;
 		LOGGER.info(r + "has been created");
 		return r;
 	}

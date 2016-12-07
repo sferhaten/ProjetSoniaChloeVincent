@@ -125,4 +125,5 @@ public Chambre(long numChambre, String description) {
 		return dispo;
 	}
 	
+	public abstract Double cout();
 }

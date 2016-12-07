@@ -31,6 +31,8 @@ public class DaoConsomationImpl implements IDaoConsomation {
 	 		 
 	 		cl.getConsomations().add(c); 
 	 		em.persist(c); 
+	 		System.out.println("identifiant " + c.getPersonne().getIdPersonne());
+	 		System.out.println("tableau" + cl.getConsomations().size());
 	 		return c; 
 	 	} 
 	 

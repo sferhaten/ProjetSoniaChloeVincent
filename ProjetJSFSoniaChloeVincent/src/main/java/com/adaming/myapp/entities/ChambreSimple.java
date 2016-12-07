@@ -13,13 +13,13 @@ import javax.persistence.Entity;
 @DiscriminatorValue("Simple")
 public class ChambreSimple extends Chambre {
 
-	private double prixSimple;
+	private Double prixSimple = 70.0;
 
-	public double getPrixSimple() {
+	public Double getPrixSimple() {
 		return prixSimple;
 	}
 
-	public void setPrixSimple(double prixSimple) {
+	public void setPrixSimple(Double prixSimple) {
 		this.prixSimple = prixSimple;
 	}
 
@@ -29,10 +29,15 @@ public class ChambreSimple extends Chambre {
 	}
 
 
-	public ChambreSimple(long numChambre, String description,
-			double prixSimple) {
+	public ChambreSimple(long numChambre, String description) {
 		super(numChambre, description);
-		this.prixSimple = prixSimple;
+	
+	}
+
+	@Override
+	public Double cout() {
+		// TODO Auto-generated method stub
+		return prixSimple;
 	}
 	
 	

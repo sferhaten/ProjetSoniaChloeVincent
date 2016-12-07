@@ -16,13 +16,18 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
+
 @Entity
 public class Reservation {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY) 
 	private long idReservation;
+	@DateTimeFormat(iso=ISO.DATE)
 	private Date dateArrive;
+	@DateTimeFormat(iso=ISO.DATE)
 	private Date dateSortie;
 	private double coutResa;
 	

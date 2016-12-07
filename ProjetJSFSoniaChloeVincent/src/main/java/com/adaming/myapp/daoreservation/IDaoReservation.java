@@ -6,7 +6,7 @@ import com.adaming.myapp.entities.Reservation;
 
 public interface IDaoReservation {
 
-	Reservation addReservation(final Reservation r, Long idPersonne);
+	Reservation addReservation(final Reservation r, Long idClient, Long idHotel, Long idChambre);
 	
 	Reservation updateReservation(final Reservation r);
 	
@@ -15,7 +15,7 @@ public interface IDaoReservation {
 	List<Reservation> getAllReservation ();
 	
 	Reservation Annulation (final Long  idReservation);
-	
+
 
 	
 }

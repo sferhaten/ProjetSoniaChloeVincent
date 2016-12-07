@@ -36,17 +36,17 @@ public class ServiceChambreTest {
 	}
 
 	@Test
-	@Ignore
+	//@Ignore
 	public void testAddChambre() {
-		Chambre c = new ChambreDouble(1, "blue", 100);
+		Chambre c = new ChambreDouble(1, "blue");
 		serviceChambre.addChambre(c, 1L);
 		assertNotNull(c.getIdChambre());
 	}
 	
 	@Test
-	@Ignore
+	//@Ignore
 	public void testUpdateChambre() {
-	Chambre c1 = serviceChambre.getOneChambre(1L);
+	Chambre c1 = serviceChambre.getOneChambre(3L);
 	c1.setDescription("green");
 	serviceChambre.updateChambre(c1);
 	Chambre c2 =serviceChambre.getOneChambre(c1.getIdChambre());
@@ -54,14 +54,14 @@ public class ServiceChambreTest {
 	}
 
 	@Test
-	@Ignore
+	//@Ignore
 	public void testGetOneChambre() {
-		Chambre c = serviceChambre.getOneChambre(1L);
+		Chambre c = serviceChambre.getOneChambre(3L);
 		assertNotNull(c);
 	}
 
 	@Test
-	@Ignore
+	//@Ignore
 	public void testGetAllChambre() {
 		List<Chambre> chambres = new ArrayList<Chambre>();
 		

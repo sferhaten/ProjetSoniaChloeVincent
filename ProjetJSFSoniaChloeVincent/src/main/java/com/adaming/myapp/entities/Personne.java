@@ -23,6 +23,9 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
+
 @Entity
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name ="Typepersonne", discriminatorType=DiscriminatorType.STRING)
@@ -37,6 +40,7 @@ public abstract class Personne {
 	protected Long idPersonne;
 	protected String nom;
 	protected String prenom;
+	@DateTimeFormat(iso=ISO.DATE)
 	protected Date dateDeNaissance;
 	
 	@Embedded
