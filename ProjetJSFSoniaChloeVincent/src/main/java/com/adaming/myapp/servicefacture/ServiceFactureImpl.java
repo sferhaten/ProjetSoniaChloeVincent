@@ -4,12 +4,13 @@ import java.util.List;
 import java.util.Set;
 
 import org.jboss.logging.Logger;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.adaming.myapp.daofacture.IDaoFacture;
 import com.adaming.myapp.entities.Consomation;
 import com.adaming.myapp.entities.Facture;
 import com.adaming.myapp.entities.Reservation;
-
+@Transactional
 public class ServiceFactureImpl implements IServicefacture {
 	
 	private IDaoFacture dao;

@@ -3,10 +3,11 @@ package com.adaming.myapp.servicepayement;
 import java.util.List;
 
 import org.jboss.logging.Logger;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.adaming.myapp.daopayement.IDaoPayement;
 import com.adaming.myapp.entities.Payement;
-
+@Transactional
 public class ServicePayementImpl implements IServicePayement {
 	
 	private IDaoPayement dao;

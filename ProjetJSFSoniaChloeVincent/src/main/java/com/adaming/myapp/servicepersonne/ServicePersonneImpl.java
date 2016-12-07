@@ -4,9 +4,12 @@ import java.util.List;
 
 
 
+
+import org.springframework.transaction.annotation.Transactional;
+
 import com.adaming.myapp.daopersonne.IDaoPersonne;
 import com.adaming.myapp.entities.Personne;
-
+@Transactional
 public class ServicePersonneImpl implements IServicePersonne {
 	
 	

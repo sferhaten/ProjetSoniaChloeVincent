@@ -13,6 +13,9 @@ import java.util.Set;
 
 
 
+
+import org.springframework.transaction.annotation.Transactional;
+
 import com.adaming.myapp.daohotel.IDaoHotel;
 import com.adaming.myapp.entities.Chambre;
 import com.adaming.myapp.entities.Client;
@@ -22,6 +25,7 @@ import com.adaming.myapp.entities.Hotel;
 import com.adaming.myapp.entities.Personne;
 import com.adaming.myapp.entities.Produit;
 import com.adaming.myapp.entities.Reservation;
+@Transactional
 
 public class ServiceHotelImpl implements IServiceHotel{
 

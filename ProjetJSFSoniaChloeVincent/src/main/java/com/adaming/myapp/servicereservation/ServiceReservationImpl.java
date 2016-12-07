@@ -3,10 +3,11 @@ package com.adaming.myapp.servicereservation;
 import java.util.List;
 
 import org.jboss.logging.Logger;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.adaming.myapp.daoreservation.IDaoReservation;
 import com.adaming.myapp.entities.Reservation;
-
+@Transactional
 public class ServiceReservationImpl implements IServiceReservation {
 	
 	private IDaoReservation dao;

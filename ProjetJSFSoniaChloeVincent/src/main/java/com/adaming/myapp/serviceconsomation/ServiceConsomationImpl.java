@@ -2,9 +2,11 @@ package com.adaming.myapp.serviceconsomation;
 
 import java.util.List;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import com.adaming.myapp.daoconsomation.IDaoConsomation;
 import com.adaming.myapp.entities.Consomation;
-
+@Transactional
 public class ServiceConsomationImpl implements IServiceConsomation {
 	
 	private IDaoConsomation dao;

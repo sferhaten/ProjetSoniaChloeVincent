@@ -3,10 +3,11 @@ package com.adaming.myapp.serviceproduit;
 import java.util.List;
 
 import org.jboss.logging.Logger;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.adaming.myapp.daoproduit.IDaoProduit;
 import com.adaming.myapp.entities.Produit;
-
+@Transactional
 public class ServiceProduitImpl implements IServiceProduit {
 	
 	private IDaoProduit dao;

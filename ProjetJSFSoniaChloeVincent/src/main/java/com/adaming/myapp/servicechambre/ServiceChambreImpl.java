@@ -3,10 +3,11 @@ package com.adaming.myapp.servicechambre;
 import java.util.List;
 
 import org.jboss.logging.Logger;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.adaming.myapp.daochambre.IDaoChambre;
 import com.adaming.myapp.entities.Chambre;
-
+@Transactional
 public class ServiceChambreImpl implements IServiceChambre {
 	
 	private IDaoChambre dao;
