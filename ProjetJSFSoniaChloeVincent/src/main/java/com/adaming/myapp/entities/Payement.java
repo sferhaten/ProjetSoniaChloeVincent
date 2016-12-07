@@ -40,9 +40,8 @@ public abstract class Payement {
 //	CONSTRUCTEURS
 //=========================
 
-	public Payement(long idPayement, double coutTotal, Date date) {
+	public Payement(double coutTotal, Date date) {
 		super();
-		this.idPayement = idPayement;
 		this.coutTotal = coutTotal;
 		this.date = date;
 	}

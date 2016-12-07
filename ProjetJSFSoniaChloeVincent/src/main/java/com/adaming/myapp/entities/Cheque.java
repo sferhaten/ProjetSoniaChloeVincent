@@ -40,14 +40,14 @@ public class Cheque extends Payement{
 	//============================
 	//Constructeur
 	//=============================
-	public Cheque(long idPayement, double coutTotal, Date date, int numCheque,
+	public Cheque(double coutTotal, Date date, int numCheque,
 			String banqueCheque) {
-		super(idPayement, coutTotal, date);
+		super(coutTotal, date);
 		this.numCheque = numCheque;
 		this.banqueCheque = banqueCheque;
 	}
 	public Cheque(long idPayement, double coutTotal, Date date) {
-		super(idPayement, coutTotal, date);
+		super(coutTotal, date);
 	}
 	
 

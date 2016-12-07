@@ -34,8 +34,8 @@ public class Espece extends Payement{
 	//=======================
 	//	constructeur
 	//=======================
-	public Espece(long idPayement, double coutTotal, Date date, String devise) {
-		super(idPayement, coutTotal, date);
+	public Espece(double coutTotal, Date date, String devise) {
+		super(coutTotal, date);
 		this.devise = devise;
 	}
 	

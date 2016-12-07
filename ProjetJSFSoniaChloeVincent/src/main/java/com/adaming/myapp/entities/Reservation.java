@@ -44,10 +44,9 @@ public class Reservation {
 //==========================
 //	CONSTRUCTEURS
 //=========================
-	public Reservation(long idReservation, Date dateArrive, Date dateSortie,
+	public Reservation(Date dateArrive, Date dateSortie,
 			double coutResa) {
 		super();
-		this.idReservation = idReservation;
 		this.dateArrive = dateArrive;
 		this.dateSortie = dateSortie;
 		this.coutResa = coutResa;

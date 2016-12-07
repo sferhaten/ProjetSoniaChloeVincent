@@ -52,9 +52,8 @@ public class Facture {
 //==========================
 //	CONSTRUCTEURS
 //=========================	
-	public Facture(long idFacture, double coutResa, double coutConso) {
+	public Facture(double coutResa, double coutConso) {
 		super();
-		this.idFacture = idFacture;
 		this.coutResa = coutResa;
 		this.coutConso = coutConso;
 	}

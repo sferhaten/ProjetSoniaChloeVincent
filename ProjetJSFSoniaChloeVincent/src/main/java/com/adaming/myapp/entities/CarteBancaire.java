@@ -39,14 +39,14 @@ public class CarteBancaire extends Payement{
 	//==========================
 	//	constructeur
 	//=========================
-	public CarteBancaire(long idPayement, double coutTotal, Date date,
+	public CarteBancaire(double coutTotal, Date date,
 			int numCarte, int typeCarte) {
-		super(idPayement, coutTotal, date);
+		super(coutTotal, date);
 		this.numCarte = numCarte;
 		this.typeCarte = typeCarte;
 	}
-	public CarteBancaire(long idPayement, double coutTotal, Date date) {
-		super(idPayement, coutTotal, date);
+	public CarteBancaire(double coutTotal, Date date) {
+		super(coutTotal, date);
 	}
 	
 

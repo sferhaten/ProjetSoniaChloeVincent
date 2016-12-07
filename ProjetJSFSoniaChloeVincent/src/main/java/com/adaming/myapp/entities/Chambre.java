@@ -57,9 +57,8 @@ public abstract class Chambre {
 
 
 
-public Chambre(long idChambre, long numChambre, String description) {
+public Chambre(long numChambre, String description) {
 	super();
-	this.idChambre = idChambre;
 	this.numChambre = numChambre;
 	this.description = description;
 }
