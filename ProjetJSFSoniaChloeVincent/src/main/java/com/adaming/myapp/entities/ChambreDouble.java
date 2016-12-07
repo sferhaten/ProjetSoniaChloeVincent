@@ -37,7 +37,7 @@ public class ChambreDouble extends Chambre{
 	}
 
 	public ChambreDouble(long idChambre, long numChambre, String description,
-			Boolean chambrelibre, double prixDouble) {
+		double prixDouble) {
 		super(idChambre, numChambre, description);
 		this.prixDouble = prixDouble;
 		// TODO Auto-generated constructor stub
