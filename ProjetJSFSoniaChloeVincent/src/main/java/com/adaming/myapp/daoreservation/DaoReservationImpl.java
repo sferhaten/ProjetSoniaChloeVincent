@@ -22,14 +22,15 @@ public class DaoReservationImpl implements IDaoReservation {
 	private final Logger LOGGER = Logger.getLogger(DaoReservationImpl.class);
 	
 	@Override
-	public Reservation addReservation(Reservation r) {
+	public Reservation addReservation(Reservation r, Long IdPersonne) {
+		Personne p =em.find(Personne.class, r.getPersonne().getIdPersonne());
+		r.setPersonne(p);
 		em.persist(r);
 		Hotel h = em.find(Hotel.class, r.getHotel().getIdHotel());
-		Personne p =em.find(Personne.class, r.getPersonne().getIdPersonne());
 		Chambre c = em.find(Chambre.class, r.getChambre().getIdChambre());
 		Facture f = em.find(Facture.class, r.getFacture().getIdFacture());
 		h.getReservations().add(r);
-		p.getReservations().add(r);
+		//p.getReservations().add(r);
 		c.getReservations().add(r);
 		f.getReservations().add(r);
 		LOGGER.info(r + "has been created");

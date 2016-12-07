@@ -1,5 +1,6 @@
 package com.adaming.myapp.servicehotel;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -19,15 +20,20 @@ public interface IServiceHotel {
 	
 	List<Hotel> getAll();
 	
-	Set<Client> clientsByHotel(Long idHotel);
-//	
-	Set<Employe> employesByHotel(Long idHotel);
+	Set<Client> clientsByHotel(final Long idHotel);
+
+	Set<Employe> employesByHotel(final Long idHotel);
 	
-	Set<Produit> produitsByHotel(Long idHotel);
-	Set<Chambre> chambreByHotel(Long idHotel);
+	Set<Produit> produitsByHotel(final Long idHotel);
+	
+	Set<Produit> produitsDisposByHotel(final Long idHotel);
+	
+	Set<Chambre> chambreByHotel(final Long idHotel);
+	
+	Set<Chambre> chambreDisposByHotel(final Long idHotel, final Date dateDemandee);
 	
 	//Set<Personne> personnesByHotel(Long idHotel);
 	
-	Double beneficeAnnuel(Long idHotel);
+	Double beneficeAnnuel(final Long idHotel);
 	
 }

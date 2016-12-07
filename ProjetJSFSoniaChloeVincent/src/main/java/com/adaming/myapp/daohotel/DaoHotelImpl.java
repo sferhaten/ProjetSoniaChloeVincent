@@ -23,14 +23,14 @@ public class DaoHotelImpl implements IDaoHotel {
 	private final Logger LOGGER = Logger.getLogger("DaoHotelImpl");
 
 	@Override
-	public Hotel addHotel(Hotel h) {
+	public Hotel addHotel(final Hotel h) {
 		em.persist(h);
 		LOGGER.info("<--------- Hotel " + h.getIdHotel() + " has been created -------->");
 		return h;
 	}
 
 	@Override
-	public Hotel getHotel(Long id) {
+	public Hotel getHotel(final Long id) {
 		Hotel h = em.find(Hotel.class, id);
 		LOGGER.info("<--------- Hotel " + id + " has been found -------->");
 		return h;

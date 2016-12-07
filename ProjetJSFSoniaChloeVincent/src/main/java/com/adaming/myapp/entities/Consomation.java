@@ -97,6 +97,26 @@ public class Consomation {
 				+ quantite + "]";
 	}
 	
+public Double coutclient(){
+		
+		Produit p = getProduit();
+		
+		Double cout = quantite*(p.getCoutVente());
+		
+		return cout;
+	}
 	
+	
+public Double benefice(){
+		
+		Produit p = getProduit();
+		
+		Double cout = quantite*(p.getCoutVente() - p.getCoutAchat());
+		
+		return cout;
+	}
+	
+	
+
 
 }

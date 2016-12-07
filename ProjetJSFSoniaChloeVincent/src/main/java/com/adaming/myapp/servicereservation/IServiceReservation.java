@@ -6,7 +6,7 @@ import com.adaming.myapp.entities.Reservation;
 
 public interface IServiceReservation {
 	
-	Reservation addReservation(final Reservation r);
+	Reservation addReservation(final Reservation r, Long idPersonne);
 	
 	Reservation updateReservation(final Reservation r);
 	

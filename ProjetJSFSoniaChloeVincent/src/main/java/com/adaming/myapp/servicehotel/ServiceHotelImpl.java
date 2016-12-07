@@ -1,8 +1,11 @@
 package com.adaming.myapp.servicehotel;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+
 
 
 
@@ -32,13 +35,13 @@ public class ServiceHotelImpl implements IServiceHotel{
 
 
 	@Override
-	public Hotel addHotel(Hotel h) {		
+	public Hotel addHotel(final Hotel h) {		
 		return dao.addHotel(h);
 	}
 
 
 	@Override
-	public Hotel getHotel(Long id) {
+	public Hotel getHotel(final Long id) {
 		return dao.getHotel(id);
 	}
 
@@ -68,7 +71,7 @@ public class ServiceHotelImpl implements IServiceHotel{
 
 
 	@Override
-	public Set<Employe> employesByHotel(Long idHotel) {
+	public Set<Employe> employesByHotel(final Long idHotel) {
 		Hotel h = dao.getHotel(idHotel);
 		Set<Employe> employes = new HashSet<Employe>();
 		for (Personne p : h.getPersonnes()) {
@@ -82,7 +85,7 @@ public class ServiceHotelImpl implements IServiceHotel{
 
 
 	@Override
-	public Set<Client> clientsByHotel(Long idHotel) {
+	public Set<Client> clientsByHotel(final Long idHotel) {
 		Hotel h = dao.getHotel(idHotel);
 		Set<Client> clients = new HashSet<Client>();
 		for (Personne p : h.getPersonnes()) {
@@ -96,14 +99,29 @@ public class ServiceHotelImpl implements IServiceHotel{
 
 
 	@Override
-	public Set<Produit> produitsByHotel(Long idHotel) {
+	public Set<Produit> produitsByHotel(final Long idHotel) {
 		Hotel h = dao.getHotel(idHotel);
 		return h.getProduits();
+	}
+	
+	@Override
+	public Set<Produit> produitsDisposByHotel(Long idHotel) {
+		Set<Produit> produits = produitsByHotel(idHotel);
+		
+		Set<Produit> produitsDispos = new HashSet<Produit>();
+		
+		for (Produit p : produits) {
+			if (p.getQuantite() > 0) {
+				produitsDispos.add(p);
+			}
+		}
+		
+		return produitsDispos;
 	}
 
 
 	@Override
-	public Double beneficeAnnuel(Long idHotel) {
+	public Double beneficeAnnuel(final Long idHotel) {
 		Hotel h = dao.getHotel(idHotel);
 		Double recettes = 0.0;
 		Double charges = 0.0;
@@ -129,10 +147,30 @@ public class ServiceHotelImpl implements IServiceHotel{
 
 
 	@Override
-	public Set<Chambre> chambreByHotel(Long idHotel) {
+	public Set<Chambre> chambreByHotel(final Long idHotel) {
 		// TODO Auto-generated method stub
 		return dao.getHotel(idHotel).getChambres();
 	}
+
+
+	@Override
+	public Set<Chambre> chambreDisposByHotel(Long idHotel, Date dateDemandee) {
+		
+		Set<Chambre> chambres = chambreByHotel(idHotel);
+		Set<Chambre> chambresDispos = new HashSet<Chambre>();
+		
+		
+		for (Chambre c : chambres) {
+			if (c.DispoChambre(dateDemandee)) {
+				chambresDispos.add(c);
+			}
+		}
+		
+		return chambresDispos;
+	}
+
+
+
 	
 	
 	

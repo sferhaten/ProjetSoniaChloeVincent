@@ -4,12 +4,15 @@ import java.util.List;
 
 
 
+
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import org.apache.log4j.Logger;
 
+import com.adaming.myapp.entities.Hotel;
 import com.adaming.myapp.entities.Personne;
 
 public class DaoPersonneImpl implements IDaoPersonne {
@@ -18,10 +21,15 @@ public class DaoPersonneImpl implements IDaoPersonne {
 	@PersistenceContext
 	protected EntityManager em;
 
+	
+	
 	@Override
-	public Personne addPersonne(Personne P) {
+	public Personne addPersonne(Personne P, Long idHotel) {
+		Hotel h = em.find(Hotel.class, idHotel);
+		
 		em.persist(P);
-		LOGGER.info("<-----------"+P+" added ------------------->");
+		h.getPersonnes().add(P);
+		
 		return P;
 	}
 
@@ -44,5 +52,7 @@ public class DaoPersonneImpl implements IDaoPersonne {
 		LOGGER.info("<-----------"+P+" updated ------------------->");
 		return P;
 	}
+
+
 
 }

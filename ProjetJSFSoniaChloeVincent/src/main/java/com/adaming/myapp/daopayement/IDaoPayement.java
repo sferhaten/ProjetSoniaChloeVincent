@@ -7,7 +7,7 @@ import com.adaming.myapp.entities.Payement;
 
 public interface IDaoPayement {
 	
-	Payement addPayement(final Payement p);
+	Payement addPayement(final Payement p, Long idFacture);
 	
 	Payement updatePayement(final Payement p);
 	

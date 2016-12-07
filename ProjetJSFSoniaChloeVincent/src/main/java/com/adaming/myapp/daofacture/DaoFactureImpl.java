@@ -11,6 +11,8 @@ import org.jboss.logging.Logger;
 
 import com.adaming.myapp.entities.Consomation;
 import com.adaming.myapp.entities.Facture;
+import com.adaming.myapp.entities.Hotel;
+import com.adaming.myapp.entities.Personne;
 import com.adaming.myapp.entities.Reservation;
 
 public class DaoFactureImpl implements IDaoFacture {
@@ -20,12 +22,7 @@ public class DaoFactureImpl implements IDaoFacture {
 	
 	private final Logger LOGGER = Logger.getLogger(DaoFactureImpl.class);
 
-	@Override
-	public Facture addFacture(Facture f) {
-		em.persist(f);
-		LOGGER.info(f + "has been created");
-		return f;
-	}
+
 
 	@Override
 	public Facture updateFacture(Facture f) {
@@ -54,24 +51,76 @@ public class DaoFactureImpl implements IDaoFacture {
 		LOGGER.info("la liste des consomation par facture: " + consomations);
 		return  consomations;
 	}
-
+	
 	@Override
-	public Facture addResToFacture(Long idFacture, Long idReservation) {
-		Facture facture = em.find(Facture.class, idFacture);
-		Reservation reservation = em.find(Reservation.class, idReservation);
-		facture.getReservations().add(reservation);
-		em.merge(facture);
-		return facture;
+	public Set<Reservation> getReserByFacture(Long idFacture) {
+		Facture f = em.find(Facture.class, idFacture);
+		Set<Reservation> reservations = f.getReservations();
+		LOGGER.info("la liste des reservations par facture: " + reservations);
+		return reservations;
 	}
 
 	@Override
-	public Facture addConTofacture(Long idFacture, Long idConsomation) {
-		Facture facture1 = em.find(Facture.class, idFacture);
-		Consomation consomation = em.find(Consomation.class, idConsomation);
-		facture1.getConsomation().add(consomation);
-		em.merge(facture1);
-		return facture1;
+	public Facture addFactureToReservation(Facture f,
+			Set<Reservation> reservations, Long idPersonne, Long idHotel) {
+		
+		f.setReservations(reservations);
+		//Personne P = em.find(Personne.class, idPersonne);
+		Hotel h = em.find(Hotel.class, idHotel);
+		
+		em.persist(f);
+		h.getFactures().add(f);
+		
+		return f;
+		
+		
+		
+		
 	}
+
+	@Override
+	public Facture addFactureToConsomation(Facture f,
+			Set<Consomation> consomations, Long idPersonne, Long idHotel) {
+		
+		f.setConsomation(consomations);
+		//Personne P = em.find(Personne.class, idPersonne);
+		Hotel h = em.find(Hotel.class, idHotel);
+		
+		em.persist(f);
+		h.getFactures().add(f);
+		
+		return f;
+	}
+
+	@Override
+	public Facture addFacture(Facture f, Set<Reservation> reservations,
+			Set<Consomation> consomations, Long idPersonne, Long idHotel) {
+		
+		f.setReservations(reservations);
+		f.setConsomation(consomations);
+	
+		//Personne P = em.find(Personne.class, idPersonne);
+		Hotel h = em.find(Hotel.class, idHotel);
+		
+		em.persist(f);
+		h.getFactures().add(f);
+		
+		return f;
+		
+	}
+
+
+	
+/*	Client client = em.find(Client.class, idClient);
+	Banque banque = em.find(Banque.class, idBanque);
+	client.getBanques().add(banque);
+	banque.getClients().add(client);
+	em.merge(client);
+	em.merge(banque);*/
+
+	
+
+
 
 
 }

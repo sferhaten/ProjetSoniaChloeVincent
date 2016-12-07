@@ -8,6 +8,7 @@
 
 package com.adaming.myapp.entities;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -37,7 +38,6 @@ public abstract class Chambre {
 	private long idChambre;
 	private long numChambre;
 	private String description;
-	private Boolean Chambrelibre;
 	
 	
 	@OneToMany (mappedBy = "chambre", fetch=FetchType.EAGER)
@@ -57,13 +57,11 @@ public abstract class Chambre {
 
 
 
-public Chambre(long idChambre, long numChambre, String description,
-		Boolean chambrelibre) {
+public Chambre(long idChambre, long numChambre, String description) {
 	super();
 	this.idChambre = idChambre;
 	this.numChambre = numChambre;
 	this.description = description;
-	Chambrelibre = chambrelibre;
 }
 
 
@@ -99,13 +97,7 @@ public Chambre(long idChambre, long numChambre, String description,
 		this.description = description;
 	}
 
-	
-	public Boolean getChambrelibre() {
-		return Chambrelibre;
-	}
-	public void setChambrelibre(Boolean chambrelibre) {
-		Chambrelibre = chambrelibre;
-	}
+
 //========================
 //		METHODES
 //========================
@@ -117,6 +109,21 @@ public Chambre(long idChambre, long numChambre, String description,
 	public String toString() {
 		return "Chambre [idChambre=" + idChambre + ", numChambre=" + numChambre
 				+ ", description=" + description + "]";
+	}
+	
+	
+	
+	public Boolean DispoChambre(Date dateDemandee){
+		
+		boolean dispo = true;
+		
+		for (Reservation r : reservations) {
+			if (dateDemandee.after(r.getDateArrive()) && (dateDemandee.before(r.getDateSortie()))) {
+				dispo = false;
+			}
+		}
+		
+		return dispo;
 	}
 	
 }

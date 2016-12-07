@@ -19,9 +19,9 @@ public class ServiceReservationImpl implements IServiceReservation {
 	}
 
 	@Override
-	public Reservation addReservation(Reservation r) {
+	public Reservation addReservation(Reservation r, Long idPersonne) {
 		// TODO Auto-generated method stub
-		return dao.addReservation(r);
+		return dao.addReservation(r, idPersonne);
 	}
 
 	@Override

@@ -8,6 +8,7 @@ import org.jboss.logging.Logger;
 import com.adaming.myapp.daofacture.IDaoFacture;
 import com.adaming.myapp.entities.Consomation;
 import com.adaming.myapp.entities.Facture;
+import com.adaming.myapp.entities.Reservation;
 
 public class ServiceFactureImpl implements IServicefacture {
 	
@@ -20,11 +21,9 @@ public class ServiceFactureImpl implements IServicefacture {
 		LOGGER.info("<----- Dao Facture injected ----->");
 	}
 
-	@Override
-	public Facture addFacture(Facture f) {
-		// TODO Auto-generated method stub
-		return dao.addFacture(f);
-	}
+	//===============================
+	//		Redefinition des methodes
+	//===============================
 
 	@Override
 	public Facture updateFacture(Facture f) {
@@ -46,9 +45,73 @@ public class ServiceFactureImpl implements IServicefacture {
 
 	@Override
 	public Set<Consomation> getConsoByFacture(Long idFacture) {
-		// TODO Auto-generated method stub
+		
 		return dao.getConsoByFacture(idFacture);
 	}
+
+	@Override
+	public Set<Reservation> getReserByFacture(Long idFacture) {
+		
+		return dao.getReserByFacture(idFacture);
+	}
 	
+
+	@Override
+	public Facture addFactureToReservation(Facture f,
+			Set<Reservation> reservations, Long idPersonne, final Long idHotel) {
+		
+		Double coutRes = 0.0 ;
+		
+		for (Reservation r : reservations) {
+			coutRes = coutRes + r.getCoutResa();
+		}
+		
+		f.setCoutResa(coutRes);
+		return dao.addFactureToReservation(f, reservations, idPersonne, idHotel);
+	}
+
+
+
+	@Override
+	public Facture addFactureToConsomation(Facture f,
+			Set<Consomation> consomations, Long idPersonne, final Long idHotel) {
+		
+		
+		
+		Double coutCons = 0.0 ;	
+
+		for (Consomation c : consomations) {
+			coutCons = coutCons + c.coutclient();
+		}	
+		
+		f.setCoutConso(coutCons);	
+		
+		return dao.addFactureToConsomation(f, consomations, idPersonne,  idHotel);
+	}
+
+
+
+	@Override
+	public Facture addFacture(Facture f, Set<Reservation> reservations,
+			Set<Consomation> consomations, Long idPersonne, final Long idHotel) {
+		
+		Double coutCons = 0.0 ;
+		Double coutRes = 0.0 ;		
+		
+		for (Consomation c : consomations) {
+			coutCons = coutCons + c.coutclient();
+		}
+		for (Reservation r : reservations) {
+			coutRes = coutRes + r.getCoutResa();
+		}
+		
+		f.setCoutConso(coutCons);	
+		f.setCoutResa(coutRes);
+		return dao.addFacture(f, reservations, consomations, idPersonne, idHotel);
+	}
+
+
+
+
 	
 }

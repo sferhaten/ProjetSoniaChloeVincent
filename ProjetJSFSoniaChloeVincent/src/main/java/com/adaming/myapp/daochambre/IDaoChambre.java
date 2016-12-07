@@ -16,4 +16,6 @@ public interface IDaoChambre {
 	List<Chambre> getAllChambre ();
 	
 	
+	
+	
 }

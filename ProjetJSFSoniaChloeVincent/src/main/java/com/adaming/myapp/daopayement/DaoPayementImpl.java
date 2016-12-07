@@ -8,6 +8,7 @@ import javax.persistence.Query;
 
 import org.jboss.logging.Logger;
 
+import com.adaming.myapp.entities.Facture;
 import com.adaming.myapp.entities.Payement;
 
 public class DaoPayementImpl implements IDaoPayement {
@@ -17,12 +18,7 @@ public class DaoPayementImpl implements IDaoPayement {
 	
 	private final Logger LOGGER = Logger.getLogger(DaoPayementImpl.class);
 
-	@Override
-	public Payement addPayement(Payement p) {
-		em.persist(p);
-		LOGGER.info(p + "has been created");
-		return p;
-	}
+
 
 	@Override
 	public Payement updatePayement(Payement p) {
@@ -42,6 +38,17 @@ public class DaoPayementImpl implements IDaoPayement {
 	public List<Payement> getAllPayement() {
 		Query query = em.createQuery("from Payement p");
 		return query.getResultList();
+	}
+
+	@Override
+	public Payement addPayement(Payement p, Long idFacture) {
+		
+		Facture f = em.find(Facture.class, idFacture);
+		
+		em.persist(p);
+		f.setPayement(p);
+		LOGGER.info(p + "has been created");
+		return p;
 	}
 
 }

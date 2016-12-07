@@ -18,9 +18,9 @@ public class ServicePayementImpl implements IServicePayement {
 	}
 
 	@Override
-	public Payement addPayement(Payement p) {
+	public Payement addPayement(Payement p, Long idFacture) {
 		// TODO Auto-generated method stub
-		return dao.addPayement(p);
+		return dao.addPayement(p, idFacture);
 	}
 
 	@Override

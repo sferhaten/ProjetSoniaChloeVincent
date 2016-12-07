@@ -7,7 +7,7 @@ import com.adaming.myapp.entities.Produit;
 public interface IServiceProduit {
 
 	
-	Produit addProduit(final Produit p);
+	Produit addProduit(final Produit p, Long idHotel);
 	
 	Produit updateProduit(final Produit p);
 	

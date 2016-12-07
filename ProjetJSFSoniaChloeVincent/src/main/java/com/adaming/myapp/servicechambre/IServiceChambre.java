@@ -13,5 +13,6 @@ public interface IServiceChambre {
 	Chambre getOneChambre(final Long  idChambre);
 	
 	List<Chambre> getAllChambre ();
+	// Boolean DispoChambre(Date date);
 
 }

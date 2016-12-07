@@ -12,9 +12,9 @@ import com.adaming.myapp.entities.Produit;
 public interface IDaoHotel {
 	
 	
-	Hotel addHotel(Hotel h);
+	Hotel addHotel(final Hotel h);
 	
-	Hotel getHotel(Long id);
+	Hotel getHotel(final Long id);
 	
 	List<Hotel> getAll();
 //	

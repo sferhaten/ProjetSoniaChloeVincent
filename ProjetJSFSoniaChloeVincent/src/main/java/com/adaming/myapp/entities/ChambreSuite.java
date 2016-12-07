@@ -26,7 +26,7 @@ public class ChambreSuite extends Chambre{
 
 	public ChambreSuite(long idChambre, long numChambre, String description,
 			Boolean chambrelibre, double prixSuite) {
-		super(idChambre, numChambre, description, chambrelibre);
+		super(idChambre, numChambre, description);
 		this.prixSuite = prixSuite;
 	}
 	

@@ -19,9 +19,9 @@ public class ServiceProduitImpl implements IServiceProduit {
 	}
 
 	@Override
-	public Produit addProduit(Produit p) {
+	public Produit addProduit(final Produit p, Long idHotel) {
 		// TODO Auto-generated method stub
-		return dao.addProduit(p);
+		return dao.addProduit(p, idHotel);
 	}
 
 	@Override

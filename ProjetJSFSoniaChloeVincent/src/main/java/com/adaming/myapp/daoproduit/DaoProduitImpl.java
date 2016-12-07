@@ -8,6 +8,7 @@ import javax.persistence.Query;
 
 import org.jboss.logging.Logger;
 
+import com.adaming.myapp.entities.Hotel;
 import com.adaming.myapp.entities.Produit;
 
 public class DaoProduitImpl implements IDaoProduit {
@@ -18,8 +19,10 @@ public class DaoProduitImpl implements IDaoProduit {
 	private final Logger LOGGER = Logger.getLogger(DaoProduitImpl.class);
 
 	@Override
-	public Produit addProduit(Produit p) {
+	public Produit addProduit(Produit p, Long idHotel) {
+		Hotel h = em.find(Hotel.class, idHotel);
 		em.persist(p);
+		h.getProduits().add(p);
 		LOGGER.info(p + "has been created");
 		return p;
 	}
