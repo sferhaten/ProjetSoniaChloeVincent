@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import com.adaming.myapp.entities.Client;
 import com.adaming.myapp.entities.Consomation;
@@ -19,18 +20,17 @@ public class DaoConsomationImpl implements IDaoConsomation {
 	 			Long idProduit) { 
 			 
 	 		Client cl = em.find(Client.class, idClient); 
-	 		 
+	 		 System.out.println("le client est " + cl.getNom());
 	 		Produit p = em.find(Produit.class, idProduit); 
 	 		 
 	 		//Hotel h = em.find(Hotel.class, idHotel); 
 	 		 
 	 		c.setProduit(p); 
-	 		em.persist(c); 
-	 		 
+	 		c.setPersonne(cl);
 	 		p.setQuantite(p.getQuantite()-c.getQuantite()); 
 	 		 
 	 		cl.getConsomations().add(c); 
-	 		 
+	 		em.persist(c); 
 	 		return c; 
 	 	} 
 	 
@@ -50,8 +50,8 @@ public class DaoConsomationImpl implements IDaoConsomation {
 	 
 	 	@Override 
 	 	public List<Consomation> consommations() { 
-	 		List<Consomation> consommations = (List<Consomation>) em.createQuery("from Consomation"); 
-	 		return consommations; 
+	 		Query query = em.createQuery("from Consomation"); 
+	 		return query.getResultList(); 
 	 	} 
 
 }

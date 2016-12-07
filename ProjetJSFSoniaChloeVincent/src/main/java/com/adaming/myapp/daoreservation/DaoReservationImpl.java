@@ -9,6 +9,7 @@ import javax.persistence.Query;
 import org.jboss.logging.Logger;
 
 import com.adaming.myapp.entities.Chambre;
+import com.adaming.myapp.entities.Client;
 import com.adaming.myapp.entities.Facture;
 import com.adaming.myapp.entities.Hotel;
 import com.adaming.myapp.entities.Personne;
@@ -23,9 +24,10 @@ public class DaoReservationImpl implements IDaoReservation {
 	
 	@Override
 	public Reservation addReservation(Reservation r, Long IdPersonne) {
-		Personne p =em.find(Personne.class, r.getPersonne().getIdPersonne());
-		r.setPersonne(p);
+		Client client =em.find(Client.class, r.getPersonne().getIdPersonne());
+		r.setPersonne(client);
 		em.persist(r);
+		client.setNombreReservations(client.getNombreReservations()+1);
 		Hotel h = em.find(Hotel.class, r.getHotel().getIdHotel());
 		Chambre c = em.find(Chambre.class, r.getChambre().getIdChambre());
 		Facture f = em.find(Facture.class, r.getFacture().getIdFacture());
@@ -61,11 +63,12 @@ public class DaoReservationImpl implements IDaoReservation {
 	public Reservation Annulation(Long idReservation) {
 		Reservation r = em.find(Reservation.class, idReservation);
 		Hotel h = em.find(Hotel.class, r.getHotel().getIdHotel());
-		Personne p =em.find(Personne.class, r.getPersonne().getIdPersonne());
+		Client client =em.find(Client.class, r.getPersonne().getIdPersonne());
 		Chambre c = em.find(Chambre.class, r.getChambre().getIdChambre());
 		Facture f = em.find(Facture.class, r.getFacture().getIdFacture());
 		h.getReservations().remove(r);
-		p.getReservations().remove(r);
+		client.getReservations().remove(r);
+		client.setNombreReservations(client.getNombreReservations()-1);
 		c.getReservations().remove(r);
 		f.getReservations().remove(r);
 		em.remove(r);
