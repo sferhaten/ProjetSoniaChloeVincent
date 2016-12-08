@@ -14,6 +14,9 @@ import java.util.Set;
 
 
 
+
+
+
 import org.springframework.transaction.annotation.Transactional;
 
 import com.adaming.myapp.daohotel.IDaoHotel;
@@ -21,12 +24,13 @@ import com.adaming.myapp.entities.Chambre;
 import com.adaming.myapp.entities.Client;
 import com.adaming.myapp.entities.Consomation;
 import com.adaming.myapp.entities.Employe;
+import com.adaming.myapp.entities.Facture;
 import com.adaming.myapp.entities.Hotel;
 import com.adaming.myapp.entities.Personne;
 import com.adaming.myapp.entities.Produit;
 import com.adaming.myapp.entities.Reservation;
-@Transactional
 
+@Transactional
 public class ServiceHotelImpl implements IServiceHotel{
 
 	
@@ -77,12 +81,17 @@ public class ServiceHotelImpl implements IServiceHotel{
 	@Override
 	public Set<Employe> employesByHotel(final Long idHotel) {
 		Hotel h = dao.getHotel(idHotel);
+		
 		Set<Employe> employes = new HashSet<Employe>();
 		for (Personne p : h.getPersonnes()) {
-		
-			if (p.getClass().toString().equals("Employe") ) {
+		//System.out.println("getClass de la personne : " + p.getClass().toString() );
+		//System.out.println("getClass().getName() de la personne : " + p.getClass().getName() );
+		//System.out.println("getClass().getSimpleName() de la personne : " + p.getClass().getSimpleName() );
+		System.out.println("Superclass de la personne : " + p.getClass().getSuperclass() );
+			if (p.getClass().getSuperclass().getSimpleName().equals("Employe") ) {
 				employes.add((Employe) p);
 			}
+			
 		}
 		return employes;
 }
@@ -93,13 +102,21 @@ public class ServiceHotelImpl implements IServiceHotel{
 		Hotel h = dao.getHotel(idHotel);
 		Set<Client> clients = new HashSet<Client>();
 		for (Personne p : h.getPersonnes()) {
-		
-			if (p.getClass().toString().equals("Client") ) {
-				clients.add((Client) p);
+			//System.out.println("getClass de la personne : " + p.getClass().toString() );
+			//System.out.println("getClass().getName() de la personne : " + p.getClass().getName() );
+			//System.out.println("getClass().getSimpleName() de la personne : " + p.getClass().getSimpleName() );
+			System.out.println("Superclass de la personne : " + p.getClass().getSuperclass() );
+				if (p.getClass().getSimpleName().equals("Client") ) {
+					clients.add((Client) p);
+				}
+				
 			}
-		}
 		return clients;
 	}
+	
+	
+
+	
 
 
 	@Override
@@ -122,6 +139,22 @@ public class ServiceHotelImpl implements IServiceHotel{
 		
 		return produitsDispos;
 	}
+	
+	@Override
+	public Set<Produit> produitsNonDisposByHotel(Long idHotel) {
+Set<Produit> produits = produitsByHotel(idHotel);
+		
+		Set<Produit> produitsNonDispos = new HashSet<Produit>();
+		
+		for (Produit p : produits) {
+			if (p.getQuantite() == 0) {
+				produitsNonDispos.add(p);
+			}
+		}
+		
+		return produitsNonDispos;
+	}
+
 
 
 	@Override
@@ -131,22 +164,23 @@ public class ServiceHotelImpl implements IServiceHotel{
 		Double charges = 0.0;
 		Double benefice = 0.0;
 		
-		for (Reservation r : h.getReservations()) {
-			recettes = recettes + r.getCoutResa();
+		for (Facture f : h.getFactures()) {
+			recettes = recettes + f.getCoutConso() + f.getCoutResa();
+			System.out.println("Facture : ");
+			System.out.println("Cout conso : " + f.getCoutConso());
+			System.out.println("Cout resa : " + f.getCoutResa());
 		}
 		
-		for (Personne p : h.getPersonnes()) {
-			
-			for (Consomation c : p.getConsomations()) {
-				
-				recettes = recettes + (c.getQuantite() * (c.getProduit().getCoutVente()-c.getProduit().getCoutAchat()));
-				
-			}
+		for (Employe emp : employesByHotel(idHotel)) {
+			charges = charges + emp.salaireTotal();
+			System.out.println("Employe " + emp.getIdPersonne() + " :");
+			System.out.println("Salaire Total : " + emp.salaireTotal());
 		}
 		
-		
-		
-		return 0.0;
+		System.out.println("Recettes : " + recettes);
+		System.out.println("Charges : " + charges);
+		benefice = recettes - charges;
+		return benefice;
 	}
 
 
@@ -172,6 +206,9 @@ public class ServiceHotelImpl implements IServiceHotel{
 		
 		return chambresDispos;
 	}
+
+
+
 
 
 

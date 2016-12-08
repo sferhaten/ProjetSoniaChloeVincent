@@ -6,6 +6,7 @@ import java.util.List;
 
 
 
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -40,6 +41,7 @@ public class DaoPersonneImpl implements IDaoPersonne {
 		return P;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Personne> getAll() {
 		Query query = em.createQuery("from Personne P");

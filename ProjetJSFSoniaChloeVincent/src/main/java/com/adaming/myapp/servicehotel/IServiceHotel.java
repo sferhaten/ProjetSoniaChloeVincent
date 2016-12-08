@@ -24,9 +24,13 @@ public interface IServiceHotel {
 
 	Set<Employe> employesByHotel(final Long idHotel);
 	
+	//Set<Personne> typePersonnesByHotel(final Long idHotel, final String type);
+	
 	Set<Produit> produitsByHotel(final Long idHotel);
 	
 	Set<Produit> produitsDisposByHotel(final Long idHotel);
+	
+	Set<Produit> produitsNonDisposByHotel(final Long idHotel);
 	
 	Set<Chambre> chambreByHotel(final Long idHotel);
 	

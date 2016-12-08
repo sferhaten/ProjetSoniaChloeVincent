@@ -50,7 +50,8 @@ public class DaoConsomationImpl implements IDaoConsomation {
 	 	} 
 	 
 	 
-	 	@Override 
+	 	@SuppressWarnings("unchecked")
+		@Override 
 	 	public List<Consomation> consommations() { 
 	 		Query query = em.createQuery("from Consomation"); 
 	 		return query.getResultList(); 

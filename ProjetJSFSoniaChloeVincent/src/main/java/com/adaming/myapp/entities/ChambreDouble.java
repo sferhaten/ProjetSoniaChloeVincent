@@ -7,7 +7,7 @@
 
 package com.adaming.myapp.entities;
 
-import java.util.Set;
+
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;

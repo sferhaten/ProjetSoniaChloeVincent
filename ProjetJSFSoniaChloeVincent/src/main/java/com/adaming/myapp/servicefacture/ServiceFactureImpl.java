@@ -10,6 +10,7 @@ import com.adaming.myapp.daofacture.IDaoFacture;
 import com.adaming.myapp.entities.Consomation;
 import com.adaming.myapp.entities.Facture;
 import com.adaming.myapp.entities.Reservation;
+
 @Transactional
 public class ServiceFactureImpl implements IServicefacture {
 	
@@ -59,56 +60,62 @@ public class ServiceFactureImpl implements IServicefacture {
 
 	@Override
 	public Facture addFactureToReservation(Facture f,
-			Set<Reservation> reservations, Long idPersonne, final Long idHotel) {
+			Set<Reservation> reservations, final Long idHotel) {
 		
 		Double coutRes = 0.0 ;
 		
 		for (Reservation r : reservations) {
+			System.out.println("Reservation : " + r);
+			System.out.println("Reservation trouvée : " + r.getIdReservation());
 			coutRes = coutRes + r.getCoutResa();
 		}
 		
 		f.setCoutResa(coutRes);
-		return dao.addFactureToReservation(f, reservations, idPersonne, idHotel);
+		return dao.addFactureToReservation(f, reservations, idHotel);
 	}
 
 
 
 	@Override
 	public Facture addFactureToConsomation(Facture f,
-			Set<Consomation> consomations, Long idPersonne, final Long idHotel) {
+			Set<Consomation> consomations, final Long idHotel) {
 		
 		
 		
 		Double coutCons = 0.0 ;	
 
 		for (Consomation c : consomations) {
+			System.out.println("Conso : " + c + " - produit : " + c.getProduit());
 			coutCons = coutCons + c.coutclient();
 		}	
 		
 		f.setCoutConso(coutCons);	
 		
-		return dao.addFactureToConsomation(f, consomations, idPersonne,  idHotel);
+		return dao.addFactureToConsomation(f, consomations,  idHotel);
 	}
 
 
 
 	@Override
 	public Facture addFacture(Facture f, Set<Reservation> reservations,
-			Set<Consomation> consomations, Long idPersonne, final Long idHotel) {
+			Set<Consomation> consomations, final Long idHotel) {
 		
 		Double coutCons = 0.0 ;
 		Double coutRes = 0.0 ;		
 		
 		for (Consomation c : consomations) {
+			System.out.println("Conso : " + c + " - produit : " + c.getProduit());
 			coutCons = coutCons + c.coutclient();
 		}
 		for (Reservation r : reservations) {
+			System.out.println("Reservation : " + r);
+			System.out.println("Reservation trouvée : " + r.getIdReservation());
 			coutRes = coutRes + r.getCoutResa();
 		}
 		
 		f.setCoutConso(coutCons);	
 		f.setCoutResa(coutRes);
-		return dao.addFacture(f, reservations, consomations, idPersonne, idHotel);
+		return dao.addFacture(f, reservations, consomations, idHotel);
 	}
 
 

@@ -60,7 +60,7 @@ public class Stagiaire extends Employe {
 
 	@Override
 	public Double salaireTotal() {
-		Long diff = (dateDeSortie.getTime() - dateEmbauuche.getTime()+1)/(3600*24*1000);		
+		Long diff = 1 + (dateDeSortie.getTime() - dateEmbauuche.getTime())/(3600*24*1000);		
 		return (salaire*diff);
 	}
 	

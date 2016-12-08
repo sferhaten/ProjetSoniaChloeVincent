@@ -1,6 +1,6 @@
 package com.adaming.myapp.daochambre;
 
-import java.util.Date;
+
 import java.util.List;
 
 import com.adaming.myapp.entities.Chambre;

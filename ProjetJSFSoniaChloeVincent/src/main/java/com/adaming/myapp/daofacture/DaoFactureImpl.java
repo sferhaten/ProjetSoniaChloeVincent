@@ -12,7 +12,7 @@ import org.jboss.logging.Logger;
 import com.adaming.myapp.entities.Consomation;
 import com.adaming.myapp.entities.Facture;
 import com.adaming.myapp.entities.Hotel;
-import com.adaming.myapp.entities.Personne;
+
 import com.adaming.myapp.entities.Reservation;
 
 public class DaoFactureImpl implements IDaoFacture {
@@ -27,13 +27,14 @@ public class DaoFactureImpl implements IDaoFacture {
 	@Override
 	public Facture updateFacture(Facture f) {
 		em.merge(f);
-		LOGGER.info(f + "has been update");
+		LOGGER.info(f + "has been updated");
 		return f;
 	}
 
 	@Override
 	public Facture getOneFacture(Long idFacture) {
 		Facture f = em.find(Facture.class, idFacture);
+		LOGGER.info(f + "has been found");
 		return f;
 	}
 
@@ -61,15 +62,23 @@ public class DaoFactureImpl implements IDaoFacture {
 	}
 
 	@Override
-	public Facture addFactureToReservation(Facture f,
-			Set<Reservation> reservations, Long idPersonne, Long idHotel) {
+	public Facture addFactureToReservation(Facture f, Set<Reservation> reservations, Long idHotel) {
 		
 		f.setReservations(reservations);
-		//Personne P = em.find(Personne.class, idPersonne);
+			
 		Hotel h = em.find(Hotel.class, idHotel);
+		f.setHotel(h);
 		
 		em.persist(f);
-		h.getFactures().add(f);
+		
+		for (Reservation r : reservations) {
+			System.out.println("Reservation : " + r);
+			r.setFacture(f);
+			em.merge(r);
+			System.out.println("Reservation trouvée : " + r.getIdReservation());
+		}
+		
+		LOGGER.info(f + "has been created");
 		
 		return f;
 		
@@ -80,30 +89,37 @@ public class DaoFactureImpl implements IDaoFacture {
 
 	@Override
 	public Facture addFactureToConsomation(Facture f,
-			Set<Consomation> consomations, Long idPersonne, Long idHotel) {
+			Set<Consomation> consomations, Long idHotel) {
 		
 		f.setConsomation(consomations);
-		//Personne P = em.find(Personne.class, idPersonne);
+		
 		Hotel h = em.find(Hotel.class, idHotel);
+		f.setHotel(h);
 		
 		em.persist(f);
-		h.getFactures().add(f);
+		
 		
 		return f;
 	}
 
 	@Override
 	public Facture addFacture(Facture f, Set<Reservation> reservations,
-			Set<Consomation> consomations, Long idPersonne, Long idHotel) {
+			Set<Consomation> consomations, Long idHotel) {
 		
 		f.setReservations(reservations);
 		f.setConsomation(consomations);
-	
-		//Personne P = em.find(Personne.class, idPersonne);
+					
 		Hotel h = em.find(Hotel.class, idHotel);
-		
+		f.setHotel(h);
+
 		em.persist(f);
-		h.getFactures().add(f);
+
+		for (Reservation r : reservations) {
+			System.out.println("Reservation : " + r);
+			r.setFacture(f);
+			em.merge(r);
+			System.out.println("Reservation trouvée : " + r.getIdReservation());
+		};
 		
 		return f;
 		

@@ -10,7 +10,7 @@ import org.jboss.logging.Logger;
 
 import com.adaming.myapp.entities.Chambre;
 import com.adaming.myapp.entities.Hotel;
-import com.adaming.myapp.entities.Personne;
+
 
 public class DaoChambreImpl implements IDaoChambre {
 	

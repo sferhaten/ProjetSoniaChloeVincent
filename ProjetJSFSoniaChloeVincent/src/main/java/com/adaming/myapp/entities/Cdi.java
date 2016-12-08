@@ -49,7 +49,7 @@ public class Cdi extends Employe {
 	@Override
 	public Double salaireTotal() {
 		
-		Long diff = ((new Date()).getTime() - dateEmbauuche.getTime()+1)/(3600*24*1000);		
+		Long diff = 1 + ((new Date()).getTime() - dateEmbauuche.getTime())/(3600*24*1000);		
 		return (salaire*diff);
 	}
 

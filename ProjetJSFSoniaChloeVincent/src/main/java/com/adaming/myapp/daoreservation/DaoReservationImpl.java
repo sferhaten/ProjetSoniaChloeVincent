@@ -12,7 +12,7 @@ import com.adaming.myapp.entities.Chambre;
 import com.adaming.myapp.entities.Client;
 import com.adaming.myapp.entities.Facture;
 import com.adaming.myapp.entities.Hotel;
-import com.adaming.myapp.entities.Personne;
+
 import com.adaming.myapp.entities.Reservation;
 
 public class DaoReservationImpl implements IDaoReservation {

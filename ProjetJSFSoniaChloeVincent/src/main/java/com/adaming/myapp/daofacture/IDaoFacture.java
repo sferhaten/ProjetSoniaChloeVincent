@@ -9,9 +9,9 @@ import com.adaming.myapp.entities.Reservation;
 
 public interface IDaoFacture {
 
-	Facture addFactureToReservation(final Facture f, Set<Reservation> reservations, final Long idPersonne, final Long idHotel);
-	Facture addFactureToConsomation(final Facture f, Set<Consomation> consomations, final Long idPersonne, final Long idHotel );
-	Facture addFacture(final Facture f, Set<Reservation> reservations, Set<Consomation> consomations, final Long idPersonne, final Long idHotel);
+	Facture addFactureToReservation(final Facture f, Set<Reservation> reservations, final Long idHotel);
+	Facture addFactureToConsomation(final Facture f, Set<Consomation> consomations, final Long idHotel );
+	Facture addFacture(final Facture f, Set<Reservation> reservations, Set<Consomation> consomations, final Long idHotel);
 	
 	Facture updateFacture(final Facture f);
 	
