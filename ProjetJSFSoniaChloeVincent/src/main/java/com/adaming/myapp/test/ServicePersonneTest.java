@@ -41,7 +41,7 @@ public class ServicePersonneTest {
 	}
 
 	@Test
-	@Ignore
+	//@Ignore
 	public void testAddPersonne() throws Exception {
 		SimpleDateFormat sf = new SimpleDateFormat("dd-MM-yyyy");
 		Date Date1=sf.parse("06-12-2012");
@@ -52,16 +52,17 @@ public class ServicePersonneTest {
 	}
 
 	@Test
-	@Ignore
+	//@Ignore
 	public void testGetPersonne() {
 		Personne p =servicePersonne.getPersonne(1L);
 		assertNotNull(p);
 	}
 
 	@Test
-	@Ignore
+	//@Ignore
 	public void testGetAll() {
 		List<Personne> personnes = new ArrayList<Personne>();
+		personnes = servicePersonne.getAll();
 		assertNotNull(personnes);
 		
 	}

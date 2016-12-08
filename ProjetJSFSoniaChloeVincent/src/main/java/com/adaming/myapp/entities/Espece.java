@@ -6,7 +6,9 @@
 *====================================*/
 package com.adaming.myapp.entities;
 
-import java.sql.Date;
+
+
+import java.util.Date;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -31,15 +33,22 @@ public class Espece extends Payement{
 		this.devise = devise;
 	}
 
+
 	//=======================
 	//	constructeur
 	//=======================
+
+	
+	public Espece() {
+		super();
+	}
+
 	public Espece(double coutTotal, Date date, String devise) {
 		super(coutTotal, date);
 		this.devise = devise;
 	}
+
 	
-	
-	
+
 
 }

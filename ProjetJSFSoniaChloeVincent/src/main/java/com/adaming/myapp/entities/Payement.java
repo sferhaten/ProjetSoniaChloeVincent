@@ -6,7 +6,9 @@
 *====================================*/
 package com.adaming.myapp.entities;
 
-import java.sql.Date;
+
+
+import java.util.Date;
 
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
@@ -17,6 +19,11 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToOne;
+
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
+
+
 
 @Entity
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
@@ -31,6 +38,7 @@ public abstract class Payement {
 	@GeneratedValue(strategy = GenerationType.IDENTITY) 
 	private long idPayement;
 	private double coutTotal;
+	@DateTimeFormat(iso=ISO.DATE)
 	private Date date;
 	
 	@OneToOne (mappedBy ="payement")
@@ -39,42 +47,45 @@ public abstract class Payement {
 //==========================
 //	CONSTRUCTEURS
 //=========================
-
-	public Payement(double coutTotal, Date date) {
-		super();
-		this.coutTotal = coutTotal;
-		this.date = date;
-	}
 	public Payement() {
 		super();
 	}
+		public Payement(double coutTotal, Date date) {
+		super();
+		this.coutTotal = coutTotal;
+		this.date = date;
+		
+	}
+	
 //=========================
 //	GETTER SETTER
 //=========================
-	public long getIdPayement() {
-		return idPayement;
-	}
-	public void setIdPayement(long idPayement) {
-		this.idPayement = idPayement;
-	}
-	public double getCoutTotal() {
-		return coutTotal;
-	}
-	public void setCoutTotal(double coutTotal) {
-		this.coutTotal = coutTotal;
-	}
-	public Date getDate() {
-		return date;
-	}
-	public void setDate(Date date) {
-		this.date = date;
-	}
-	public Facture getFacture() {
-		return facture;
-	}
-	public void setFacture(Facture facture) {
-		this.facture = facture;
-	}
+		public long getIdPayement() {
+			return idPayement;
+		}
+		public void setIdPayement(long idPayement) {
+			this.idPayement = idPayement;
+		}
+		public double getCoutTotal() {
+			return coutTotal;
+		}
+		public void setCoutTotal(double coutTotal) {
+			this.coutTotal = coutTotal;
+		}
+		public Date getDate() {
+			return date;
+		}
+		public void setDate(Date date) {
+			this.date = date;
+		}
+		public Facture getFacture() {
+			return facture;
+		}
+		public void setFacture(Facture facture) {
+			this.facture = facture;
+		}
+		
+		
 
 //========================
 //		METHODES

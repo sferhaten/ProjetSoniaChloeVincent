@@ -39,7 +39,7 @@ public class ServiceProduit {
 	}
 
 	@Test
-	@Ignore
+	//@Ignore
 	public void testAddProduit() {
 		Produit  p = new Produit("the", 2, 2.0, 2.0);
 		serviceProduit.addProduit(p, 1L);
@@ -47,7 +47,7 @@ public class ServiceProduit {
 	}
 
 	@Test
-	@Ignore
+	//@Ignore
 	public void testUpdateProduit() {
 		Produit p1 = serviceProduit.getOneProduit(1L);
 		p1.setNom("cafe");
@@ -58,16 +58,17 @@ public class ServiceProduit {
 	}
 
 	@Test
-	@Ignore
+	//@Ignore
 	public void testGetOneProduit() {
 		Produit p = serviceProduit.getOneProduit(1L);
 		assertNotNull(p);
 	}
 
 	@Test
-	@Ignore
+	//@Ignore
 	public void testGetAllProduit() {
 		List<Produit> produits = new ArrayList<Produit>();
+		produits = serviceProduit.getAllProduit();
         assertNotNull(produits);
 	}
 

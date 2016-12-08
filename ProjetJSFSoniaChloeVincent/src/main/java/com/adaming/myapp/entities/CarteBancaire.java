@@ -6,7 +6,9 @@
 *====================================*/
 package com.adaming.myapp.entities;
 
-import java.sql.Date;
+
+
+import java.util.Date;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -17,7 +19,7 @@ public class CarteBancaire extends Payement{
 
 	
 	private int numCarte;
-	private int typeCarte;
+	private String typeCarte;
 	
 	//=========================
 	//  Getter setter
@@ -28,26 +30,31 @@ public class CarteBancaire extends Payement{
 	public void setNumCarte(int numCarte) {
 		this.numCarte = numCarte;
 	}
-	public int getTypeCarte() {
+	public String getTypeCarte() {
 		return typeCarte;
 	}
-	public void setTypeCarte(int typeCarte) {
+	public void setTypeCarte(String typeCarte) {
 		this.typeCarte = typeCarte;
 	}
+
 	
 	
 	//==========================
 	//	constructeur
 	//=========================
-	public CarteBancaire(double coutTotal, Date date,
-			int numCarte, int typeCarte) {
+
+
+	public CarteBancaire() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public CarteBancaire(double coutTotal, Date date, int numCarte,
+			String typeCarte) {
 		super(coutTotal, date);
 		this.numCarte = numCarte;
 		this.typeCarte = typeCarte;
 	}
-	public CarteBancaire(double coutTotal, Date date) {
-		super(coutTotal, date);
-	}
-	
+
 
 }

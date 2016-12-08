@@ -64,6 +64,7 @@ public class ServiceChambreTest {
 	//@Ignore
 	public void testGetAllChambre() {
 		List<Chambre> chambres = new ArrayList<Chambre>();
+		chambres = serviceChambre.getAllChambre();
 		
         assertNotNull(chambres);
 	}

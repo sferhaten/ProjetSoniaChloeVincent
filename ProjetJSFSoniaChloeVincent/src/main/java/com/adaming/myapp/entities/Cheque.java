@@ -6,7 +6,9 @@
 *====================================*/
 package com.adaming.myapp.entities;
 
-import java.sql.Date;
+
+
+import java.util.Date;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -36,18 +38,20 @@ public class Cheque extends Payement{
 	public void setBanqueCheque(String banqueCheque) {
 		this.banqueCheque = banqueCheque;
 	}
+
 	
 	//============================
 	//Constructeur
 	//=============================
+	
 	public Cheque(double coutTotal, Date date, int numCheque,
 			String banqueCheque) {
 		super(coutTotal, date);
 		this.numCheque = numCheque;
 		this.banqueCheque = banqueCheque;
 	}
-	public Cheque(long idPayement, double coutTotal, Date date) {
-		super(coutTotal, date);
+	public Cheque() {
+		super();
 	}
 	
 

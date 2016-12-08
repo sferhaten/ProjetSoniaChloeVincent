@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 import org.hamcrest.core.IsEqual;
 import org.junit.AfterClass;
@@ -12,7 +13,6 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.adaming.myapp.entities.Consomation;
 import com.adaming.myapp.entities.Reservation;
 import com.adaming.myapp.servicereservation.IServiceReservation;
 
@@ -49,25 +49,27 @@ public class ServiceReservationTest {
 	}
 
 	@Test
-	//@Ignore
-	public void testUpdateReservation() {
+	@Ignore
+	public void testUpdateReservation() throws ParseException {
 		SimpleDateFormat sf = new SimpleDateFormat("dd-MM-yyyy");
-		Reservation reservation1 = serviceReservation.getOneReservation(1L);
-		reservation1.setDateArrive(sf.parse("31-11-2016"));
+		Reservation reservation1 = serviceReservation.getOneReservation(9L);
+		reservation1.setDateArrive(sf.parse("27-10-2016"));
 		serviceReservation.updateReservation(reservation1);
-		assertThat(10,IsEqual.equalTo(serviceReservation.getOneReservation(reservation1.getIdReservation()).getDateArrive()));
+		assertThat(sf.parse("27-10-2016"),IsEqual.equalTo(serviceReservation.getOneReservation(reservation1.getIdReservation()).getDateArrive()));
 	}
 
 	@Test
 	@Ignore
 	public void testGetOneReservation() {
-		fail("Not yet implemented");
+		Reservation reservation =serviceReservation.getOneReservation(8L);
+		assertNotNull(reservation);
 	}
 
 	@Test
 	@Ignore
 	public void testGetAllReservation() {
-		fail("Not yet implemented");
+		List<Reservation> reservations =serviceReservation.getAllReservation();
+		assertNotNull(reservations);
 	}
 
 }
