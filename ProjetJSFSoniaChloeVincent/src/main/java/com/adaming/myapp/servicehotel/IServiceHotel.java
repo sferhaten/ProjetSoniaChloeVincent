@@ -40,4 +40,11 @@ public interface IServiceHotel {
 	
 	Double beneficeAnnuel(final Long idHotel);
 	
+	Set<Chambre> chambreSimpleDisposByHotel(final Long idHotel, final Date dateDemandee1, final Date dateDemandee2);
+	
+	Set<Chambre> chambreDoubleDisposByHotel(final Long idHotel, final Date dateDemandee1, final Date dateDemandee2);
+	
+	Set<Chambre> chambreSuiteDisposByHotel(final Long idHotel, final Date dateDemandee1, final Date dateDemandee2);
+	
+	
 }

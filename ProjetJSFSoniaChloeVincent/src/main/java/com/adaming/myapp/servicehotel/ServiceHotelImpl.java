@@ -1,9 +1,14 @@
 package com.adaming.myapp.servicehotel;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+
+
+
 
 
 
@@ -205,6 +210,154 @@ Set<Produit> produits = produitsByHotel(idHotel);
 		}
 		
 		return chambresDispos;
+	}
+
+
+	@Override
+	public Set<Chambre> chambreSimpleDisposByHotel(Long idHotel,
+			Date dateDemandee1, Date dateDemandee2) {
+		
+		Calendar c = Calendar.getInstance();
+		Boolean dispo;
+		
+		Set<Chambre> chambres = chambreByHotel(idHotel);
+		System.out.println("Nombre de chambres : " + chambres.size());
+		Set<Chambre> chambresSimple = new HashSet<Chambre>();
+		Set<Chambre> chambresSimpleDispos = new HashSet<Chambre>();
+		
+		for (Chambre ch : chambres) {
+			System.out.println("1ere boucle - Chambre : " + ch.getIdChambre());
+			if (ch.getClass().getSimpleName().equals("ChambreSimple")) {
+				chambresSimple.add(ch);
+			}
+		}
+		
+		System.out.println("Nombre de chambres simples : " + chambresSimple.size());
+		
+		
+		
+//		System.out.println("Avant 2ème boucle - 1ère date : " + dateDemandee1);
+//		System.out.println("Avant 2ème boucle - 2ème date : " + dateDemandee2);
+//		System.out.println("Avant 2ème boucle - 1ère date : " + c.getTime());
+	
+		for (Chambre ch1 : chambresSimple) {
+			c.setTime(dateDemandee1);
+			System.out.println("2ème boucle - Chambre : " + ch1.getIdChambre());
+			System.out.println("2ème boucle - 1ère date : " + c.getTime());
+			dispo = true;
+			while (c.getTime().after(dateDemandee2) == false) {
+				System.out.println("3ème boucle - Date : " + c.getTime() );
+				System.out.println("3ème boucle - Dispo : " + ch1.DispoChambre(c.getTime()) );
+				if (ch1.DispoChambre(c.getTime()) == false) {
+					dispo = false;
+				}
+				c.add(Calendar.DATE, 1);
+			}
+			System.out.println("La chambre " + ch1.getIdChambre() + " est dispo : " + dispo);
+			if (dispo) {
+				chambresSimpleDispos.add(ch1);
+			}
+		}
+		
+		System.out.println("Nombre de chambres simples dispos : " + chambresSimpleDispos.size());
+		
+		
+		return chambresSimpleDispos;
+	}
+
+
+	@Override
+	public Set<Chambre> chambreDoubleDisposByHotel(Long idHotel,
+			Date dateDemandee1, Date dateDemandee2) {
+		Calendar c = Calendar.getInstance();
+		Boolean dispo;
+		
+		Set<Chambre> chambres = chambreByHotel(idHotel);
+		System.out.println("Nombre de chambres : " + chambres.size());
+		Set<Chambre> chambresDouble = new HashSet<Chambre>();
+		Set<Chambre> chambresDoubleDispos = new HashSet<Chambre>();
+		
+		for (Chambre ch : chambres) {
+			System.out.println("1ere boucle - Chambre : " + ch.getIdChambre());
+			if (ch.getClass().getSimpleName().equals("ChambreDouble")) {
+				chambresDouble.add(ch);
+			}
+		}
+		
+		System.out.println("Nombre de chambres double : " + chambresDouble.size());
+		
+	
+		for (Chambre ch1 : chambresDouble) {
+			c.setTime(dateDemandee1);
+			System.out.println("2ème boucle - Chambre : " + ch1.getIdChambre());
+			System.out.println("2ème boucle - 1ère date : " + c.getTime());
+			dispo = true;
+			while (c.getTime().after(dateDemandee2) == false) {
+				System.out.println("3ème boucle - Date : " + c.getTime() );
+				System.out.println("3ème boucle - Dispo : " + ch1.DispoChambre(c.getTime()) );
+				if (ch1.DispoChambre(c.getTime()) == false) {
+					dispo = false;
+				}
+				c.add(Calendar.DATE, 1);
+			}
+			System.out.println("La chambre " + ch1.getIdChambre() + " est dispo : " + dispo);
+			if (dispo) {
+				chambresDoubleDispos.add(ch1);
+			}
+		}
+		
+		System.out.println("Nombre de chambres simples dispos : " + chambresDoubleDispos.size());
+		
+		
+		return chambresDoubleDispos;
+	}
+
+
+	@Override
+	public Set<Chambre> chambreSuiteDisposByHotel(Long idHotel,
+			Date dateDemandee1, Date dateDemandee2) {
+		
+		Calendar c = Calendar.getInstance();
+		Boolean dispo;
+		
+		Set<Chambre> chambres = chambreByHotel(idHotel);
+		System.out.println("Nombre de chambres : " + chambres.size());
+		Set<Chambre> chambresSuite = new HashSet<Chambre>();
+		Set<Chambre> chambresSuiteDispos = new HashSet<Chambre>();
+		
+		for (Chambre ch : chambres) {
+			System.out.println("1ere boucle - Chambre : " + ch.getIdChambre());
+			if (ch.getClass().getSimpleName().equals("ChambreSuite")) {
+				chambresSuite.add(ch);
+			}
+		}
+		
+		System.out.println("Nombre de chambres suite : " + chambresSuite.size());
+		
+	
+		for (Chambre ch1 : chambresSuite) {
+			c.setTime(dateDemandee1);
+			System.out.println("2ème boucle - Chambre : " + ch1.getIdChambre());
+			System.out.println("2ème boucle - 1ère date : " + c.getTime());
+			dispo = true;
+			while (c.getTime().after(dateDemandee2) == false) {
+				System.out.println("3ème boucle - Date : " + c.getTime() );
+				System.out.println("3ème boucle - Dispo : " + ch1.DispoChambre(c.getTime()) );
+				if (ch1.DispoChambre(c.getTime()) == false) {
+					dispo = false;
+				}
+				c.add(Calendar.DATE, 1);
+			}
+			System.out.println("La chambre " + ch1.getIdChambre() + " est dispo : " + dispo);
+			if (dispo) {
+				chambresSuiteDispos.add(ch1);
+			}
+		}
+		
+		System.out.println("Nombre de chambres simples dispos : " + chambresSuiteDispos.size());
+		
+		
+		return chambresSuiteDispos;
 	}
 
 
