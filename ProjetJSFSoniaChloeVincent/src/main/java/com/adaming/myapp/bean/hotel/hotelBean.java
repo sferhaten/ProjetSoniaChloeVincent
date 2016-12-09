@@ -1,12 +1,12 @@
 package com.adaming.myapp.bean.hotel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
 import org.jboss.logging.Logger;
 
-import com.adaming.myapp.bean.client.ClientBean;
 import com.adaming.myapp.entities.Hotel;
 import com.adaming.myapp.servicehotel.IServiceHotel;
 
@@ -17,13 +17,7 @@ public class hotelBean {
 	@Inject
 	private IServiceHotel serviceHotel;
 	
-	
-	//=================7
-	//
-	//
-	
-	
-	private List<Hotel> hotels;
+	private List<Hotel> hotels = new ArrayList<Hotel>();
 	
 	
 	public List<Hotel> getHotels() {

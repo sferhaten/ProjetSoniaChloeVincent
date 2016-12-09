@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>Employe</title>
+
+
+	<h:outputStylesheet name="css/bootstrap.css" rel="stylesheet" />
+
+	<h:outputStylesheet name="css/datepicker3.css" rel="stylesheet" />
+	<h:outputStylesheet name="css/styles.css" rel="stylesheet" />
+
+</h:head>
+<body>
+
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed"
+				data-toggle="collapse" data-target="#sidebar-collapse">
+				<span class="sr-only">Toggle navigation</span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#"><span>Gestion Hotels</span></a>
+			<ul class="user-menu">
+				<li class="dropdown pull-right"><a href="#"
+					class="dropdown-toggle" data-toggle="dropdown"> User <span
+						class="employeet"></span></a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="#">Profile</a></li>
+						<li><a href="#"> Settings</a></li>
+						<li><a href="#"> Logout</a></li>
+					</ul></li>
+			</ul>
+		</div>
+
+	</div>
+	</nav>
+	<!-- /.container-fluid -->
+
+
+	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+
+		<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+			<form role="search">
+				<div class="form-group">
+					<h:inputText type="text" class="form-control" placeholder="Search" />
+				</div>
+			</form>
+			<ul class="nav menu">
+				<li class="active"><a href="home.html"><svg
+							class="glyph stroked dashboard-dial"></svg> Home</a></li>
+				<li><a href="widgets.html"><svg
+							class="glyph stroked calendar"></svg> Hotel</a></li>
+				<li><a href="charts.html"><svg
+							class="glyph stroked line-graph"></svg> Personne</a></li>
+				<li><a href="tables.html"><svg class="glyph stroked table"></svg>
+						facture</a></li>
+				<li><a href="forms.html"><svg class="glyph stroked pencil"></svg>
+						Payement</a></li>
+			</ul>
+		</div>
+		<!--/.sidebar-->
+
+		<!-- ********** Formulaire ajout employe************** -->
+
+		<h1 class="text-center">Employe</h1>
+		<br />
+
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="panel panel-default">
+					<div class="panel-heading">Gestion employé</div>
+					<div class="panel-body">
+
+
+
+						<h:form>
+							<p:panel id="panel" header="Nouvel employe">
+
+								<p:messages id="msgs" />
+								
+								<h:panelGrid columns="3" cellpadding="5">
+									<p:outputLabel for="idHotel" value="Hotel :" />
+									<h:selectOneMenu id="idHotel"
+										value="#{employeBean.nomHotel}" style="width:125px">
+										<f:selectItems itemLabel="em.nomHotel" itemValue="em.nomHotel" 
+										value="#{employeBean.hotels}" var="em" />
+									</h:selectOneMenu>
+								</h:panelGrid>
+								
+								<h:panelGrid columns="3" cellpadding="5">
+								
+																
+									<p:outputLabel for="firstname" value="Prenom" />
+									<p:inputText id="firstname" value="#{EmployeBean.employe.prenom}"
+										required="true" label="Firstname">
+										<f:validateLength minimum="2" />
+									</p:inputText>
+									<p:message for="firstname" display="icon" />
+
+									<p:outputLabel for="lastname" value="Nom" />
+									<p:inputText id="lastname" value="#{EmployeBean.employe.nom}"
+										label="Lastname" required="true">
+										<f:validateLength minimum="2" />
+										<p:ajax update="msgLastname" event="keyup" />
+									</p:inputText>
+									<p:message for="lastname" id="msgLastname" display="icon" />
+
+									<p:outputLabel for="lastname" value="Adresse" />
+									<p:inputText id="adresse" value="#{EmployeBean.employe.adresse}"
+										label="Lastname" required="true">
+										<f:validateLength minimum="2" />
+										<p:ajax update="msgAdresse" event="keyup" />
+									</p:inputText>
+									<p:message for="lastname" id="msgAdresse" display="icon" />
+
+									<p:outputLabel for="lastname" value="Date de naissance" />
+									<p:inputText id="naissance" value="#{EmployeBean.employe.prenom}"
+										label="Lastname" required="true">
+										<f:validateLength minimum="2" />
+										<p:ajax update="msgNaissance" event="keyup" />
+									</p:inputText>
+									<p:message for="lastname" id="msgNaissance" display="icon" />
+
+									<p:outputLabel for="lastname" value="Salaire" />
+									<p:inputText id="salaire" value="#{EmployeBean.employe.adresse}"
+										label="Lastname" required="true">
+										<f:validateLength minimum="2" />
+										<p:ajax update="msgSalaire" event="keyup" />
+									</p:inputText>
+									<p:message for="lastname" id="msgSalaire" display="icon" />
+
+									<p:outputLabel for="lastname" value="Role" />
+									<p:inputText id="role" value="#{EmployeBean.employe.role}"
+										label="Lastname" required="true">
+										<f:validateLength minimum="2" />
+										<p:ajax update="msgRole" event="keyup" />
+									</p:inputText>
+									<p:message for="lastname" id="msgRole" display="icon" />
+
+									<p:outputLabel for="lastname" value="Type de contract" />
+									<p:inputText id="contract" value="#{EmployeBean.employe.contract}"
+										label="Lastname" required="true">
+										<f:validateLength minimum="2" />
+										<p:ajax update="msgContract" event="keyup" />
+									</p:inputText>
+									<p:message for="lastname" id="msgContract" display="icon" />
+
+								</h:panelGrid>
+
+								<p:commandButton value="Save" update="panel"
+									actionListener="#{userView.save}" icon="ui-icon-check" />
+							</p:panel>
+						</h:form>
+						<br />
+
+						<!-- ********** Liste employe************** -->
+						<h:form>
+							<p:dataTable var="employe" value="#{EmployeBean.employes}"
+								widgetVar="carsTable" emptyMessage="Pas d'employe trouvé"
+								filteredValue="#{dtFilterView.filteredCars}">
+
+								<f:facet name="header">
+									<p:outputPanel>
+										<h:outputText value="Search all fields:" />
+										<p:inputText id="globalFilter"
+											onkeyup="PF('carsTable').filter()" style="width:150px"
+											placeholder="Entrer un mot cle" />
+									</p:outputPanel>
+								</f:facet>
+
+								<p:column filterBy="#{car.id}" headerText="Id"
+									filterMatchMode="contains">
+									<h:outputText value="#{employe.id}" />
+								</p:column>
+
+								<p:column filterBy="#{car.year}" headerText="Nom"
+									filterMatchMode="lte">
+									<f:facet name="filter">
+										<p:spinner onchange="PF('carsTable').filter()"
+											styleClass="year-spinner">
+											<f:converter converterId="javax.faces.Integer" />
+										</p:spinner>
+									</f:facet>
+									<h:outputText value="#{employe.nom}" />
+								</p:column>
+
+								<p:column filterBy="#{car.year}" headerText="Prenom"
+									filterMatchMode="lte">
+									<f:facet name="filter">
+										<p:spinner onchange="PF('carsTable').filter()"
+											styleClass="year-spinner">
+											<f:converter converterId="javax.faces.Integer" />
+										</p:spinner>
+									</f:facet>
+									<h:outputText value="#{employe.prenom}" />
+								</p:column>
+
+								<p:column filterBy="#{car.year}" headerText="Date de naissance"
+									filterMatchMode="lte">
+									<f:facet name="filter">
+										<p:spinner onchange="PF('carsTable').filter()"
+											styleClass="year-spinner">
+											<f:converter converterId="javax.faces.Integer" />
+										</p:spinner>
+									</f:facet>
+									<h:outputText value="#{employe.dateDeNaissance}" />
+								</p:column>
+
+								<p:column filterBy="#{car.year}" headerText="Salaire"
+									filterMatchMode="lte">
+									<f:facet name="filter">
+										<p:spinner onchange="PF('carsTable').filter()"
+											styleClass="year-spinner">
+											<f:converter converterId="javax.faces.Integer" />
+										</p:spinner>
+									</f:facet>
+									<h:outputText value="#{employe.salaire}" />
+								</p:column>
+
+								<p:column filterBy="#{car.sold}" headerText="Status"
+									filterMatchMode="equals">
+									<f:facet name="filter">
+										<p:selectOneButton onchange="PF('carsTable').filter()">
+											<f:converter converterId="javax.faces.Boolean" />
+											<f:selectItem itemLabel="CDI" itemValue="" />
+											<f:selectItem itemLabel="CDD" itemValue="true" />
+											<f:selectItem itemLabel="Stage" itemValue="false" />
+										</p:selectOneButton>
+									</f:facet>
+									<h:outputText value="#{employe.contract}" />
+								</p:column>
+
+								<p:column filterBy="#{car.year}" headerText="Role"
+									filterMatchMode="lte">
+									<f:facet name="filter">
+										<p:spinner onchange="PF('carsTable').filter()"
+											styleClass="year-spinner">
+											<f:converter converterId="javax.faces.Integer" />
+										</p:spinner>
+									</f:facet>
+									<h:outputText value="#{employe.role}" />
+								</p:column>
+							</p:dataTable>
+						</h:form>
+
+						<br /> <br /> <br /> <br />
+
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+	<!-- ******************************************** -->
+	<h:outputScript name="js/jquery-1.11.1.min.js"></h:outputScript>
+	<h:outputScript name="js/bootstrap.min.js"></h:outputScript>
+	<h:outputScript name="js/chart.min.js"></h:outputScript>
+	<h:outputScript name="js/chart-data.js"></h:outputScript>
+	<h:outputScript name="js/easypiechart.js"></h:outputScript>
+	<h:outputScript name="js/easypiechart-data.js"></h:outputScript>
+	<h:outputScript name="js/bootstrap-datepicker.js"></h:outputScript>
+
+
+	<h:outputScript name="js/lumino.glyphs.js" />
+
+</body>
+</html>

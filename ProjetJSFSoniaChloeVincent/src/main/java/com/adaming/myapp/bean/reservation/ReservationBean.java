@@ -11,6 +11,7 @@ import javax.inject.Inject;
 import org.jboss.logging.Logger;
 import org.springframework.stereotype.Component;
 
+import com.adaming.myapp.bean.chambre.ChambreBean;
 import com.adaming.myapp.bean.client.ClientBean;
 import com.adaming.myapp.entities.Chambre;
 import com.adaming.myapp.entities.ChambreSimple;
@@ -28,6 +29,9 @@ public class ReservationBean {
 	
 	@Inject
 	private ClientBean serviceClient;
+	
+	@Inject
+	private ChambreBean serviceChambre;
 	
 	private Reservation reservation;
 
@@ -66,6 +70,9 @@ public class ReservationBean {
 		
 		ch1.setIdChambre(1L);
 		ch2.setIdChambre(2L);
+		
+		ch1.setNumChambre(1L);
+		ch2.setNumChambre(2L);
 		
 		listeChambres.add(ch1);
 		listeChambres.add(ch2);
