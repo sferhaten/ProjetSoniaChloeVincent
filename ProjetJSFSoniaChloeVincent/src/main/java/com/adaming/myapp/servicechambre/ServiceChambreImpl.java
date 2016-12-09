@@ -32,6 +32,7 @@ public class ServiceChambreImpl implements IServiceChambre {
 	}
 
 	@Override
+	@Transactional(readOnly=true)  //pour la lecture
 	public List<Chambre> getAllChambre() {
 		// TODO Auto-generated method stub
 		return dao.getAllChambre();

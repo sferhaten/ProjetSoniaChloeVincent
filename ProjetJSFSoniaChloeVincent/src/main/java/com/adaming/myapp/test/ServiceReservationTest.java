@@ -40,7 +40,7 @@ public class ServiceReservationTest {
 	//========================
 	
 	@Test
-	@Ignore
+	//@Ignore
 	public void testAddReservation() throws ParseException {
 		SimpleDateFormat sf = new SimpleDateFormat("dd-MM-yyyy");
 		Reservation reservation = new Reservation(sf.parse("26-10-2016"), sf.parse("30-10-2016"), 50);

@@ -35,6 +35,7 @@ public class DaoChambreImpl implements IDaoChambre {
 
 	@Override
 	@SuppressWarnings("unchecked")
+	
 	public List<Chambre> getAllChambre() {
 		Query query = em.createQuery("from Chambre c");
 		return query.getResultList();

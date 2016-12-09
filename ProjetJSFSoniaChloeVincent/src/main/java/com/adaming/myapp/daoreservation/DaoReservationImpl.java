@@ -33,11 +33,13 @@ public class DaoReservationImpl implements IDaoReservation {
 		
 		r.setHotel(h);
 		r.setChambre(c);
-		em.persist(r);
+		
 		Double coutResa =0.0;
 		int nbJour = (int) ((r.getDateSortie().getTime() -r.getDateArrive().getTime())/(3600*24*1000));
 		coutResa = c.cout()*nbJour;
+		r.setCoutResa(coutResa);
 		LOGGER.info(r + "has been created");
+		em.persist(r);
 		return r;
 	}
 
