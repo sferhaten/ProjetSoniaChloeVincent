@@ -97,44 +97,84 @@
        				 </h:selectOneMenu>
     </h:panelGrid>	 
     <h:form>
-	  		<p:dataTable paginator="true" rows="5" value="#{reservationBean.listeReservations}" var="r" >
+	  		<p:dataTable paginator="true" rows="5" value="#{factureBean.reservations}" var="f" >
 	       
 	       		<f:facet name="header">Réservations</f:facet>
 	       
 		      	<p:column headerText="Identifiant">
-		        	<h:outputText value="#{r.idReservation}"></h:outputText>
+		        	<h:outputText value="#{f.idReservation}"></h:outputText>
 		       	</p:column>
 		       	
 		       <p:column headerText="Date d'arrivée">
-		       		<h:outputText value="#{r.dateArrive}"></h:outputText>
+		       		<h:outputText value="#{f.dateArrive}"></h:outputText>
 		       </p:column>
 		       
 		       <p:column headerText="Date de sortie">
-		       		<h:outputText value="#{r.dateSortie}"></h:outputText>
+		       		<h:outputText value="#{f.dateSortie}"></h:outputText>
 		       </p:column>
 		       
 		       <p:column headerText="Coût de la réservation">
-		       		<h:outputText value="#{r.coutResa}"></h:outputText>
+		       		<h:outputText value="#{f.coutResa}"></h:outputText>
 		       </p:column>
 		       
 		       <p:column headerText="Chambre">
-		       		<h:outputText value="#{r.chambre.idChambre}"></h:outputText>
+		       		<h:outputText value="#{f.chambre.idChambre}"></h:outputText>
 		       </p:column>
-		       
-		       <p:column headerText="Numéro de facture">
-		       		<h:outputText value="#{r.facture.idFacture}"></h:outputText>
-		       </p:column>
-		       
-		       
-		        
+		  
 	       
 	   		</p:dataTable>
-	  </h:form>
-    
+	  </h:form><br/>
+		
+		 <h:form>
+	  		<p:dataTable   paginator="true" rows="5" value="#{factureBean.consomations}" var="f">
+	       
+	       		<f:facet name="header">Consomations</f:facet>
+		      	<p:column headerText="Identifiant">
+		        	<h:outputText value="#{f.idProduit}"></h:outputText>
+		       	</p:column>
+		       	
+		       <p:column headerText="Quantite consomee">
+		       		<h:outputText value="#{f.quantite}"></h:outputText>
+		       </p:column>
 		       
-		        <p:commandButton value="Save" update="panel" actionListener="#{factureBean.addFacture}" icon="ui-icon-check" />
-		    </p:panel>
-		</h:form><br/>
+		       <p:column headerText="Cout consomation">
+		       		<h:outputText value="#{f.coutClient}"></h:outputText>
+		       </p:column>
+
+	   		</p:dataTable>
+	   		
+	  </h:form><br/>
+	  
+	     
+	<p:commandButton value="Save" update="panel" actionListener="#{factureBean.addFacture}" icon="ui-icon-check" /><br/>
+		           
+		  </p:panel><br/>   
+		  <h:form>
+		  <p:panel id="panel" header="Liste des factures ">
+	  		<p:dataTable   paginator="true" rows="5" value="#{factureBean.factures}" var="f">
+	       
+	       		<f:facet name="header">Factures</f:facet>
+		      	<p:column headerText="Identifiant">
+		        	<h:outputText value="#{f.idFacture}"></h:outputText>
+		       	</p:column>
+		       	
+		       <p:column headerText="Cout des reservations">
+		       		<h:outputText value="#{f.coutRes}"></h:outputText>
+		       </p:column>
+		       
+		       <p:column headerText="Cout des consomations">
+		       		<h:outputText value="#{f.coutCons}"></h:outputText>
+		       </p:column>
+
+				<p:column headerText="Cout total">
+		       		<h:outputText value="#{f.coutTotal}"></h:outputText>
+		       </p:column>
+		       
+	   		</p:dataTable>
+	   		</p:panel>
+	     </h:form>
+		
+	</h:form>	
 
 	</div>
 

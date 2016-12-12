@@ -28,6 +28,7 @@ public interface IServicePersonne {
 	Set<Consomation> consomations(Long idPersonne);
 	
 	Set<Consomation> consomationsNonFacturees(Long idPersonne);
+	Set<Consomation> consomationsFacturees(Long idPersonne);
 	
 	
 }

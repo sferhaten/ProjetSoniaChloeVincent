@@ -54,8 +54,8 @@ public class ServiceHotelImpl implements IServiceHotel{
 
 
 	@Override
-	public Hotel getHotel(final Long id) {
-		return dao.getHotel(id);
+	public Hotel getHotel(final Long idHotel) {
+		return dao.getHotel(idHotel);
 	}
 
 

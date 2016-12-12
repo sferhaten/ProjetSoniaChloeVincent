@@ -51,9 +51,9 @@ public class ServiceTestHotel {
 	}
 
 	@Test
-	@Ignore
+	//@Ignore
 	public void testGetHotel() {
-		Hotel h = service.getHotel(3L);
+		Hotel h = service.getHotel(1L);
 		assertNotNull(h);
 	}	
 
@@ -67,6 +67,7 @@ public class ServiceTestHotel {
 	}
 
 	@Test
+	@Ignore
 	public void testEmployesByHotel() {
 		Set<Employe> employes = service.employesByHotel(2L);
 		System.out.println("testEmployesByHotel");
@@ -75,6 +76,7 @@ public class ServiceTestHotel {
 	}
 
 	@Test
+	@Ignore
 	public void testClientsByHotel() {
 		Set<Client> clients = service.clientsByHotel(2L);
 		System.out.println("testClientsByHotel");
@@ -83,6 +85,7 @@ public class ServiceTestHotel {
 	}
 
 	@Test
+	@Ignore
 	public void testProduitsByHotel() {
 		Set<Produit> produits = service.produitsByHotel(2L);
 		System.out.println("nombre de produits : " + produits.size());
@@ -90,6 +93,7 @@ public class ServiceTestHotel {
 	}
 
 	@Test
+	@Ignore
 	public void testProduitsDisposByHotel() {
 		Set<Produit> produits = service.produitsDisposByHotel(2L);
 		System.out.println("nombre de produits dispos : " + produits.size());
@@ -97,6 +101,7 @@ public class ServiceTestHotel {
 	}
 	
 	@Test
+	@Ignore
 	public void testProduitsNonDisposByHotel() {
 		Set<Produit> produits = service.produitsNonDisposByHotel(2L);
 		System.out.println("nombre de produits non dispos : " + produits.size());
@@ -104,6 +109,7 @@ public class ServiceTestHotel {
 	}
 
 	@Test
+	@Ignore
 	public void testBeneficeAnnuel() {
 		Double benefice = service.beneficeAnnuel(2L);
 		System.out.println("benefice : " + benefice);

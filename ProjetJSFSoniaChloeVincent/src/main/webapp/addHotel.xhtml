@@ -93,7 +93,7 @@
 		                <f:validateLength minimum="2" />
 		            </p:inputText>
 		            <p:message for="nomHotel" display="icon" />
-		 
+		        
 		            <p:outputLabel for="telephone" value="Telephone:" />
 		            <p:inputText id="telephone" value="#{hotelBean.telephone}" label="Telephone" required="true">
 		                <f:validateLength minimum="2" />
@@ -103,7 +103,7 @@
 		            
 		               <p:outputLabel for="qualite" value="Qualite:" />
 		            <p:inputText id="qualite" value="#{hotelBean.qualite}" label="Qualite" required="true">
-		                <f:validateLength minimum="2" />
+		                <f:validateLength minimum="1" />
 		                <p:ajax update="msgqualite" event="keyup" />
 		            </p:inputText>
 		            <p:message for="qualite" id="msgqualite" display="icon" />
@@ -148,21 +148,19 @@
 		        <p:commandButton value="Save" update="panel" actionListener="#{hotelBean.addHotel}" icon="ui-icon-check" />
 		    </p:panel>
 		</h:form><br/>
+		
 
-
-	  
-
-	   
 <h:form>
+<p:growl id="msgs" showDetail="true" />
     <p:dataTable id="tbl" var="h" value="#{hotelBean.hotels}"
                  paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
                  paginator="true" rows="10" style="margin-bottom:20px">
- 				selectionMode="single" selection="#{hotelBean.selectedHotel}" rowKey="#{h.idHotel}"
-                emptyMessage="No cars found with given criteria" filteredValue="#{hotelBean.filteredHotels}">
+ 		emptyMessage="No hotels found with given criteria" filteredValue="#{hotelBean.hotels}">
+ 		
 	 <f:facet name="header">
             <p:outputPanel>
-                <h:outputText value="Search all fields:" />
-                <p:inputText id="globalFilter" onkeyup="PF('tb1').filter()" style="width:150px" placeholder="Enter keyword"/>
+                <h:outputText value="Hotels:" />
+               
             </p:outputPanel>
         </f:facet>
        
@@ -182,7 +180,7 @@
             <h:outputText value="#{h.idHotel}" />
         </p:column>
  
-        <p:column filterBy="#{h.nom}" sortBy="#{h.nom}" filterMatchMode="contains">
+        <p:column filterBy="#{h.nomHotel}" sortBy="#{h.nomHotel}" filterMatchMode="contains">
             <f:facet name="header">
                 <h:outputText value="Nom"/>
             </f:facet>
@@ -203,42 +201,53 @@
             <h:outputText value="#{h.qualite}" />
         </p:column>
         
-        <p:column filterBy="#{h.pays}" sortBy="#{h.pays}" filterMatchMode="contains">
+        <p:column filterBy="#{h.adresseHotel.pays}" sortBy="#{h.adresseHotel.pays}" filterMatchMode="contains">
             <f:facet name="header" >
                 <h:outputText value=" Pays" />
             </f:facet>
-            <h:outputText value="#{h. pays}" />
+            <h:outputText value="#{h.adresseHotel.pays}" />
         </p:column>
         <p:column>
             <f:facet name="header">
                 <h:outputText value="Ville" />
             </f:facet>
-            <h:outputText value="#{h.ville}" />
+            <h:outputText value="#{h.adresseHotel.ville}" />
         </p:column>
         <p:column>
             <f:facet name="header">
                 <h:outputText value="Code postal" />
             </f:facet>
-            <h:outputText value="#{h.codePostal}" />
+            <h:outputText value="#{h.adresseHotel.codePostal}" />
         </p:column>
         <p:column>
             <f:facet name="header">
                 <h:outputText value="Voie" />
             </f:facet>
-            <h:outputText value="#{h.voie}" />
+            <h:outputText value="#{h.adresseHotel.voie}" />
         </p:column>
         <p:column>
             <f:facet name="header">
                 <h:outputText value="Numero" />
             </f:facet>
-            <h:outputText value="#{h.numero}" />
+            <h:outputText value="#{h.adresseHotel.numero}" />
         </p:column>
-      
+       <p:column >
+             <p:commandButton action="#{hotelBean.getOne(h.idHotel)}"   oncomplete="PF('carDialog').show()" icon="ui-icon-search" title="View">
+               <f:setPropertyActionListener value="#{h}" target="#{hotelBean.selectedHotel}" />
+            </p:commandButton>
+        </p:column>
+        
+        
+        
     </p:dataTable>
 
 </h:form>
 
 	  
+	  
+
+	   
+
 	   
 
 

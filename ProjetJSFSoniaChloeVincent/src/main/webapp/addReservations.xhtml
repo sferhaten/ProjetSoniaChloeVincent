@@ -46,7 +46,19 @@
 		</div><!-- /.container-fluid -->
 	</nav>
 	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+	 <h:form>
 	 
+	    <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+        <p:outputLabel for="console" value="Basic:" />
+        <p:selectOneMenu id="console" value="#{reservationBean.typeChambre}" style="width:125px">
+            <f:selectItem itemLabel="Select One" itemValue="" />
+            <f:selectItem itemLabel="Xbox One" itemValue="Xbox One" />
+            <f:selectItem itemLabel="PS4" itemValue="PS4" />
+            <f:selectItem itemLabel="Wii U" itemValue="Wii U" />
+        </p:selectOneMenu>
+
+    </h:panelGrid>
+</h:form>
 		<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
 			<form role="search">
 				<div class="form-group">
@@ -91,16 +103,19 @@
 			        </h:selectOneMenu><br/>
 			        
 			        <p:outputLabel id="idChambreLabel" for="idChambre" value="Numéro de chambre :" style="display:none" />
-			        <h:selectOneMenu id="idChambre" value="#{reservationBean.idChambre}" 
+			        <h:selectOneMenu id="idChambre" value="#{reservationBean.listeChambres}" var="ch"
 			        				style="width:200px; display:none">
-			            <f:selectItems value="#{reservationBean.listeChambres}" var="ch" itemValue="#{ch.idChambre}" itemLabel="#{ch.numChambre}" />
+			            <f:selectItem itemLabel="#{ch.idChambre}" itemValue="#{ch.idChambre}" />
+			            <f:selectItem itemLabel="Chambre simple" itemValue="ChambreSimple" />
+			            <f:selectItem itemLabel="Chambre double" itemValue="Chambredouble" />
+			            <f:selectItem itemLabel="Suite" itemValue="Suite" />
 			        </h:selectOneMenu><br/>
 		            
 		            
 		 
 		        </h:panelGrid>
 		 
-		        <p:commandButton value="Ajouter" update="panel" actionListener="#{reservationBean.add}" icon="ui-icon-check" />
+		        <p:commandButton value="Save" update="panel" actionListener="#{userView.save}" icon="ui-icon-check" />
 		    </p:panel>
 		</h:form><br/>
 		
@@ -134,32 +149,31 @@
 		
 	   
 	  <h:form>
-	  		<p:dataTable paginator="true" rows="5" value="#{reservationBean.listeReservations}" var="r"
-	  						sortMode="multiple" >
+	  		<p:dataTable paginator="true" rows="5" value="#{reservationBean.listeReservations}" var="r" >
 	       
 	       		<f:facet name="header">Réservations</f:facet>
 	       
-		      	<p:column sortBy="#{r.idReservation}" headerText="Identifiant">
+		      	<p:column headerText="Identifiant">
 		        	<h:outputText value="#{r.idReservation}"></h:outputText>
 		       	</p:column>
 		       	
-		       <p:column sortBy="#{r.dateArrive}" headerText="Date d'arrivée">
+		       <p:column headerText="Date d'arrivée">
 		       		<h:outputText value="#{r.dateArrive}"></h:outputText>
 		       </p:column>
 		       
-		       <p:column sortBy="#{r.dateSortie}" headerText="Date de sortie">
+		       <p:column headerText="Date de sortie">
 		       		<h:outputText value="#{r.dateSortie}"></h:outputText>
 		       </p:column>
 		       
-		       <p:column sortBy="#{r.coutResa}" headerText="Coût de la réservation">
+		       <p:column headerText="Coût de la réservation">
 		       		<h:outputText value="#{r.coutResa}"></h:outputText>
 		       </p:column>
 		       
-		       <p:column sortBy="#{r.chambre.idChambre}" headerText="Chambre">
+		       <p:column headerText="Chambre">
 		       		<h:outputText value="#{r.chambre.idChambre}"></h:outputText>
 		       </p:column>
 		       
-		       <p:column sortBy="#{r.facture.idFacture}" headerText="Numéro de facture">
+		       <p:column headerText="Numéro de facture">
 		       		<h:outputText value="#{r.facture.idFacture}"></h:outputText>
 		       </p:column>
 		       

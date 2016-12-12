@@ -84,44 +84,83 @@
    
    
    		
-	   	 <h:form>
-	  		<p:dataTable paginator="true" rows="5" selectionMode="single" selection="#{reservationBean.listeReservations}" var="P" >
+	   	 <h:form id="form1">
+	  		<p:dataTable  id="radioDT" paginator="true" rows="5" selection="#{consomationBean.produits}" var="P" rowKey="#{P.id}">
 	       
-	       		<f:facet name="header">Produit</f:facet>
-	       
+	       		<f:facet name="header">Stock Produit</f:facet>
+	 			 <p:column headerText="Selectionner" selectionMode="single"/>
 		      	<p:column headerText="Identifiant">
-		        	<h:outputText value="#{p.idProduit}"></h:outputText>
+		        	<h:outputText value="#{P.idProduit}"></h:outputText>
 		       	</p:column>
 		       	
 		       <p:column headerText="Nom">
-		       		<h:outputText value="#{p.nomProduit}"></h:outputText>
+		       		<h:outputText value="#{P.nomProduit}"></h:outputText>
 		       </p:column>
 		       
 		       <p:column headerText="Quantite">
-		       		<h:outputText value="#{p.quantiteProduit}"></h:outputText>
+		       		<h:outputText value="#{P.quantiteProduit}"></h:outputText>
 		       </p:column>
 		       
 		       <p:column headerText="Coût Achat">
-		       		<h:outputText value="#{p.coutAchat}"></h:outputText>
+		       		<h:outputText value="#{P.coutAchat}"></h:outputText>
 		       </p:column>
 		        <p:column headerText="Coût Vente">
-		       		<h:outputText value="#{p.coutVente}"></h:outputText>
+		       		<h:outputText value="#{P.coutVente}"></h:outputText>
 		       </p:column>
 		       
 		       <p:column headerText="Quantite consomee">
-		       		<h:outputText value="#{p.qauntite}"></h:outputText>
+		       		<h:inputText value="#{P.qauntite}"></h:inputText>
+		       </p:column>
+ 			
+ 			<f:facet name="footer"><h:commandButton process="radioDT" value="Save" action="#{produitBean.addConsomation}"/></f:facet>
+ 		
+	   		</p:dataTable>
+	   		
+	  </h:form><br />
+	  
+	  <script type="text/javascript">
+	    	function get(){
+	    		var Produit = document.getElementById("form1:produits").value;
+	    		var idProduit = document.getElementById("form1:idProduit");
+	    		
+	    		
+	    		
+	    		if (typeChambre == "") {
+	    			
+	    			idProduit.style.display = 'none';
+	    			
+	    			
+	    		}else{
+	    			
+	    			idProduit.style.display = 'block';
+	    			
+	    		}
+	    
+	    	}
+	    
+	    
+	    
+	    </script>
+
+  	 <h:form>
+	  		<p:dataTable   paginator="true" rows="5" value="#{consomationBean.consomations}" var="P">
+	       
+	       		<f:facet name="header">Consomations</f:facet>
+		      	<p:column headerText="Identifiant">
+		        	<h:outputText value="#{P.idProduit}"></h:outputText>
+		       	</p:column>
+		       	
+		       <p:column headerText="Quantite consomee">
+		       		<h:outputText value="#{P.quantite}"></h:outputText>
 		       </p:column>
 		       
-		      
-		       
-		       
-		        
-	       
+		       <p:column headerText="Cout consomation">
+		       		<h:outputText value="#{P.coutClient}"></h:outputText>
+		       </p:column>
+
 	   		</p:dataTable>
+	   		
 	  </h:form>
-
-	  
-
 	   
 
 

@@ -102,7 +102,7 @@ public class ServiceFactureImpl implements IServicefacture {
 		
 		Double coutCons = 0.0 ;
 		Double coutRes = 0.0 ;		
-		
+		Double coutTotal = 0.0;
 		for (Consomation c : consomations) {
 			System.out.println("Conso : " + c + " - produit : " + c.getProduit());
 			coutCons = coutCons + c.coutclient();
@@ -112,9 +112,10 @@ public class ServiceFactureImpl implements IServicefacture {
 			System.out.println("Reservation trouvée : " + r.getIdReservation());
 			coutRes = coutRes + r.getCoutResa();
 		}
-		
+
 		f.setCoutConso(coutCons);	
 		f.setCoutResa(coutRes);
+	
 		return dao.addFacture(f, reservations, consomations, idHotel);
 	}
 

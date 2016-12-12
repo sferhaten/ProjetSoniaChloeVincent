@@ -28,9 +28,9 @@ public class DaoHotelImpl implements IDaoHotel {
 	}
 
 	@Override
-	public Hotel getHotel(final Long id) {
-		Hotel h = em.find(Hotel.class, id);
-		LOGGER.info("<--------- Hotel " + id + " has been found -------->");
+	public Hotel getHotel(final Long idHotel) {
+		Hotel h = em.find(Hotel.class, idHotel);
+		LOGGER.info("<--------- Hotel " + idHotel + " has been found -------->");
 		return h;
 	}
 

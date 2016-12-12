@@ -16,7 +16,7 @@ public interface IServiceHotel {
 	
 	Hotel addHotel(Hotel h);
 	
-	Hotel getHotel(Long id);
+	Hotel getHotel(Long idHotel);
 	
 	List<Hotel> getAll();
 	

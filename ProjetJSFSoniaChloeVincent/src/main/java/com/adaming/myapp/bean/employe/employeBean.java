@@ -16,7 +16,7 @@ import com.adaming.myapp.entities.Employe;
 import com.adaming.myapp.entities.Hotel;
 import com.adaming.myapp.servicepersonne.IServicePersonne;
 
-@Component("EmployeBean")
+@Component("employeBean")
 @ViewScoped
 	public class employeBean {
 

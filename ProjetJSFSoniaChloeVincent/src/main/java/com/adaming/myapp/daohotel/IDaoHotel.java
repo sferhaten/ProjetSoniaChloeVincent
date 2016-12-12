@@ -10,7 +10,7 @@ public interface IDaoHotel {
 	
 	Hotel addHotel(final Hotel h);
 	
-	Hotel getHotel(final Long id);
+	Hotel getHotel(final Long idHotel);
 	
 	List<Hotel> getAll();
 

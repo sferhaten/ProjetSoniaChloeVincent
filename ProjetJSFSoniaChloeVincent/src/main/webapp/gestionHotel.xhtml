@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>Insert title here</title>
+
+
+	<h:outputStylesheet name="css/bootstrap.css" rel="stylesheet" />
+
+	<h:outputStylesheet name="css/datepicker3.css" rel="stylesheet" />
+	<h:outputStylesheet name="css/styles.css" rel="stylesheet" />
+
+</h:head>
+<body>
+
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed"
+				data-toggle="collapse" data-target="#sidebar-collapse">
+				<span class="sr-only">Toggle navigation</span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#"><span>Gestion Hotels</span></a>
+			<ul class="user-menu">
+				<li class="dropdown pull-right"><a href="#"
+					class="dropdown-toggle" data-toggle="dropdown"> User <span
+						class="caret"></span></a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="#">Profile</a></li>
+						<li><a href="#"> Settings</a></li>
+						<li><a href="#"> Logout</a></li>
+					</ul></li>
+			</ul>
+		</div>
+
+	</div>
+	<!-- /.container-fluid --> </nav>
+	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+
+		<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+			<form role="search">
+				<div class="form-group">
+					<h:inputText type="text" class="form-control" placeholder="Search" />
+				</div>
+			</form>
+			<ul class="nav menu">
+				<li class="active"><a href="home.html"><svg
+							class="glyph stroked dashboard-dial"></svg> Home</a></li>
+				<li><a href="widgets.html"><svg
+							class="glyph stroked calendar"></svg> Hotel</a></li>
+
+
+				<li><a href="charts.html"><i class="fa fa-bank fa-fw"></i>
+						<svg class="glyph stroked line-graph"></svg> Personne<span
+						class="fa arrow" /></a>
+					<ul class="nav nav-second-level">
+						<li><a href="toAddBanque">Client</a></li>
+						<li><a href="toGestionBanque">Employe </a></li>
+					</ul></li>
+				<li><a href="tables.html"><svg class="glyph stroked table"></svg>
+						facture</a></li>
+				<li><a href="forms.html"><svg class="glyph stroked pencil"></svg>
+						Payement<span class="fa arrow" /></a>
+					<ul class="nav nav-second-level">
+						<li><a href="toAddBanque">Carte baquaire</a></li>
+						<li><a href="toGestionBanque">Espece </a></li>
+						<li><a href="toGestionBanque">Cheque </a></li>
+					</ul></li>
+
+				<li><a href="forms.html"><svg class="glyph stroked pencil"></svg>
+						Stock de l'hotel</a></li>
+
+			</ul>
+
+		</div>
+		<!--/.sidebar-->
+
+		<h1 class="text-center">Gestion hotel</h1>
+		<br />
+
+		<h:form>
+
+			<h:messages style="prenom:red"></h:messages>
+
+			<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+
+				<p:outputLabel id="idHotelLabel" for="selectedidHotel"
+					value="Hotels:" />
+				<h:selectOneMenu id="selectedidHotel"
+					value="#{gestionHotelBean.selectedidHotel}" style="width:125px">
+					<f:selectItems value="#{gestionHotelBean.hotels}" var="g"
+						itemValue="#{g.idHotel}" itemLabel="#{g.nomHotel}" />
+				</h:selectOneMenu>
+
+			</h:panelGrid>
+
+			<h:selectOneRadio id="option" value="#{gestionHotelBean.option}"
+				style="width:200px" onclick="get()">
+				<f:selectItem itemLabel="ListeChambres" itemValue="ListeChambres" />
+				<f:selectItem itemLabel="ListeChambresSimples" itemValue="ListeChambresSimples" />
+				<f:selectItem itemLabel="ListeChambresDoubles" itemValue="ListeChambresDoubles" />
+				<f:selectItem itemLabel="ListeChambresSuite" itemValue="ListeChambresSuite" />
+				<f:selectItem itemLabel="ListeProduits" itemValue="ListeProduits" />
+				<f:selectItem itemLabel="ListeClients" itemValue="ListeClients" />
+				<f:selectItem itemLabel="ListeEmployes" itemValue="ListeEmployes" />
+			</h:selectOneRadio>
+			<br />
+
+		        
+		        	<p:outputLabel for="dateDemandee1" value="Date Demandee 1 :" />
+       				<p:calendar id="dateDemandee1" value="#{gestionHotelBean.dateDemandee1}" required="true" label="Date Demandee 1"/><br/>
+       				
+       				<p:outputLabel for="dateDemandee2" value="Date Demandee 2 :" />
+       				<p:calendar id="dateDemandee2" value="#{gestionHotelBean.dateDemandee2}" required="true" label="Date Demandee 2"/><br/>
+
+
+
+			<h:commandButton value="Submit"
+				actionListener="#{gestionHotelBean.getAll}" icon="ui-icon-check" />
+			<br />
+
+		</h:form>
+
+		<h:form id="form1">
+			<p:dataTable id="tbl" var="P" value="#{gestionHotelBean.produits}"
+				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+				paginator="true" rows="10" style="margin-bottom:20px"
+				rendered="#{gestionHotelBean.produitsVisibles}">
+
+				<f:facet name="header">Stock Produits hotel</f:facet>
+
+				<p:column headerText="Identifiant">
+					<h:outputText value="#{P.idProduit}"></h:outputText>
+				</p:column>
+
+				<p:column headerText="Nom">
+					<h:outputText value="#{P.nom}"></h:outputText>
+				</p:column>
+
+				<p:column headerText="Quantite">
+					<h:outputText value="#{P.quantite}"></h:outputText>
+				</p:column>
+
+				<p:column headerText="Coût Achat">
+					<h:outputText value="#{P.coutAchat}"></h:outputText>
+				</p:column>
+				<p:column headerText="Coût Vente">
+					<h:outputText value="#{P.coutVente}"></h:outputText>
+				</p:column>
+
+			</p:dataTable>
+
+		</h:form>
+		<br />
+		
+		
+		<h:form id="form2">
+			<p:dataTable id="tbl" var="ch" value="#{gestionHotelBean.chambres}"
+				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+				paginator="true" rows="10" style="margin-bottom:20px"
+				rendered="#{gestionHotelBean.chambressVisibles}">
+
+				<f:facet name="header">Chambres de l'hotel</f:facet>
+
+				<p:column headerText="Identifiant">
+					<h:outputText value="#{ch.idChambre}"></h:outputText>
+				</p:column>
+
+				<p:column headerText="Description">
+					<h:outputText value="#{ch.description}"></h:outputText>
+				</p:column>
+
+				<p:column headerText="Numéro">
+					<h:outputText value="#{ch.numChambre}"></h:outputText>
+				</p:column>
+
+
+			</p:dataTable>
+
+		</h:form>
+
+		<h:form id="form3">
+			<p:dataTable id="tbl" var="cl" value="#{gestionHotelBean.clients}"
+				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+				paginator="true" rows="10" style="margin-bottom:20px"
+				rendered="#{gestionHotelBean.clientsVisibles}">
+
+				<f:facet name="header">Clients hotel</f:facet>
+
+				<p:column headerText="Identifiant">
+					<h:outputText value="#{cl.idPersonne}"></h:outputText>
+				</p:column>
+
+<!-- 				<p:column headerText="Code postal"> -->
+<!-- 					<h:outputText value="#{cl.adresse.codePostal}"></h:outputText> -->
+<!-- 				</p:column> -->
+
+<!-- 				<p:column headerText="Numéro"> -->
+<!-- 					<h:outputText value="#{cl.numero}"></h:outputText> -->
+<!-- 				</p:column> -->
+
+<!-- 				<p:column headerText="Pays"> -->
+<!-- 					<h:outputText value="#{cl.pays}"></h:outputText> -->
+<!-- 				</p:column> -->
+
+<!-- 				<p:column headerText="Ville"> -->
+<!-- 					<h:outputText value="#{cl.ville}"></h:outputText> -->
+<!-- 				</p:column> -->
+
+<!-- 				<p:column headerText="Voie"> -->
+<!-- 					<h:outputText value="#{cl.voie}"></h:outputText> -->
+<!-- 				</p:column> -->
+
+				<p:column headerText="Date de naissance">
+					<h:outputText value="#{cl.dateDeNaissance}"></h:outputText>
+				</p:column>
+
+				<p:column headerText="Nom">
+					<h:outputText value="#{cl.nom}"></h:outputText>
+				</p:column>
+
+				<p:column headerText="Prenom">
+					<h:outputText value="#{cl.prenom}"></h:outputText>
+				</p:column>
+
+				<p:column headerText="Nombre de réservations">
+					<h:outputText value="#{cl.nombreReservations}"></h:outputText>
+				</p:column>
+
+
+			</p:dataTable>
+
+		</h:form>
+		<br />
+
+
+		<h:form id="form4">
+			<p:dataTable id="tbl" var="em" value="#{gestionHotelBean.employes}"
+				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+				paginator="true" rows="10" style="margin-bottom:20px"
+				rendered="#{gestionHotelBean.employesVisibles}">
+
+				<f:facet name="header">Employés de l'hotel</f:facet>
+
+				<p:column headerText="Identifiant">
+					<h:outputText value="#{em.idPersonne}"></h:outputText>
+				</p:column>
+
+<!-- 				<p:column headerText="Code postal"> -->
+<!-- 					<h:outputText value="#{em.adresse.codePostal}"></h:outputText> -->
+<!-- 				</p:column> -->
+
+<!-- 				<p:column headerText="Numéro"> -->
+<!-- 					<h:outputText value="#{em.numero}"></h:outputText> -->
+<!-- 				</p:column> -->
+
+<!-- 				<p:column headerText="Pays"> -->
+<!-- 					<h:outputText value="#{em.pays}"></h:outputText> -->
+<!-- 				</p:column> -->
+
+<!-- 				<p:column headerText="Ville"> -->
+<!-- 					<h:outputText value="#{em.ville}"></h:outputText> -->
+<!-- 				</p:column> -->
+
+<!-- 				<p:column headerText="Voie"> -->
+<!-- 					<h:outputText value="#{em.voie}"></h:outputText> -->
+<!-- 				</p:column> -->
+
+				<p:column headerText="Date de naissance">
+					<h:outputText value="#{em.dateDeNaissance}"></h:outputText>
+				</p:column>
+
+				<p:column headerText="Nom">
+					<h:outputText value="#{em.nom}"></h:outputText>
+				</p:column>
+
+				<p:column headerText="Prenom">
+					<h:outputText value="#{em.prenom}"></h:outputText>
+				</p:column>
+
+								
+				<p:column headerText="Date d'embauche">
+					<h:outputText value="#{em.dateEmbauuche}"></h:outputText>
+				</p:column>
+
+
+
+			</p:dataTable>
+
+		</h:form>
+
+		
+
+	</div>
+
+	<h:outputScript name="js/jquery-1.11.1.min.js"></h:outputScript>
+	<h:outputScript name="js/bootstrap.min.js"></h:outputScript>
+	<h:outputScript name="js/chart.min.js"></h:outputScript>
+	<h:outputScript name="js/chart-data.js"></h:outputScript>
+	<h:outputScript name="js/easypiechart.js"></h:outputScript>
+	<h:outputScript name="js/easypiechart-data.js"></h:outputScript>
+	<h:outputScript name="js/bootstrap-datepicker.js"></h:outputScript>
+	
+
+		<h:outputScript name="js/lumino.glyphs.js"/>
+    
+</body>
+</html>

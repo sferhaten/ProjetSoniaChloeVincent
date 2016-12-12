@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+ xmlns:h="http://xmlns.jcp.org/jsf/html"
+ xmlns:p="http://primefaces.org/ui"
+ xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Insert title here</title>
+
+
+<h:outputStylesheet name="css/bootstrap.css" rel="stylesheet"/>
+
+<h:outputStylesheet name="css/datepicker3.css" rel="stylesheet"/>
+<h:outputStylesheet name="css/styles.css" rel="stylesheet"/>
+
+</h:head>
+<body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar-collapse">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#"><span>Gestion Hotels</span></a>
+				<ul class="user-menu">
+					<li class="dropdown pull-right">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown"> User <span class="caret"></span></a>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="#">Profile</a></li>
+							<li><a href="#"> Settings</a></li>
+							<li><a href="#"> Logout</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+							
+		</div><!-- /.container-fluid -->
+	</nav>
+	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+	
+		<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+			<form role="search">
+				<div class="form-group">
+					<h:inputText type="text" class="form-control" placeholder="Search"/>
+				</div>
+			</form>
+			<ul class="nav menu">
+			<li class="active"><a href="home.html"><svg class="glyph stroked dashboard-dial"></svg> Home</a></li>
+			<li><a href="widgets.html"><svg class="glyph stroked calendar"></svg> Hotel</a></li>
+			
+			
+			<li><a href="charts.html"><i class="fa fa-bank fa-fw"></i><svg class="glyph stroked line-graph"></svg> Personne<span
+							class="fa arrow"/></a>
+						<ul class="nav nav-second-level">
+							<li><a href="toAddBanque">Client</a></li>
+							<li><a href="toGestionBanque">Employe </a></li>
+							</ul></li>
+			<li><a href="tables.html"><svg class="glyph stroked table"></svg> facture</a></li>
+			<li><a href="forms.html"><svg class="glyph stroked pencil"></svg> Payement<span
+							class="fa arrow"/></a>
+							<ul class="nav nav-second-level">
+							<li><a href="toAddBanque">Carte baquaire</a></li>
+							<li><a href="toGestionBanque">Espece </a></li>
+							<li><a href="toGestionBanque">Cheque </a></li>
+							</ul></li>
+			
+			<li><a href="forms.html"><svg class="glyph stroked pencil"></svg> Stock de l'hotel</a></li>
+			
+		</ul>
+	
+		</div><!--/.sidebar-->
+		
+		<h1 class="text-center">Ajouter un produit</h1><br />
+		
+ 		<h:messages style="prenom:red"></h:messages>
+   
+	   	<h:form>
+		    <p:panel id="panel" header="New Produit">
+		 
+		        <p:messages id="msgs" />
+		 
+		        <h:panelGrid columns="3" cellpadding="5">
+		        <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+
+				<p:outputLabel id="idHotelLabel" for="selectedidHotel"
+					value="Hotels:" />
+				<h:selectOneMenu id="selectedidHotel"
+					value="#{addProduitBean.selectedidHotel}" style="width:125px">
+					<f:selectItems value="#{addProduitBean.hotelBean.hotels}" var="P"
+						itemValue="#{P.idHotel}" itemLabel="#{P.nomHotel}" />
+				</h:selectOneMenu>
+
+			</h:panelGrid>
+		            <p:outputLabel for="nom" value="Nom:" />
+		            <p:inputText id="nom" value="#{addProduitBean.nom}" required="true" label="Nom">
+		                <f:validateLength minimum="2" />
+		            </p:inputText>
+		            <p:message for="nom" display="icon" />
+		 
+		            <p:outputLabel for="quantite" value="Quantite:" />
+		            <p:inputText id="quantite" value="#{addProduitBean.quantite}" label="Quantite" required="true">
+		                <f:validateLength minimum="1" />
+		                <p:ajax update="msgQuantite" event="keyup" />
+		            </p:inputText>
+		            <p:message for="quantite" id="msgQuantite" display="icon" />
+		            
+		               <p:outputLabel for="coutAchat" value="Cout achat:" />
+		            <p:inputText id="coutAchat" value="#{addProduitBean.coutAchat}" label="Cout achat" required="true">
+		                <f:validateLength minimum="1" />
+		                <p:ajax update="msgcoutAchat" event="keyup" />
+		            </p:inputText>
+		            <p:message for="coutAchat" id="msgcoutAchat" display="icon" />
+		            
+		             <p:outputLabel for="coutVente" value="Cout vente:" />
+		            <p:inputText id="coutVente" value="#{addProduitBean.coutVente}" label="Cout vente" required="true">
+		                <f:validateLength minimum="2" />
+		                <p:ajax update="msgcoutVente" event="keyup" />
+		            </p:inputText>
+		            <p:message for="coutVente" id="msgcoutVente" display="icon" />
+		            
+		            
+		 
+		        </h:panelGrid>
+		 
+		        <p:commandButton value="Save" update="panel" actionListener="#{addProduitBean.add}" icon="ui-icon-check" />
+		    </p:panel>
+		</h:form><br/>
+		
+ <h:form>
+<p:growl id="msgs" showDetail="true" />
+    <p:dataTable id="tbl" var="P" value="#{addProduitBean.produits}"
+                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
+                 paginator="true" rows="10" style="margin-bottom:20px">addProduitBean.hotels}">
+ 		
+	 <f:facet name="header">
+            <p:outputPanel>
+                <h:outputText value="Produits:" />
+               
+            </p:outputPanel>
+        </f:facet>
+       
+        <f:facet name="{Exporters}">
+            <h:commandLink>
+                <p:graphicImage name="/demo/images/pdf.png" width="24"/>
+                <p:dataExporter type="pdf" target="tbl" fileName="produits" />
+            </h:commandLink>
+        </f:facet>
+        
+        	
+ 
+       			<p:column headerText="Identifiant">
+					<h:outputText value="#{P.idProduit}"></h:outputText>
+				</p:column>
+
+				<p:column headerText="Nom">
+					<h:outputText value="#{P.nom}"></h:outputText>
+				</p:column>
+
+				<p:column headerText="Quantite">
+					<h:outputText value="#{P.quantite}"></h:outputText>
+				</p:column>
+
+				<p:column headerText="Coût Achat">
+					<h:outputText value="#{P.coutAchat}"></h:outputText>
+				</p:column>
+				<p:column headerText="Coût Vente">
+					<h:outputText value="#{P.coutVente}"></h:outputText>
+				</p:column>
+				<p:column headerText="Voir" style="width:100px;text-align: center">
+					 <p:commandButton  actionListener="#{addProduitBean.getOneProduit(P.idProduit)}" update=":form2:ProduitDetail" oncomplete="PF('ProduitVar').show()" icon="ui-icon-search"  />
+				</p:column>
+		 
+    </p:dataTable>
+
+</h:form>
+	  
+	  
+<h:form id="form2">  
+       <p:dialog header="Produit" widgetVar="ProduitVar" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+       <p:outputPanel id="ProduitDetail" style="text-align:center;">      
+      <p:panelGrid  columns="2">    
+           <h:outputText value="Identifiant" />      
+          <h:outputText value="#{addproduitBean.produit.idProduit}" />
+                 <h:outputText value="Nom du produit" /> 
+               <h:outputText value="#{addproduitBean.produit.nom}" />  
+             <h:outputText value="Quantite" />   
+             <h:inputText value="#{addProduitBean.produit.quantite}" />  
+               <h:outputText value="coutAchat" />             
+   <h:inputText value="#{addProduitBean.produit.coutAchat}" />                               
+ <h:outputText value="coutVente" />                
+<h:inputText value="#{addProduitBean.produit.coutVente}" />                           
+ </p:panelGrid>                         
+<p:commandButton action="#{addProduitBean.update}" update=":form2:ProduitDetail" icon="ui-icon-pencil" title="Modifier">            
+</p:commandButton>        
+</p:outputPanel>                              
+ </p:dialog>  
+ </h:form><br/>
+
+	   
+
+	   
+
+
+	</div>
+
+	<h:outputScript name="js/jquery-1.11.1.min.js"></h:outputScript>
+	<h:outputScript name="js/bootstrap.min.js"></h:outputScript>
+	<h:outputScript name="js/chart.min.js"></h:outputScript>
+	<h:outputScript name="js/chart-data.js"></h:outputScript>
+	<h:outputScript name="js/easypiechart.js"></h:outputScript>
+	<h:outputScript name="js/easypiechart-data.js"></h:outputScript>
+	<h:outputScript name="js/bootstrap-datepicker.js"></h:outputScript>
+	
+
+		<h:outputScript name="js/lumino.glyphs.js"/>
+    
+</body>
+</html>

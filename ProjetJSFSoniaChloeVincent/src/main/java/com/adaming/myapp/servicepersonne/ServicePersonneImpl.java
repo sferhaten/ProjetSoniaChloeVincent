@@ -99,7 +99,36 @@ public class ServicePersonneImpl implements IServicePersonne {
 	@Override
 	public Set<Consomation> consomationsNonFacturees(Long idPersonne) {
 		
-		Personne p = dao.getPersonne(idPersonne);
+		boolean facturee;
+		
+		Set<Consomation> consomations = consomations(idPersonne);
+		Set<Consomation> consomationsFacturees = consomationsFacturees(idPersonne);
+		Set<Consomation> consomationsNonFacturees = new HashSet<Consomation>();
+		
+		
+		
+		for (Consomation c : consomations) {
+			facturee = false;
+			for (Consomation conso : consomationsFacturees) {
+				if (c.getIdConsommation() == conso.getIdConsommation()) {
+					facturee = true;
+				}
+			}
+			if (facturee == false) {
+				consomationsNonFacturees.add(c);
+			}
+		}
+		
+		return consomationsNonFacturees;
+		
+	}
+
+
+
+
+	@Override
+	public Set<Consomation> consomationsFacturees(Long idPersonne) {
+	Personne p = dao.getPersonne(idPersonne);
 		
 		Set<Reservation> reservations = p.getReservations();
 		Iterator<Reservation> iter = reservations.iterator();
@@ -108,7 +137,7 @@ public class ServicePersonneImpl implements IServicePersonne {
 		Hotel h = reserv.getHotel();
 		
 		Set<Consomation> consomations = consomations(idPersonne);
-		Set<Consomation> consomationsNonFacturees = new HashSet<Consomation>();
+		Set<Consomation> consomationsFacturees = new HashSet<Consomation>();
 		
 		
 		
@@ -116,14 +145,13 @@ public class ServicePersonneImpl implements IServicePersonne {
 			for (Facture f : h.getFactures()) {
 				for (Consomation conso : f.getConsomation()) {
 					if (conso.getIdConsommation() == c.getIdConsommation()) {
-						consomationsNonFacturees.add(c);
+						consomationsFacturees.add(c);
 					}
 				}
 			}
 		}
 		
-		return consomationsNonFacturees;
-		
+		return consomationsFacturees;
 	}
 
 
