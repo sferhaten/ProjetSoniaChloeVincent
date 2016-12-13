@@ -18,6 +18,7 @@ import com.adaming.myapp.entities.Adresse;
 import com.adaming.myapp.entities.Client;
 import com.adaming.myapp.entities.Consomation;
 import com.adaming.myapp.entities.Employe;
+import com.adaming.myapp.entities.Facture;
 import com.adaming.myapp.entities.Hotel;
 import com.adaming.myapp.entities.Personne;
 import com.adaming.myapp.entities.Reservation;
@@ -37,10 +38,10 @@ public class ClientBean {
 	private hotelBean hotelBean;
 	
 
-	private Adresse adresse;
-
+	
+	private Personne personne;
 	private List<Personne> clients;
-	private List<Hotel> hotels;
+	private List<Hotel> hotels = new ArrayList<Hotel>();
 	private Client client;
 	private String nom;
 	private String prenom;
@@ -61,6 +62,7 @@ public class ClientBean {
 	private Set<Reservation> reservations = new HashSet<Reservation>();
 	private Set<Consomation> consomations = new HashSet<Consomation>();
 	private Set<Client> clientsHotel = new HashSet<Client>();
+	private Set<Facture> factures = new HashSet<Facture>();
 	
 	
 	//===============================
@@ -93,25 +95,33 @@ public class ClientBean {
 	}
 	
 
-	public Client GetClient(Long idClient) {
-		Client client = (Client) servicePersonne.getPersonne(idClient);
-		LOGGER.info("Client trouvé : " + client.getIdPersonne());
-		return client;
+	public Personne GetClient(Long idPersonne) {
+	
+		return personne = servicePersonne.getPersonne(idPersonne);
+	
+		
 	}
 	
 	public void addClient() {
-		Adresse adresse = new Adresse(numero, voie, codePostal, ville, pays);
-		Client client = new Client(nom, prenom, dateDeNaissance, adresse,
+		Adresse adressePersonne = new Adresse(numero, voie, codePostal, ville, pays);
+		Client client = new Client(nom, prenom, dateDeNaissance, adressePersonne,
 				nombreReservations);
 		servicePersonne.addPersonne(client, selectedidHotel);
 
 	}
 	
 	public String update(){
-		servicePersonne.updatePersonne(client);
+		servicePersonne.updatePersonne(personne);
 		return "home?redirect-faces-true";
 	}
 
+	public void getAllHotels() {
+		hotels = hotelBean.getAll();
+		System.out.println("++++++++++++++++++++++++++" + hotels);
+		LOGGER.info("----------------la liste hotels est--------------"
+				+ hotels);
+
+	}
 	
 public Set<Reservation> getReservationsNonFacturees(Long idPersonne){
 		
@@ -133,15 +143,30 @@ public Set<Consomation> getConsommationsNonFacturees(Long idPersonne){
 		return "client?faces-redirect=true";
 	}
 	
-	
+	public Set<Facture> factureClient(Long idPersonne){
+		return factures = servicePersonne.facturesClient(idPersonne);   
+		
+	}
 	
 	
 	//=====================================
 	//		Getter and setters
 	//=====================================
+	
+	
 	public IServicePersonne getServicePersonne() {
 		return servicePersonne;
 	}
+
+	public Personne getPersonne() {
+		return personne;
+	}
+
+
+	public void setPersonne(Personne personne) {
+		this.personne = personne;
+	}
+
 
 	public void setServicePersonne(IServicePersonne servicePersonne) {
 		this.servicePersonne = servicePersonne;
@@ -164,13 +189,7 @@ public Set<Consomation> getConsommationsNonFacturees(Long idPersonne){
 		this.hotels = hotels;
 	}
 
-	public Adresse getAdresse() {
-		return adresse;
-	}
-
-	public void setAdresse(Adresse adresse) {
-		this.adresse = adresse;
-	}
+	
 
 	public List<Personne> getClients() {
 		return clients;

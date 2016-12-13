@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.adaming.myapp.entities.Consomation;
+import com.adaming.myapp.entities.Facture;
 import com.adaming.myapp.entities.Personne;
 import com.adaming.myapp.entities.Reservation;
 
@@ -28,7 +29,10 @@ public interface IServicePersonne {
 	Set<Consomation> consomations(Long idPersonne);
 	
 	Set<Consomation> consomationsNonFacturees(Long idPersonne);
+	
 	Set<Consomation> consomationsFacturees(Long idPersonne);
+	
+	Set<Facture> facturesClient(Long idPersonne);
 	
 	
 }
