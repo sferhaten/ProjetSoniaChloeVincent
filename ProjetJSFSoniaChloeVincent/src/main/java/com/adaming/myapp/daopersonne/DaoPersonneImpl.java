@@ -26,8 +26,9 @@ public class DaoPersonneImpl implements IDaoPersonne {
 	
 	@Override
 	public Personne addPersonne(Personne P, Long idHotel) {
-		Hotel h = em.find(Hotel.class, idHotel);
 		
+		Hotel h = em.find(Hotel.class, idHotel);
+		P.setHotel(h);
 		em.persist(P);
 		h.getPersonnes().add(P);
 		

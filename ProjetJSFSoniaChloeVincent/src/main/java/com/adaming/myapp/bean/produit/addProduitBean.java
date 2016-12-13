@@ -175,4 +175,10 @@ public class addProduitBean {
 			
 		}
 		
+
+		public String redirect(){
+			initFields();
+			return "addProduit?faces-redirect=true";
+		}
+		
 }

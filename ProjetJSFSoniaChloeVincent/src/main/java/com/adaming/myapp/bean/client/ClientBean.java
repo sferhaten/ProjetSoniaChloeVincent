@@ -60,6 +60,7 @@ public class ClientBean {
 	private Long selectedidHotel;
 	private Set<Reservation> reservations = new HashSet<Reservation>();
 	private Set<Consomation> consomations = new HashSet<Consomation>();
+	private Set<Client> clientsHotel = new HashSet<Client>();
 	
 	
 	//===============================
@@ -80,9 +81,14 @@ public class ClientBean {
 		pays = "";
 	}
 
-	@PostConstruct
+
 	public void getAllClient(){
 		clients= servicePersonne.getAll();
+	}
+	
+	
+	public void getAllClientByHotel(){
+		
 	}
 	
 
@@ -121,6 +127,14 @@ public Set<Consomation> getConsommationsNonFacturees(Long idPersonne){
 		LOGGER.info(" <--------- client been crée ----------------------> ");
 	}
 
+	public String redirect(){
+		initFields();
+		return "client?faces-redirect=true";
+	}
+	
+	//=====================================
+	//		Getter and setters
+	//=====================================
 	public IServicePersonne getServicePersonne() {
 		return servicePersonne;
 	}
@@ -304,6 +318,14 @@ public Set<Consomation> getConsommationsNonFacturees(Long idPersonne){
 
 	public void setConsomations(Set<Consomation> consomations) {
 		this.consomations = consomations;
+	}
+
+	public Set<Client> getClientsHotel() {
+		return clientsHotel;
+	}
+
+	public void setClientsHotel(Set<Client> clientsHotel) {
+		this.clientsHotel = clientsHotel;
 	}
 
 	

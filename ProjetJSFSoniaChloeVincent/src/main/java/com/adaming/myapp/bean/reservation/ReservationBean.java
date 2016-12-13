@@ -206,6 +206,23 @@ public class ReservationBean {
 	}
 	
 	
+
+	public String redirect(){
+		initFields();
+		return "addReservations?faces-redirect=true";
+	}
+	
+	
+	public void initFields(){
+		dateArrive = null;
+
+		dateSortie = null;
+	}
+	//=====================
+	//
+	//======================
+	
+	
 	public Reservation getReservation() {
 		return reservation;
 	}

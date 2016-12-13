@@ -233,7 +233,10 @@ public class addConsomationBean {
 		
 	}
 	
-	
+	public String redirect(){
+		initFields();
+		return "addConsomation?faces-redirect=true";
+	}
 
 	public void addConsomation(){
 		Consomation consomation = new Consomation(quantiteConsomation);

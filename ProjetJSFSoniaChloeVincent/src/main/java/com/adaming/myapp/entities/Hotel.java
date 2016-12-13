@@ -17,6 +17,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 
@@ -55,8 +56,7 @@ public class Hotel {
 	private Set<Chambre> chambres = new HashSet<Chambre>();
 	
 	//Personne
-	@OneToMany(fetch=FetchType.EAGER)
-	@JoinTable(name ="personne_to_hotel")
+	@OneToMany(mappedBy = "hotel" ,fetch=FetchType.EAGER)
 	private Set<Personne> personnes = new HashSet<Personne>();
 	
 	

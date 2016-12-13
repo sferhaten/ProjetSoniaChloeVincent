@@ -70,188 +70,198 @@
 		</div>
 		<!--/.sidebar-->
 
-		<!-- ********** Formulaire ajout Client************** -->
+<!-- ********** Select Hotel************** -->
+	<h1 class="text-center">Client</h1>
+		<h:panelGrid columns="1" cellpadding="10">
+			<p:outputLabel for="idHotel" value="Hotel :" />
+			<h:selectOneMenu id="idHotel" value="#{clientBean.selectedidHotel}"
+				style="width:125px" >
+				<f:ajax event="change" listener="#{clientBean.getAllEmployeByHotel}" update =":employes:tbl" render=":employes:tbl" ></f:ajax>
+				<f:selectItems itemLabel="#{c.nomHotel}" itemValue="#{c.idHotel}"
+					value="#{clientBean.hotels}" var="c" />
+			</h:selectOneMenu>
 
-		<h1 class="text-center">Client</h1>
-		<br />
-		<h:form>
-			<p:panel header="Nouveaux client">
+			<!-- ********** Formulaire ajout Client************** -->
 
-				<p:messages id="msgs" />
-
-				<h:panelGrid columns="1" cellpadding="10">
-					<p:outputLabel for="idHotel" value="Hotel :" />
-					<h:selectOneMenu id="idHotel" value="#{clientBean.selectedidHotel}"
-						style="width:125px" onchange="get()">
-						<f:selectItems itemLabel="#{c.nomHotel}" itemValue="#{c.idHotel}"
-							value="#{clientBean.hotels}" var="c" />
-					</h:selectOneMenu>
-
-
-					<p:outputLabel for="prenom" value="Prenom" id="prenomLabel" />
-					<p:inputText id="prenom" value="#{clientBean.prenom}"
-						required="true">
-						<f:validateLength minimum="2" />
-					</p:inputText>
-					<p:message for="prenom" display="icon" />
-
-					<p:outputLabel for="nom" value="Nom" id="nomLabel" />
-					<p:inputText id="nom" value="#{clientBean.nom}" required="true">
-						<f:validateLength minimum="2" />
-					</p:inputText>
-					<p:message for="nom" display="icon" />
-
-
-					<p:outputLabel for="dateDeSortie" value="Date de sortie" />
-					<p:calendar id="dateDeSortie" value="#{clientBean.dateDeSortie}"
-						required="true">
-						<f:validateLength minimum="2" />
-					</p:calendar>
-					<p:message for="dateDeSortie" display="icon" />
-
-					<p:outputLabel for="numero" value="Numero" id="numeroLabel" />
-					<p:inputText id="numero" value="#{clientBean.numero}"
-						required="true">
-						<f:validateLength minimum="2" />
-					</p:inputText>
-					<p:message for="numero" display="icon" />
-
-					<p:outputLabel for="voie" value="Voie" id="voieLabel" />
-					<p:inputText id="voie" value="#{clientBean.voie}" label="voie"
-						required="true">
-						<f:validateLength minimum="2" />
-					</p:inputText>
-					<p:message for="voie" display="icon" />
-
-					<p:outputLabel for="codePostal" value="Code postal"
-						id="codePostalLabel" />
-					<p:inputText id="codePostal" value="#{clientBean.codePostal}"
-						required="true">
-						<f:validateLength minimum="2" />
-					</p:inputText>
-					<p:message for="codePostal" display="icon" />
-
-					<p:outputLabel for="ville" value="Ville" id="villeLabel" />
-					<p:inputText id="ville" value="#{clientBean.ville}" required="true">
-						<f:validateLength minimum="2" />
-					</p:inputText>
-					<p:message for="ville" display="icon" />
-
-					<p:outputLabel for="pays" value="Pays" id="paysLabel" />
-					<p:inputText id="pays" value="#{clientBean.pays}" required="true">
-						<f:validateLength minimum="2" />
-					</p:inputText>
-					<p:message for="pays" display="icon" />
-
-					<p:outputLabel for="dateDeNaissance" value="Date de naissance" />
-					<p:calendar id="dateDeNaissance"
-						value="#{clientBean.dateDeNaissance}" required="true">
-						<f:validateLength minimum="2" />
-					</p:calendar>
-					<p:message for="dateDeNaissance" display="icon" />
-
-
-				</h:panelGrid>
-
-				<h:commandButton value="Ajouter" action="#{clientBean.addClient}"
-					icon="ui-icon-check" />
-			</p:panel>
-		</h:form>
-		<br />
-
-
-
-		<!--  List client -->
-		<h:form>
-			<p:growl id="msgs" showDetail="true" />
-			<p:dataTable id="tbl" var="cl" value="#{clientBean.clients}"
-				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
-				paginator="true" rows="10" style="margin-bottom:20px">addProduitBean.hotels}">
- 		
-	 <f:facet name="header">
-					<p:outputPanel>
-						<h:outputText value="Clients:" />
-
-					</p:outputPanel>
-				</f:facet>
 			
-				<p:column headerText="Nom">
-					<h:outputText value="#{cl.nom}"></h:outputText>
-				</p:column>
+			<br />
+			<h:form>
+				<p:panel header="Nouveaux client">
 
-				<p:column headerText="Prenom">
-					<h:outputText value="#{cl.prenom}"></h:outputText>
-				</p:column>
-				<p:column headerText="Numero">
-					<h:outputText value="#{cl.adressePersonne.numero}"></h:outputText>
-				</p:column>
-				<p:column headerText="Voie">
-					<h:outputText value="#{cl.adressePersonne.voie}"></h:outputText>
-				</p:column>
-				<p:column headerText="Code postal">
-					<h:outputText value="#{cl.adressePersonne.codePostal}"></h:outputText>
-				</p:column>
-				<p:column headerText="Ville">
-					<h:outputText value="#{cl.adressePersonne.ville}"></h:outputText>
-				</p:column>
+					<p:messages id="msgs" />
 
-				<p:column headerText="Pays">
-					<h:outputText value="#{cl.adressePersonne.pays}"></h:outputText>
-				</p:column>
-
-				<p:column headerText="Date de naissance">
-					<h:outputText value="#{cl.dateDeNaissance}"></h:outputText>
-				</p:column>
+					<h:panelGrid columns="1" cellpadding="10">
+						<p:outputLabel for="idHotel" value="Hotel :" />
+						<h:selectOneMenu id="idHotel"
+							value="#{clientBean.selectedidHotel}" style="width:125px"
+							onchange="get()">
+							<f:selectItems itemLabel="#{c.nomHotel}" itemValue="#{c.idHotel}"
+								value="#{clientBean.hotels}" var="c" />
+						</h:selectOneMenu>
 
 
-				<p:column headerText="Voir" style="width:100px;text-align: center">
-					<p:commandButton action="#{clientBean.getClient(cl.idPersonne)}"
-						update=":form2:ClientDetail" oncomplete="PF('ClientVar').show()"
-						icon="ui-icon-search" />
-				</p:column>
+						<p:outputLabel for="prenom" value="Prenom" id="prenomLabel" />
+						<p:inputText id="prenom" value="#{clientBean.prenom}"
+							required="true">
+							<f:validateLength minimum="2" />
+						</p:inputText>
+						<p:message for="prenom" display="icon" />
 
-			</p:dataTable>
+						<p:outputLabel for="nom" value="Nom" id="nomLabel" />
+						<p:inputText id="nom" value="#{clientBean.nom}" required="true">
+							<f:validateLength minimum="2" />
+						</p:inputText>
+						<p:message for="nom" display="icon" />
 
-		</h:form>
 
-		<!--  Formulaire update   -->
+						<p:outputLabel for="dateDeSortie" value="Date de sortie" />
+						<p:calendar id="dateDeSortie" value="#{clientBean.dateDeSortie}"
+							required="true">
+							<f:validateLength minimum="2" />
+						</p:calendar>
+						<p:message for="dateDeSortie" display="icon" />
 
-		<p:dialog header="Client" widgetVar="ClientVar" modal="true"
-			showEffect="fade" hideEffect="fade" resizable="false">
-			<h:form id="form2">
-				<p:outputPanel id="ClientDetail" style="text-align:center;">
+						<p:outputLabel for="numero" value="Numero" id="numeroLabel" />
+						<p:inputText id="numero" value="#{clientBean.numero}"
+							required="true">
+							<f:validateLength minimum="2" />
+						</p:inputText>
+						<p:message for="numero" display="icon" />
 
-					<p:panelGrid columns="2">
-						<h:outputText value="Nom:" />
-						<h:inputText value="#{clientBean.client.nom}" />
-						<h:outputText value="Prenom" />
-						<h:inputText value="#{clientBean.client.prenom}" />
-						<h:outputText value="Numero" />
-						<h:inputText value="#{clientBean.client.adressePersonne.numero}" />
-						<h:outputText value="Voie" />
-						<h:inputText value="#{clientBean.client.adressePersonne.voie}" />
-						<h:outputText value="Code Postal" />
-						<h:inputText value="#{clientBean.client.adressePersonne.codePostal}" />
-						<h:outputText value="Ville" />
-						<h:inputText value="#{clientBean.client.adressePersonne.ville}" />
-						<h:outputText value="Pays" />
-						<h:inputText value="#{clientBean.client.adressePersonne.pays}" />
-					</p:panelGrid>
+						<p:outputLabel for="voie" value="Voie" id="voieLabel" />
+						<p:inputText id="voie" value="#{clientBean.voie}" label="voie"
+							required="true">
+							<f:validateLength minimum="2" />
+						</p:inputText>
+						<p:message for="voie" display="icon" />
 
-					<p:commandButton action="#{clientBean.update}"
-						update=":form2:ClientDetail" icon="ui-icon-pencil"
-						title="Modifier">
-					</p:commandButton>
-				</p:outputPanel>
+						<p:outputLabel for="codePostal" value="Code postal"
+							id="codePostalLabel" />
+						<p:inputText id="codePostal" value="#{clientBean.codePostal}"
+							required="true">
+							<f:validateLength minimum="2" />
+						</p:inputText>
+						<p:message for="codePostal" display="icon" />
+
+						<p:outputLabel for="ville" value="Ville" id="villeLabel" />
+						<p:inputText id="ville" value="#{clientBean.ville}"
+							required="true">
+							<f:validateLength minimum="2" />
+						</p:inputText>
+						<p:message for="ville" display="icon" />
+
+						<p:outputLabel for="pays" value="Pays" id="paysLabel" />
+						<p:inputText id="pays" value="#{clientBean.pays}" required="true">
+							<f:validateLength minimum="2" />
+						</p:inputText>
+						<p:message for="pays" display="icon" />
+
+						<p:outputLabel for="dateDeNaissance" value="Date de naissance" />
+						<p:calendar id="dateDeNaissance"
+							value="#{clientBean.dateDeNaissance}" required="true">
+							<f:validateLength minimum="2" />
+						</p:calendar>
+						<p:message for="dateDeNaissance" display="icon" />
+
+
+					</h:panelGrid>
+
+					<h:commandButton value="Ajouter" action="#{clientBean.addClient}"
+						icon="ui-icon-check" />
+				</p:panel>
 			</h:form>
 			<br />
-		</p:dialog>
-
-		<!--   Bouton choix   -->
 
 
 
+			<!--  List client -->
+			<h:form>
+				<p:growl id="msgs" showDetail="true" />
+				<p:dataTable id="tbl" var="cl" value="#{clientBean.clients}"
+					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
+					paginator="true" rows="10" style="margin-bottom:20px">addProduitBean.hotels}">
+ 		
+	 <f:facet name="header">
+						<p:outputPanel>
+							<h:outputText value="Clients:" />
 
+						</p:outputPanel>
+					</f:facet>
+
+					<p:column headerText="Nom">
+						<h:outputText value="#{cl.nom}"></h:outputText>
+					</p:column>
+
+					<p:column headerText="Prenom">
+						<h:outputText value="#{cl.prenom}"></h:outputText>
+					</p:column>
+					<p:column headerText="Numero">
+						<h:outputText value="#{cl.adressePersonne.numero}"></h:outputText>
+					</p:column>
+					<p:column headerText="Voie">
+						<h:outputText value="#{cl.adressePersonne.voie}"></h:outputText>
+					</p:column>
+					<p:column headerText="Code postal">
+						<h:outputText value="#{cl.adressePersonne.codePostal}"></h:outputText>
+					</p:column>
+					<p:column headerText="Ville">
+						<h:outputText value="#{cl.adressePersonne.ville}"></h:outputText>
+					</p:column>
+
+					<p:column headerText="Pays">
+						<h:outputText value="#{cl.adressePersonne.pays}"></h:outputText>
+					</p:column>
+
+					<p:column headerText="Date de naissance">
+						<h:outputText value="#{cl.dateDeNaissance}"></h:outputText>
+					</p:column>
+
+
+					<p:column headerText="Voir" style="width:100px;text-align: center">
+						<p:commandButton action="#{clientBean.getClient(cl.idPersonne)}"
+							update=":form2:ClientDetail" oncomplete="PF('ClientVar').show()"
+							icon="ui-icon-search" />
+					</p:column>
+
+				</p:dataTable>
+
+			</h:form>
+
+			<!--  Formulaire update   -->
+
+			<p:dialog header="Client" widgetVar="ClientVar" modal="true"
+				showEffect="fade" hideEffect="fade" resizable="false">
+				<h:form id="form2">
+					<p:outputPanel id="ClientDetail" style="text-align:center;">
+
+						<p:panelGrid columns="2">
+							<h:outputText value="Nom:" />
+							<h:inputText value="#{clientBean.client.nom}" />
+							<h:outputText value="Prenom" />
+							<h:inputText value="#{clientBean.client.prenom}" />
+							<h:outputText value="Numero" />
+							<h:inputText value="#{clientBean.client.adressePersonne.numero}" />
+							<h:outputText value="Voie" />
+							<h:inputText value="#{clientBean.client.adressePersonne.voie}" />
+							<h:outputText value="Code Postal" />
+							<h:inputText
+								value="#{clientBean.client.adressePersonne.codePostal}" />
+							<h:outputText value="Ville" />
+							<h:inputText value="#{clientBean.client.adressePersonne.ville}" />
+							<h:outputText value="Pays" />
+							<h:inputText value="#{clientBean.client.adressePersonne.pays}" />
+						</p:panelGrid>
+
+						<p:commandButton action="#{clientBean.update}"
+							update=":form2:ClientDetail" icon="ui-icon-pencil"
+							title="Modifier">
+						</p:commandButton>
+					</p:outputPanel>
+				</h:form>
+				<br />
+			</p:dialog>
+
+			<!--   Bouton choix   -->
 	</div>
 
 

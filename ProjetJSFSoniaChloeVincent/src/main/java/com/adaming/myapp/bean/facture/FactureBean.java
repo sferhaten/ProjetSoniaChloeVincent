@@ -50,6 +50,7 @@ public class FactureBean {
 	
 
 	private Set<Consomation> listeConsommations = new HashSet<Consomation>();
+	private boolean activitesVisibles ;
 	
 	
 	//======================
@@ -66,33 +67,65 @@ public class FactureBean {
 	public void getHotel(){
 		
 		listeHotels = serviceHotel.getHotels();
+		activitesVisibles = false;
+		idPersonne = 0L;
 		
 	}
+
 	
 	
+
 	public void getClientsHotel(){
 		
 		listePersonnes = serviceHotel.clientsByHotel(idHotel);
 		
-	}
-	
-	public void getActivites(){
+		listeReservations = new HashSet<Reservation>();
 		
-		System.out.println("getActivites lancée");
+
+		listeConsommations = new HashSet<Consomation>();
 		
-		System.out.println("idPersonne : " + idPersonne);
+		activitesVisibles = false;
 		
-		listeReservations = serviceClient.getReservationsNonFacturees(idPersonne);
-		listeConsommations = serviceClient.getConsommationsNonFacturees(idPersonne);
+		idPersonne = 0L;
 		
 	}
 	
 	public List<Facture> getAllFactures(){
 		return service.getAllFacture();
 	}
+
 	
+	public void getActivites() {
+
+		activitesVisibles = true;
+
+		System.out.println("getActivites lancée");
+
+		System.out.println("idPersonne : " + idPersonne);
+
+		listeReservations = serviceClient
+				.getReservationsNonFacturees(idPersonne);
+
+		System.out.println("Taille de la liste des reservations : "
+				+ listeReservations.size());
+
+		listeConsommations = serviceClient
+				.getConsommationsNonFacturees(idPersonne);
+
+		System.out.println("Taille de la liste des consommations : "
+				+ listeConsommations.size());
+
+	}
+
+	public String redirect(){
+		initFields();
+		return "factures?faces-redirect=true";
+	}
 	
-	
+	public void initFields(){
+		 coutResa = 0.0;
+	 coutConso = 0.0;
+	}
 	
 	//========================
 	//		les getter and setter

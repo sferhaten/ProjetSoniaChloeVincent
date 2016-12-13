@@ -21,6 +21,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -40,6 +42,8 @@ public abstract class Personne {
 	protected Long idPersonne;
 	protected String nom;
 	protected String prenom;
+	
+	
 	@DateTimeFormat(iso=ISO.DATE)
 	protected Date dateDeNaissance;
 	
@@ -50,7 +54,10 @@ public abstract class Personne {
 	//
 	@OneToMany(mappedBy="personne", fetch=FetchType.EAGER)
 	private Set<Consomation>consomations= new HashSet<Consomation>();
-	
+	//
+	@ManyToOne
+	@JoinColumn(name="hotel")
+	protected Hotel hotel;
 	
 	//
 	@OneToMany(mappedBy = "personne", fetch=FetchType.EAGER)
@@ -80,6 +87,12 @@ public abstract class Personne {
 	
 	public Long getIdPersonne() {
 		return idPersonne;
+	}
+	public Hotel getHotel() {
+		return hotel;
+	}
+	public void setHotel(Hotel hotel) {
+		this.hotel = hotel;
 	}
 	public void setIdPersonne(Long idPersonne) {
 		this.idPersonne = idPersonne;

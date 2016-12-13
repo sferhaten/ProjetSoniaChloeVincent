@@ -2,6 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
@@ -10,7 +11,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<title>Insert title here</title>
+	<title>Factures</title>
 
 
 	<h:outputStylesheet name="css/bootstrap.css" rel="stylesheet" />
@@ -90,8 +91,7 @@
 						required="true" style="width:200px; display:block">
 						<f:selectItems value="#{factureBean.listeHotels}" var="h"
 							itemValue="#{h.idHotel}" itemLabel="#{h.nomHotel}" />
-						<f:ajax render="idPersonne"
-							listener="#{factureBean.getClientsHotel}"></f:ajax>
+						<f:ajax render="@form" listener="#{factureBean.getClientsHotel}"></f:ajax>
 					</h:selectOneMenu>
 					<br />
 
@@ -101,8 +101,7 @@
 						required="true" style="width:200px; display:block">
 						<f:selectItems value="#{factureBean.listePersonnes}" var="p"
 							itemValue="#{p.idPersonne}" itemLabel="#{p.nom}" />
-						<f:ajax render="activites"
-							listener="#{factureBean.getActivites}"></f:ajax>
+						<f:ajax render="@form" listener="#{factureBean.getActivites}"></f:ajax>
 					</h:selectOneMenu>
 					<br />
 
@@ -110,74 +109,163 @@
 
 
 			</p:panel>
-		
-			<p:panel id="activites" header="Activités non facturées du client">
-
-				<br />
-				<p:dataTable paginator="true" rows="5"
-					value="#{factureBean.listeReservations}" var="r"
-					sortMode="multiple">
-
-					<f:facet name="header">Réservations</f:facet>
-
-					<p:column sortBy="#{r.idReservation}" headerText="Identifiant">
-						<h:outputText value="#{r.idReservation}"></h:outputText>
-					</p:column>
-
-					<p:column sortBy="#{r.dateArrive}" headerText="Date d'arrivée">
-						<h:outputText value="#{r.dateArrive}"></h:outputText>
-					</p:column>
-
-					<p:column sortBy="#{r.dateSortie}" headerText="Date de sortie">
-						<h:outputText value="#{r.dateSortie}"></h:outputText>
-					</p:column>
-
-					<p:column sortBy="#{r.coutResa}"
-						headerText="Coût de la réservation">
-						<h:outputText value="#{r.coutResa}"></h:outputText>
-					</p:column>
-
-					<p:column sortBy="#{r.chambre.idChambre}" headerText="Chambre">
-						<h:outputText value="#{r.chambre.idChambre}"></h:outputText>
-					</p:column>
 
 
-					<f:facet name="footer">
+			<c:if test="#{factureBean.idPersonne > 0}">
+				<p:panel id="activites" header="Activités non facturées du client">
+
+					<br />
+					<c:if test="#{fn:length(factureBean.listeReservations) > 0}">
+						<p:dataTable paginator="true" rows="5"
+							value="#{factureBean.listeReservations}" var="r"
+							sortMode="multiple">
+
+
+							<f:facet name="header">Réservations</f:facet>
+
+							<p:column sortBy="#{r.idReservation}" headerText="Identifiant">
+								<h:outputText value="#{r.idReservation}"></h:outputText>
+							</p:column>
+
+							<p:column sortBy="#{r.dateArrive}" headerText="Date d'arrivée">
+								<h:outputText value="#{r.dateArrive}"></h:outputText>
+							</p:column>
+
+							<p:column sortBy="#{r.dateSortie}" headerText="Date de sortie">
+								<h:outputText value="#{r.dateSortie}"></h:outputText>
+							</p:column>
+
+							<p:column sortBy="#{r.coutResa}"
+								headerText="Coût de la réservation">
+								<h:outputText value="#{r.coutResa}"></h:outputText>
+							</p:column>
+
+							<p:column sortBy="#{r.chambre.idChambre}" headerText="Chambre">
+								<h:outputText value="#{r.chambre.idChambre}"></h:outputText>
+							</p:column>
+
+
+							<f:facet name="footer">
         			Le client a effectué #{fn:length(factureBean.listeReservations)} réservations.
     			</f:facet>
 
-				</p:dataTable>
-				<br />
-				<br />
+						</p:dataTable>
+					</c:if>
+					<c:if test="#{fn:length(factureBean.listeReservations) eq 0}">
 
-				<p:dataTable paginator="true" rows="5"
-					value="#{factureBean.listeConsommations}" var="c"
-					sortMode="multiple">
+						<h:outputText
+							style="color:red;text-align:center;font-weight:bold;display: block"
+							value="Le client n'a aucune réservation non facturée."></h:outputText>
 
-					<f:facet name="header">Consommations</f:facet>
+					</c:if>
 
-					<p:column sortBy="#{r.idConsommation}" headerText="Identifiant">
-						<h:outputText value="#{r.idConsommation}"></h:outputText>
-					</p:column>
+					<br />
+					<br />
 
-					<p:column sortBy="#{r.quantite}" headerText="Quantité">
-						<h:outputText value="#{r.quantite}"></h:outputText>
-					</p:column>
+					<c:if test="#{fn:length(factureBean.listeConsommations) > 0}">
+						<p:dataTable paginator="true" rows="5"
+							value="#{factureBean.listeConsommations}" var="c"
+							sortMode="multiple">
 
-					<p:column sortBy="#{r.produit.nom}" headerText="Produit">
-						<h:outputText value="#{r.produit.nom}"></h:outputText>
-					</p:column>
+							<f:facet name="header">Consommations</f:facet>
+
+							<p:column sortBy="#{c.idConsommation}" headerText="Identifiant">
+								<h:outputText value="#{c.idConsommation}"></h:outputText>
+							</p:column>
+
+							<p:column sortBy="#{c.quantite}" headerText="Quantité">
+								<h:outputText value="#{c.quantite}"></h:outputText>
+							</p:column>
+
+							<p:column sortBy="#{c.produit.nom}" headerText="Produit">
+								<h:outputText value="#{c.produit.nom}"></h:outputText>
+							</p:column>
 
 
 
 
-					<f:facet name="footer">
+							<f:facet name="footer">
         			Le client a effectué #{fn:length(factureBean.listeConsommations)} consommations.
     			</f:facet>
 
-				</p:dataTable>
+						</p:dataTable>
 
-			</p:panel>
+					</c:if>
+
+					<c:if test="#{fn:length(factureBean.listeConsommations) eq 0}">
+
+						<h:outputText
+							style="color:red;text-align:center;font-weight:bold;display: block"
+							value="Le client n'a aucune consommation non facturée."></h:outputText>
+
+					</c:if>
+					<br />
+
+				</p:panel>
+
+				<br />
+
+				<p:commandButton value="Facturer"
+					actionListener="#{reservationBean.add}" icon="ui-icon-check" />
+
+				<br />
+				<c:if test="#{fn:length(factureBean.listeConsommations) > 0}">
+					<p:dataTable paginator="true" rows="5"
+						value="#{factureBean.listeConsommations}" var="c"
+						sortMode="multiple">
+
+						<f:facet name="header">Consommations</f:facet>
+
+						<p:column sortBy="#{c.idConsommation}" headerText="Identifiant">
+							<h:outputText value="#{c.idConsommation}"></h:outputText>
+						</p:column>
+
+						<p:column sortBy="#{c.quantite}" headerText="Quantité">
+							<h:outputText value="#{c.quantite}"></h:outputText>
+						</p:column>
+
+						<p:column sortBy="#{c.produit.nom}" headerText="Produit">
+							<h:outputText value="#{c.produit.nom}"></h:outputText>
+						</p:column>
+
+
+
+
+						<f:facet name="footer">
+        			Le client a effectué #{fn:length(factureBean.listeConsommations)} consommations.
+    			</f:facet>
+
+					</p:dataTable>
+
+				</c:if>
+
+				<c:if test="#{fn:length(factureBean.listeConsommations) eq 0}">
+
+					<h:outputText
+						style="color:red;text-align:center;font-weight:bold;display: block"
+						value="Le client n'a aucune consommation non facturée."></h:outputText>
+
+				</c:if>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			</c:if>
+
+
+
 
 
 		</h:form>

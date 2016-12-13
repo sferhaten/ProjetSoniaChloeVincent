@@ -232,6 +232,12 @@ public class gestionHotelBean {
 	//	Les methodes
 	//====================================
 	
+
+	public String redirect(){
+		
+		return "gestionHotel?faces-redirect=true";
+	}
+	
 	@PostConstruct
 	public void init(){
 		getAllHotels();

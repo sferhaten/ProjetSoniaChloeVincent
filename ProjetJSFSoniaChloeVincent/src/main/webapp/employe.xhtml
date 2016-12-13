@@ -487,12 +487,13 @@
 						<h:outputText value="Pays" />
 						<h:inputText value="#{empBean.personne.adressePersonne.pays}" />
 						
-						<p:commandButton action="#{empBean.update}"
-							update=":form2:EmployeDetail" icon="ui-icon-pencil"
-							title="Modifier">
-						</p:commandButton>
+						
 
 					</p:panelGrid>
+					<p:commandButton actionLisner="#{empBean.update}"
+							update=":form2:EmployeDetail" icon="ui-icon-pencil"
+							value="Modifier">
+						</p:commandButton>
 					
 				</p:outputPanel>
 			

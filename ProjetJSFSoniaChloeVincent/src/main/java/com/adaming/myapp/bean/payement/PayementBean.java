@@ -70,6 +70,11 @@ public class PayementBean {
 		LOGGER.info(" <--------- employe been crée ----------------------> ");
 	}
 
+	public String redirect(){
+		initFields();
+		return "payement?faces-redirect=true";
+	}
+	
 	@PostConstruct
 	private void initFields() {
 		date = null;

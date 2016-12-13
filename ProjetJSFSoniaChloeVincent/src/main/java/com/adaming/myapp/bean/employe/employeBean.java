@@ -95,7 +95,7 @@ public class employeBean {
 
 	public String update(){
 		servicePersonne.updatePersonne(personne);
-		System.out.println("==================================" + employe);
+		System.out.println("==================================" + personne);
 		return "home?redirect-faces-true";
 	}
 
@@ -187,6 +187,12 @@ public class employeBean {
 	public void getOneEmploye(Long idPersonne){
 		personne = servicePersonne.getPersonne(idPersonne);
 		System.out.println("+++++++++++++++++++++++++++++" + personne);
+	}
+	
+
+public String redirect(){
+		initFields();
+		return "employe?faces-redirect=true";
 	}
 	// ===========================
 	// Getter and setter

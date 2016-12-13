@@ -58,14 +58,37 @@
 			<ul class="nav menu">
 				<li class="active"><a href="home.html"><svg
 							class="glyph stroked dashboard-dial"></svg> Home</a></li>
-				<li><a href="widgets.html"><svg
-							class="glyph stroked calendar"></svg> Hotel</a></li>
-				<li><a href="charts.html"><svg
-							class="glyph stroked line-graph"></svg> Personne</a></li>
-				<li><a href="tables.html"><svg class="glyph stroked table"></svg>
-						facture</a></li>
-				<li><a href="forms.html"><svg class="glyph stroked pencil"></svg>
-						Payement</a></li>
+
+
+				<li><h:link value="Employe" outcome="employe.xhtml"
+						onclick="#{empBean.redirect()}">
+						<svg class="glyph stroked line-graph"></svg>
+					</h:link></li>
+				<li><h:link value="Client" outcome="client.xhtml"
+						onclick="#{clientBean.redirect()}">
+						<svg class="glyph stroked line-graph"></svg>
+					</h:link></li>
+				<li><h:link value="Chambre" outcome="addChambre.xhtml"
+						onclick="#{chambreBean.redirect()}">
+						<svg class="glyph stroked line-graph"></svg>
+					</h:link></li>
+				<li><h:link value="Produit" outcome="addProduit.xhtml"
+						onclick="#{addProduitBean.redirect()}">
+						<svg class="glyph stroked line-graph"></svg>
+					</h:link></li>
+				<li><h:link value="Consommation" outcome="addConsomation.xhtml"
+						onclick="#{addConsomationBean.redirect()}">
+						<svg class="glyph stroked line-graph"></svg>
+					</h:link></li>
+
+				<li><h:link value="Reservation" outcome="addReservation.xhtml"
+						onclick="#{reservationBean.redirect()}">
+						<svg class="glyph stroked line-graph"></svg>
+					</h:link></li>
+				<li><h:link value="Payement" outcome="payement.xhtml"
+						onclick="#{payementBean.redirect()}">
+						<svg class="glyph stroked line-graph"></svg>
+					</h:link></li>
 			</ul>
 		</div>
 		<!--/.sidebar-->
@@ -172,7 +195,7 @@
 
 									<p:commandButton value="Save" update="panel"
 										actionListener="#{ClientBean.addChambre}" icon="ui-icon-check" />
-										</h:panelGrid>
+								</h:panelGrid>
 							</p:panel>
 						</h:form>
 						<br /> <br /> <br /> <br /> <br />

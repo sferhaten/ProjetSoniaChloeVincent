@@ -267,6 +267,11 @@ public void addHotel(){
 }
 
 
+public String redirect(){
+	intFields();
+	return "addHotel?faces-redirect=true";
+}
+
 public Set<Chambre> getChambreSimpleDispo(Long idHotel, Date dateDemandee1, Date dateDemandee2){        
 		return serviceHotel.chambreSimpleDisposByHotel(idHotel, dateDemandee1, dateDemandee2);    
 }
@@ -285,6 +290,10 @@ public Set<Client> clientsByHotel(Long idHotel){
 	
 	return serviceHotel.clientsByHotel(idHotel);
 	
+}
+
+public Set<Chambre> getChambreByHotel(Long idHotel){
+	return serviceHotel.chambreByHotel(idHotel);
 }
 
 public String show(Long idHotel) {  
