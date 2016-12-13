@@ -88,6 +88,7 @@ public class ClientBean {
 	
 	
 	public void getAllClientByHotel(){
+		clientsHotel = hotelBean.clientsByHotel(selectedidHotel);
 		
 	}
 	
@@ -131,6 +132,9 @@ public Set<Consomation> getConsommationsNonFacturees(Long idPersonne){
 		initFields();
 		return "client?faces-redirect=true";
 	}
+	
+	
+	
 	
 	//=====================================
 	//		Getter and setters

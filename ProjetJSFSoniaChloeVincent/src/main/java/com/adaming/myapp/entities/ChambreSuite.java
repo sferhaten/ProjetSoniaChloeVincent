@@ -29,6 +29,11 @@ public class ChambreSuite extends Chambre{
 		
 	}
 
+	
+	public ChambreSuite() {
+		super();
+	}
+
 	@Override
 	public Double cout() {
 		// TODO Auto-generated method stub
