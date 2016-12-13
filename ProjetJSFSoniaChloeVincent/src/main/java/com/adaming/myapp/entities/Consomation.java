@@ -23,7 +23,7 @@ public class Consomation {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY) 
 	private Long idConsommation;
-	private Integer quantite;
+	private Integer quantiteConsomation;
 	
 	
 	//produit
@@ -45,11 +45,11 @@ public class Consomation {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Consomation(Integer quantite) {
+	public Consomation(Integer quantiteConsomation) {
 		super();
-		this.quantite = quantite;
+		this.quantiteConsomation = quantiteConsomation;
 	}
-	
+
 	//==========================
 	//Getters et setters
 	//==========================
@@ -62,14 +62,16 @@ public class Consomation {
 		this.idConsommation = idConsommation;
 	}
 
-	public Integer getQuantite() {
-		return quantite;
+
+	
+	public Integer getQuantiteConsomation() {
+		return quantiteConsomation;
 	}
 
-	public void setQuantite(Integer quantite) {
-		this.quantite = quantite;
+	public void setQuantiteConsomation(Integer quantiteConsomation) {
+		this.quantiteConsomation = quantiteConsomation;
 	}
-	
+
 	public Produit getProduit() {
 		return produit;
 	}
@@ -90,28 +92,30 @@ public class Consomation {
 	//==========================
 
 	
-
 	@Override
 	public String toString() {
-		return "Consomation [idConsommation=" + idConsommation + ", quantite="
-				+ quantite + "]";
+		return "Consomation [idConsommation=" + idConsommation
+				+ ", quantiteConsomation=" + quantiteConsomation + "]";
 	}
+
 	
 public Double coutclient(){
 		
 		Produit p = getProduit();
 		
-		Double cout = quantite*(p.getCoutVente());
+		Double cout = quantiteConsomation *(p.getCoutVente());
 		
 		return cout;
 	}
 	
 	
+
+
 public Double benefice(){
 		
 		Produit p = getProduit();
 		
-		Double cout = quantite*(p.getCoutVente() - p.getCoutAchat());
+		Double cout = quantiteConsomation*(p.getCoutVente() - p.getCoutAchat());
 		
 		return cout;
 	}

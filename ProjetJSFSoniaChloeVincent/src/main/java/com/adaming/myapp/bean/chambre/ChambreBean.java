@@ -1,7 +1,11 @@
 package com.adaming.myapp.bean.chambre;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 
@@ -9,6 +13,10 @@ import org.jboss.logging.Logger;
 import org.springframework.stereotype.Component;
 
 import com.adaming.myapp.entities.Chambre;
+import com.adaming.myapp.entities.ChambreDouble;
+import com.adaming.myapp.entities.ChambreSimple;
+import com.adaming.myapp.entities.ChambreSuite;
+import com.adaming.myapp.entities.Hotel;
 import com.adaming.myapp.servicechambre.IServiceChambre;
 
 @Component("chambreBean")
@@ -18,21 +26,57 @@ public class ChambreBean {
 	private Logger LOGGER = Logger.getLogger(ChambreBean.class);
 	
 	@Inject
-	private IServiceChambre service;
+	private IServiceChambre serviceChambre;
 	
 	private Chambre chambre;
 	
 	private List<Chambre> listeChambres;
 	
-	private long idChambre;
-	private long numChambre;
+	private Long idChambre;
+	private Long numChambre;
 	private String description;
+	
+	private Hotel hotel;
+	private Long idHotel;
+
+	private List<Chambre> chambres = new ArrayList<Chambre>();
 	
 	
 	public ChambreBean() {
 		super();
 		LOGGER.info("------ ChambreBean created ------");
 	}
+	
+	public void addChambreSimple(){
+		Chambre ChambreSimple = new ChambreSimple(numChambre, description);
+		serviceChambre.addChambre(ChambreSimple, idHotel);
+	}
+	
+	public void addChambreDouble(){
+		Chambre ChambreDouble = new ChambreDouble(numChambre, description);
+		serviceChambre.addChambre(ChambreDouble, idHotel);
+	}
+	
+	public void addChambreSuite(){
+		Chambre ChambreSuite = new ChambreSuite(numChambre, description);
+		serviceChambre.addChambre(ChambreSuite, idHotel);
+	}
+	
+	
+	@PostConstruct
+	public void init(){
+		getAll();
+		}
+	
+	public List<Chambre> getAll() {
+		chambres = serviceChambre.getAllChambre();
+		return chambres;
+	}
+	
+	public void getOne(Long idHotel) {
+		chambre = serviceChambre.getOneChambre(idHotel);
+	}
+	
 	
 	
 	public Chambre getChambre() {
@@ -84,16 +128,4 @@ public class ChambreBean {
 		this.description = description;
 	}
 
-
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }

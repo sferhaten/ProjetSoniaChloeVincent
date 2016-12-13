@@ -35,6 +35,7 @@ public class gestionHotelBean {
 	private String nomHotel;
 	private List<Hotel>hotels = new ArrayList<Hotel>();
 	private Set<Produit> produits = new HashSet<Produit>();
+	private Set<Produit> produitsDispoByHotel = new HashSet<Produit>();
 	private Set<Client>clients = new HashSet<Client>();
 	private Set<Employe>employes = new HashSet<Employe>();
 	private Long idProduit;
@@ -66,6 +67,12 @@ public class gestionHotelBean {
 	
 	public Hotel getHotel() {
 		return hotel;
+	}
+	public Set<Produit> getProduitsDispoByHotel() {
+		return produitsDispoByHotel;
+	}
+	public void setProduitsDispoByHotel(Set<Produit> produitsDispoByHotel) {
+		this.produitsDispoByHotel = produitsDispoByHotel;
 	}
 	public Date getDateDemandee1() {
 		return dateDemandee1;
@@ -233,6 +240,10 @@ public class gestionHotelBean {
 		hotels = serviceHotel.getAll();
 		System.out.println("liste hotels" + hotels);
 		
+	}
+	
+	public Set<Produit> getProduitsDispo(Long idHotel){
+		return produitsDispoByHotel = serviceHotel.produitsDisposByHotel(idHotel);
 	}
 	
 

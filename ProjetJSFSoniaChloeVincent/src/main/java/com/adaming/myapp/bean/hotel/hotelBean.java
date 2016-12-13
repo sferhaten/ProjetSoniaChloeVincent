@@ -15,6 +15,8 @@ import org.springframework.stereotype.Component;
 
 import com.adaming.myapp.entities.Adresse;
 import com.adaming.myapp.entities.Chambre;
+import com.adaming.myapp.entities.Client;
+import com.adaming.myapp.entities.Employe;
 import com.adaming.myapp.entities.Hotel;
 import com.adaming.myapp.servicehotel.IServiceHotel;
 
@@ -43,14 +45,43 @@ public class hotelBean {
 	private Integer qualite;
 	private List<Hotel> hotels = new ArrayList<Hotel>();
 	private Set<Chambre> chambres = new HashSet<Chambre>();
+	private Set<Employe>employes = new HashSet<Employe>();
 	private Hotel selectedHotel;
-	
+	private Long selectedidHotel;
+	private Set<Client> clients = new HashSet<Client>() ;
 	//===========================
 	//	Getter and Setter
 	//===========================
 
+	
+	
 	public Set<Chambre> getChambres() {
 		return chambres;
+	}
+
+
+	public Long getSelectedidHotel() {
+		return selectedidHotel;
+	}
+
+
+	public void setSelectedidHotel(Long selectedidHotel) {
+		this.selectedidHotel = selectedidHotel;
+	}
+
+
+	public Set<Employe> getEmployes() {
+		return employes;
+	}
+
+
+	public void setEmployes(Set<Employe> employes) {
+		this.employes = employes;
+	}
+
+
+	public Hotel getSelectedHotel() {
+		return selectedHotel;
 	}
 
 
@@ -233,6 +264,27 @@ public void addHotel(){
 	intFields();
 	getAll();
 
+}
+
+
+public Set<Chambre> getChambreSimpleDispo(Long idHotel, Date dateDemandee1, Date dateDemandee2){        
+		return serviceHotel.chambreSimpleDisposByHotel(idHotel, dateDemandee1, dateDemandee2);    
+}
+public Set<Chambre> getChambreDoubleDispo(Long idHotel, Date dateDemandee1, Date dateDemandee2){  
+      return serviceHotel.chambreDoubleDisposByHotel(idHotel, dateDemandee1, dateDemandee2);    
+}
+public Set<Chambre> getChambreSuiteDispo(Long idHotel, Date dateDemandee1, Date dateDemandee2){
+        return serviceHotel.chambreSuiteDisposByHotel(idHotel, dateDemandee1, dateDemandee2);    
+}
+
+public Set<Employe> getEmployeParHotel(Long idHotel){
+	return serviceHotel.employesByHotel(idHotel);
+}
+
+public Set<Client> clientsByHotel(Long idHotel){
+	
+	return serviceHotel.clientsByHotel(idHotel);
+	
 }
 
 public String show(Long idHotel) {  

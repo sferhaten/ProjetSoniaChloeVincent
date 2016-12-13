@@ -27,7 +27,7 @@ public class DaoConsomationImpl implements IDaoConsomation {
 	 		 
 	 		c.setProduit(p); 
 	 		c.setPersonne(cl);
-	 		p.setQuantite(p.getQuantite()-c.getQuantite()); 
+	 		p.setQuantite(p.getQuantite()-c.getQuantiteConsomation()); 
 	 		 
 	 		cl.getConsomations().add(c); 
 	 		em.persist(c); 

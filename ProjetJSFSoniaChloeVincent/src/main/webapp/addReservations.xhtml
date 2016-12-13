@@ -1,299 +1,228 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
- xmlns:h="http://xmlns.jcp.org/jsf/html"
- xmlns:p="http://primefaces.org/ui"
- xmlns:f="http://xmlns.jcp.org/jsf/core">
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
 <h:head>
 
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Insert title here</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>Insert title here</title>
 
 
-<h:outputStylesheet name="css/bootstrap.css" rel="stylesheet"/>
+	<h:outputStylesheet name="css/bootstrap.css" rel="stylesheet" />
 
-<h:outputStylesheet name="css/datepicker3.css" rel="stylesheet"/>
-<h:outputStylesheet name="css/styles.css" rel="stylesheet"/>
+	<h:outputStylesheet name="css/datepicker3.css" rel="stylesheet" />
+	<h:outputStylesheet name="css/styles.css" rel="stylesheet" />
 
 </h:head>
 <body>
 
 
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar-collapse">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="#"><span>Gestion Hotels</span></a>
-				<ul class="user-menu">
-					<li class="dropdown pull-right">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown"> User <span class="caret"></span></a>
-						<ul class="dropdown-menu" role="menu">
-							<li><a href="#">Profile</a></li>
-							<li><a href="#"> Settings</a></li>
-							<li><a href="#"> Logout</a></li>
-						</ul>
-					</li>
-				</ul>
-			</div>
-							
-		</div><!-- /.container-fluid -->
-	</nav>
-	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
-	 <h:form>
-	 
-	    <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
-        <p:outputLabel for="console" value="Basic:" />
-        <p:selectOneMenu id="console" value="#{reservationBean.typeChambre}" style="width:125px">
-            <f:selectItem itemLabel="Select One" itemValue="" />
-            <f:selectItem itemLabel="Xbox One" itemValue="Xbox One" />
-            <f:selectItem itemLabel="PS4" itemValue="PS4" />
-            <f:selectItem itemLabel="Wii U" itemValue="Wii U" />
-        </p:selectOneMenu>
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed"
+				data-toggle="collapse" data-target="#sidebar-collapse">
+				<span class="sr-only">Toggle navigation</span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#"><span>Gestion Hotels</span></a>
+			<ul class="user-menu">
+				<li class="dropdown pull-right"><a href="#"
+					class="dropdown-toggle" data-toggle="dropdown"> User <span
+						class="caret"></span></a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="#">Profile</a></li>
+						<li><a href="#"> Settings</a></li>
+						<li><a href="#"> Logout</a></li>
+					</ul></li>
+			</ul>
+		</div>
 
-    </h:panelGrid>
-</h:form>
+	</div>
+	<!-- /.container-fluid --> </nav>
+	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+
 		<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
 			<form role="search">
 				<div class="form-group">
-					<h:inputText type="text" class="form-control" placeholder="Search"/>
+					<h:inputText type="text" class="form-control" placeholder="Search" />
 				</div>
 			</form>
 			<ul class="nav menu">
-				<li class="active"><a href="home.html"><svg class="glyph stroked dashboard-dial"></svg> Home</a></li>
-				<li><a href="widgets.html"><svg class="glyph stroked calendar"></svg> Hotel</a></li>
-				<li><a href="charts.html"><svg class="glyph stroked line-graph"></svg> Personne</a></li>
-				<li><a href="tables.html"><svg class="glyph stroked table"></svg> facture</a></li>
-				<li><a href="forms.html"><svg class="glyph stroked pencil"></svg> Payement</a></li>
-				
+				<li class="active"><a href="home.html"><svg
+							class="glyph stroked dashboard-dial"></svg> Home</a></li>
+				<li><a href="widgets.html"><svg
+							class="glyph stroked calendar"></svg> Hotel</a></li>
+				<li><a href="charts.html"><svg
+							class="glyph stroked line-graph"></svg> Personne</a></li>
+				<li><a href="tables.html"><svg class="glyph stroked table"></svg>
+						facture</a></li>
+				<li><a href="forms.html"><svg class="glyph stroked pencil"></svg>
+						Payement</a></li>
+
 			</ul>
-	
-		</div><!--/.sidebar-->
-		
-		<h1 class="text-center">Réservations du client Toto</h1><br />
-		
- 		<h:messages style="prenom:red"></h:messages>
-   
-	   	<h:form id="form1">
-		    <p:panel id="panel" header="Ajouter une nouvelle réservation">
-		 
-		        <p:messages id="msgs" />
-		 
-		        <h:panelGrid columns="3" cellpadding="5">
-		        
-		        	<p:outputLabel for="dateArrive" value="Date d'arrivée :" />
-       				<p:calendar id="dateArrive" value="#{reservationBean.dateArrive}" required="true" label="Date d'arrivée"/><br/>
-       				
-       				<p:outputLabel for="dateSortie" value="Date de sortie :" />
-       				<p:calendar id="dateSortie" value="#{reservationBean.dateSortie}" required="true" label="Date de sortie"/><br/>
-		        	
-		            <p:outputLabel for="typeChambre" value="Type de chambre :" />
-			        <h:selectOneMenu id="typeChambre" value="#{reservationBean.typeChambre}"
-			        				style="width:200px" onchange="get()">
-			            <f:selectItem itemLabel="Select un type" itemValue="#{null}" noSelectionOption="true"/>
-			            <f:selectItem itemLabel="Chambre simple" itemValue="ChambreSimple" />
-			            <f:selectItem itemLabel="Chambre double" itemValue="Chambredouble" />
-			            <f:selectItem itemLabel="Suite" itemValue="Suite" />
-			        </h:selectOneMenu><br/>
-			        
-			        <p:outputLabel id="idChambreLabel" for="idChambre" value="Numéro de chambre :" style="display:none" />
-			        <h:selectOneMenu id="idChambre" value="#{reservationBean.listeChambres}" var="ch"
-			        				style="width:200px; display:none">
-			            <f:selectItem itemLabel="#{ch.idChambre}" itemValue="#{ch.idChambre}" />
-			            <f:selectItem itemLabel="Chambre simple" itemValue="ChambreSimple" />
-			            <f:selectItem itemLabel="Chambre double" itemValue="Chambredouble" />
-			            <f:selectItem itemLabel="Suite" itemValue="Suite" />
-			        </h:selectOneMenu><br/>
-		            
-		            
-		 
-		        </h:panelGrid>
-		 
-		        <p:commandButton value="Save" update="panel" actionListener="#{userView.save}" icon="ui-icon-check" />
-		    </p:panel>
-		</h:form><br/>
-		
-		
-		<script type="text/javascript">
-	    	function get(){
-	    		var typeChambre = document.getElementById("form1:typeChambre").value;
-	    		var idChambre = document.getElementById("form1:idChambre");
-	    		var idChambreLabel = document.getElementById("form1:idChambreLabel");
-	    		
-	    		
-	    		if (typeChambre == "") {
-	    			
-	    			idChambre.style.display = 'none';
-	    			idChambreLabel.style.display = 'none';
-	    			
-	    		}else{
-	    			
-	    			idChambre.style.display = 'block';
-	    			idChambreLabel.style.display = 'block';
-	    		}
-	    
-	    	}
-	    
-	    
-	    
-	    </script>
-			
-		
-		
-		
-	   
-	  <h:form>
-	  		<p:dataTable paginator="true" rows="5" value="#{reservationBean.listeReservations}" var="r" >
-	       
-	       		<f:facet name="header">Réservations</f:facet>
-	       
-		      	<p:column headerText="Identifiant">
-		        	<h:outputText value="#{r.idReservation}"></h:outputText>
-		       	</p:column>
-		       	
-		       <p:column headerText="Date d'arrivée">
-		       		<h:outputText value="#{r.dateArrive}"></h:outputText>
-		       </p:column>
-		       
-		       <p:column headerText="Date de sortie">
-		       		<h:outputText value="#{r.dateSortie}"></h:outputText>
-		       </p:column>
-		       
-		       <p:column headerText="Coût de la réservation">
-		       		<h:outputText value="#{r.coutResa}"></h:outputText>
-		       </p:column>
-		       
-		       <p:column headerText="Chambre">
-		       		<h:outputText value="#{r.chambre.idChambre}"></h:outputText>
-		       </p:column>
-		       
-		       <p:column headerText="Numéro de facture">
-		       		<h:outputText value="#{r.facture.idFacture}"></h:outputText>
-		       </p:column>
-		       
-		       
-		        
-	       
-	   		</p:dataTable>
-	  </h:form>
-	  
-	  
-	    <h:form id="form">
-	         <p:dialog header="Catégorie" widgetVar="CategorieVar" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
-		        <p:outputPanel id="CategorieDetail" style="text-align:center;">
-		            <p:panelGrid  columns="2">
-		                <h:outputText value="Identifiant" />
-		                <h:outputText value="#{categorieBean.categorie.idCategorie}" />
-		 
-		                <h:outputText value="Catégorie" />
-		                <h:outputText value="#{categorieBean.categorie.designation}" />
-		            </p:panelGrid>
-		        </p:outputPanel>
-	   		</p:dialog>
-	   </h:form><br/>
-	   
-	   
-	   	<p:separator style="width:500px;height:20px"></p:separator><br/>
-	 	<p:separator style="width:500px;height:20px"></p:separator><br/>
-	   
-	   <h:form>
-	      	<p:panel header="Ajouter un produit">
-	   
-				<h:panelGrid id="grid" columns="4" cellpadding="5">
-				      <h:outputLabel value="Nom du produit"/>
-				      <h:inputText requiredMessage="Nom du produit obligatoire" required="true" value="#{produitBean.nomProduit}">
-				      </h:inputText>
-				      
-				      <h:outputLabel value="Prix"/>
-				      <h:inputText requiredMessage="Prix obligatoire" required="true" value="#{produitBean.prix}">
-				      		<f:validateLongRange maximum="1000000" minimum="1"></f:validateLongRange>
-				      </h:inputText>
-				      
-				      <h:outputLabel value="Quantite"/>
-				      <h:inputText requiredMessage="Quantite obligatoire" required="true" value="#{produitBean.quantite}">
-				      		<f:validateLongRange maximum="1000000" minimum="1"></f:validateLongRange>
-				      </h:inputText>
-						      
+
+		</div>
+		<!--/.sidebar-->
+
+		<h1 class="text-center">Réservations du client Toto</h1>
+		<br />
+
+		<h:messages style="prenom:red"></h:messages>
+
+
+
+		<h:form id="form">
+
+			<p:panel id="panel" header="Ajouter une nouvelle réservation">
+				<p:messages id="msgs" />
+				<h:panelGrid columns="3" cellpadding="5">
+
+					<p:outputLabel for="dateArrive" value="Date d'arrivée :" />
+					<p:calendar id="dateArrive" value="#{reservationBean.dateArrive}"
+						required="true" label="Date d'arrivée"
+						mindate="#{reservationBean.dateMinimum}">
+						<p:ajax render="dateSortie" event="dateSelect"
+							listener="#{reservationBean.setd1}"></p:ajax>
+					</p:calendar>
+					<br />
+
+					<p:outputLabel for="dateSortie" value="Date de sortie :" />
+					<p:calendar id="dateSortie" value="#{reservationBean.dateSortie}"
+						required="true" label="Date de sortie"
+						mindate="#{reservationBean.dateArrive}">
+						<p:ajax event="dateSelect" listener="#{reservationBean.setd2}"></p:ajax>
+					</p:calendar>
+					<br />
+
+					<p:outputLabel for="typeChambre" value="Type de chambre :" />
+					<p:selectOneMenu id="typeChambre"
+						value="#{reservationBean.typeChambre}" style="width:200px"
+						required="true">
+						<f:selectItem itemLabel="Select un type" itemValue="#{null}"
+							noSelectionOption="true" />
+						<f:selectItem itemLabel="Chambre simple" itemValue="ChambreSimple" />
+						<f:selectItem itemLabel="Chambre double" itemValue="ChambreDouble" />
+						<f:selectItem itemLabel="Suite" itemValue="Suite" />
+						<f:ajax render="idChambre"
+							listener="#{reservationBean.getChambresDispos}"></f:ajax>
+					</p:selectOneMenu>
+					<br />
+
+					<p:outputLabel id="idChambreLabel" for="idChambre"
+						value="Numéro de chambre :" style="display:block" />
+					<h:selectOneMenu id="idChambre"
+						value="#{reservationBean.idChambre}" required="true"
+						style="width:200px; display:block">
+						<f:selectItems value="#{reservationBean.listeChambres}" var="ch"
+							itemValue="#{ch.idChambre}" itemLabel="#{ch.numChambre}" />
+					</h:selectOneMenu>
+					<br />
+
 				</h:panelGrid>
-			      
-			     <h:commandButton value="Ajouter" action="#{produitBean.add}"/>
-			    
-			</p:panel> 
-			    
-	   </h:form><br/>
-	   
-	   <h:form>
-	  		<p:dataTable paginator="true" rows="5" value="#{produitBean.listeProduits}" var="p" >
-	       
-		       <p:column headerText="Identifiant">
-		       		<h:outputText value="#{p.idProduit}"></h:outputText>
-		       </p:column>
-		       <p:column headerText="Nom du produit">
-		          	<h:outputText value="#{p.nomProduit}"></h:outputText>
-		       </p:column>
-		        <p:column headerText="Prix">
-		          	<h:outputText value="#{p.prix}"></h:outputText>
-		       </p:column>
-		     <!--  <p:column>
-		          <h:outputText value="#{p.quantite}"></h:outputText>
-		       </p:column> -->
-		       <p:column style="width:32px;text-align: center">
-		            <p:commandButton action="#{produitBean.getOne(p.idProduit)}" update=":form2:ProduitDetail" oncomplete="PF('ProduitVar').show()" icon="ui-icon-search" title="Voir">
-		            </p:commandButton>
-		        </p:column>
-	          
-	   		</p:dataTable>
-	  	</h:form>
-	  
-	  	<h:form id="form2">
-	         <p:dialog header="Produit" widgetVar="ProduitVar" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
-		        <p:outputPanel id="ProduitDetail" style="text-align:center;">
-		            <p:panelGrid  columns="2">
-		                <h:outputText value="Identifiant" />
-		                <h:outputText value="#{produitBean.produit.idProduit}" />
-		 
-		                <h:outputText value="Nom du produit" />
-		                <h:outputText value="#{produitBean.produit.nomProduit}" />
-		                
-		                <h:outputText value="Prix" />
-		                <h:inputText value="#{produitBean.produit.prix}" />
-		 
-		                <h:outputText value="Quantité" />
-		                <h:inputText value="#{produitBean.produit.quantite}" />
-		                
-		                <h:outputText value="Catégorie à ajouter" />
-		                <h:inputText value="#{produitBean.idCategorie}" />
-		                
-		            </p:panelGrid>
-		            
-		             <p:commandButton action="#{produitBean.update}" update=":form2:ProduitDetail" icon="ui-icon-pencil" title="Modifier">
-		            </p:commandButton>
-		        </p:outputPanel>  
-		        
-	    	</p:dialog>
-	   </h:form><br/>
-	  
-	   
+
+
+				<p:commandButton value="Réserver"
+					actionListener="#{reservationBean.add}" icon="ui-icon-check" />
+
+
+			</p:panel>
+		</h:form>
+		<br />
+
+
+
+		<h:form id="form2">
+			<p:dataTable paginator="true" rows="5"
+				value="#{reservationBean.listeReservations}" var="r"
+				sortMode="multiple">
+
+				<f:facet name="header">Réservations</f:facet>
+
+				<p:column sortBy="#{r.idReservation}" headerText="Identifiant">
+					<h:outputText value="#{r.idReservation}"></h:outputText>
+				</p:column>
+
+				<p:column sortBy="#{r.dateArrive}" headerText="Date d'arrivée">
+					<h:outputText value="#{r.dateArrive}"></h:outputText>
+				</p:column>
+
+				<p:column sortBy="#{r.dateSortie}" headerText="Date de sortie">
+					<h:outputText value="#{r.dateSortie}"></h:outputText>
+				</p:column>
+
+				<p:column sortBy="#{r.coutResa}" headerText="Coût de la réservation">
+					<h:outputText value="#{r.coutResa}"></h:outputText>
+				</p:column>
+
+				<p:column sortBy="#{r.chambre.idChambre}" headerText="Chambre">
+					<h:outputText value="#{r.chambre.idChambre}"></h:outputText>
+				</p:column>
+
+				<p:column sortBy="#{r.facture.idFacture}"
+					headerText="Numéro de facture">
+					<h:outputText value="#{r.facture.idFacture}"></h:outputText>
+				</p:column>
+
+				<p:column style="width:32px;text-align: center">
+					<p:commandButton
+						action="#{reservationBean.getOneReservation(r.idReservation)}"
+						update=":form3:Annulation" oncomplete="PF('AnnulVar').show()"
+						icon="ui-icon-close" title="Voir">
+					</p:commandButton>
+				</p:column>
+
+
+				<f:facet name="footer">
+        			Le client a effectué #{fn:length(reservationBean.listeReservations)} réservations.
+    			</f:facet>
+
+			</p:dataTable>
+		</h:form>
+
+		<h:form id="form3">
+			<p:dialog header="Voulez-vous vraiment annuler ?"
+				widgetVar="AnnulVar" modal="true" showEffect="fade"
+				hideEffect="fade" resizable="false">
+				<p:outputPanel id="Annulation" style="text-align:center;">
+
+					<p:commandButton action="#{reservationBean.annuler}" value="Oui" icon="ui-icon-check" />
+
+					<p:commandButton action="#{reservationBean.nePasAnnuler}" value="Non" icon="ui-icon-close" />
+
+
+
+
+				</p:outputPanel>
+
+
+
+			</p:dialog>
+		</h:form>
+		<br />
+
+
+
 
 
 	</div>
 
-	<h:outputScript name="js/jquery-1.11.1.min.js"></h:outputScript>
+	<!-- <h:outputScript name="js/jquery-1.11.1.min.js"></h:outputScript>
 	<h:outputScript name="js/bootstrap.min.js"></h:outputScript>
 	<h:outputScript name="js/chart.min.js"></h:outputScript>
 	<h:outputScript name="js/chart-data.js"></h:outputScript>
 	<h:outputScript name="js/easypiechart.js"></h:outputScript>
 	<h:outputScript name="js/easypiechart-data.js"></h:outputScript>
 	<h:outputScript name="js/bootstrap-datepicker.js"></h:outputScript>
-	
 
-		<h:outputScript name="js/lumino.glyphs.js"/>
-    
+
+	<h:outputScript name="js/lumino.glyphs.js" />
+ -->
 </body>
 </html>

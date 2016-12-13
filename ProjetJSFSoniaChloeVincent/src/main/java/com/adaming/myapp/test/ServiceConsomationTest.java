@@ -49,9 +49,9 @@ public class ServiceConsomationTest {
 	@Ignore
 	public void testUpdateConsommation() {
 		Consomation consomation2 = serviceConsomation.getConsommation(6L);
-		consomation2.setQuantite(10);
+		consomation2.setQuantiteConsomation(10);
 		serviceConsomation.updateConsommation(consomation2);
-		assertThat(10,IsEqual.equalTo(serviceConsomation.getConsommation(consomation2.getIdConsommation()).getQuantite()));
+		assertThat(10,IsEqual.equalTo(serviceConsomation.getConsommation(consomation2.getIdConsommation()).getQuantiteConsomation()));
 	}
 
 	

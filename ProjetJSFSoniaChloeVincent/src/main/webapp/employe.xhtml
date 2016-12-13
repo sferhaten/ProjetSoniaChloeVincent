@@ -49,6 +49,7 @@
 
 	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
 
+
 		<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
 			<form role="search">
 				<div class="form-group">
@@ -70,211 +71,444 @@
 		</div>
 		<!--/.sidebar-->
 
-		<!-- ********** Formulaire ajout employe************** -->
 
-		<h1 class="text-center">Employe</h1>
+		<!-- **************** Bouton pour choisir le type de contract ****************************** -->
+
+		<h:form>
+			<h1 class="text-center">Employe</h1>
+			<br />
+			<h:panelGrid columns="2" style="margin-bottom:50px" cellpadding="50">
+				<p:outputLabel for="option" value="Choix : " />
+				<p:selectOneRadio id="option" value="#{empBean.option}"
+					layout="grid" columns="1">
+					<f:selectItem itemLabel="CDI " itemValue="CDI" />
+					<f:selectItem itemLabel="CDD" itemValue="CDD" />
+					<f:selectItem itemLabel="Stagiaire" itemValue="Stagiaire" />
+				</p:selectOneRadio>
+
+				<h:commandButton value="Valider" actionListener="#{empBean.choisir}"
+					icon="ui-icon-check" />
+				<br />
+			</h:panelGrid>
+		</h:form>
+
+		<!-- ****** Formulaire ajout CDI ******************** -->
+
+
+
+		<h:form id="formCDI">
+			<p:panel header="Nouveaux CDI" rendered="#{empBean.cDIVisibles}">
+
+				<p:messages id="msgs" />
+
+				<h:panelGrid>
+
+					<p:outputLabel for="idHotel" value="Hotel :" />
+					<h:selectOneMenu id="idHotel" value="#{empBean.selectedidHotel}"
+						style="width:125px" onchange="get()">
+						<f:selectItems itemLabel="#{c.nomHotel}" itemValue="#{c.idHotel}"
+							value="#{empBean.hotels}" var="c" />
+					</h:selectOneMenu>
+
+
+					<p:outputLabel for="prenom" value="Prenom" id="prenomLabel" />
+					<p:inputText id="prenom" value="#{empBean.prenom}" required="true">
+						<f:validateLength minimum="2" />
+					</p:inputText>
+					<p:message for="prenom" display="icon" />
+
+					<p:outputLabel for="nom" value="Nom" id="nomLabel" />
+					<p:inputText id="nom" value="#{empBean.nom}" required="true">
+						<f:validateLength minimum="2" />
+					</p:inputText>
+					<p:message for="nom" display="icon" />
+
+					<p:outputLabel for="dateEmbauuche" value="Date d'embauche" />
+					<p:calendar id="dateEmbauuche" value="#{empBean.dateEmbauuche}"
+						required="true">
+						<f:validateLength minimum="2" />
+					</p:calendar>
+					<p:message for="dateEmbauuche" display="icon" />
+
+					<p:outputLabel for="numero" value="Numero" id="numeroLabel" />
+					<p:inputText id="numero" value="#{empBean.numero}" required="true">
+						<f:validateLength minimum="2" />
+					</p:inputText>
+					<p:message for="numero" display="icon" />
+
+					<p:outputLabel for="voie" value="Voie" id="voieLabel" />
+					<p:inputText id="voie" value="#{empBean.voie}" label="voie"
+						required="true">
+						<f:validateLength minimum="2" />
+					</p:inputText>
+					<p:message for="voie" display="icon" />
+
+					<p:outputLabel for="codePostal" value="Code postal"
+						id="codePostalLabel" />
+					<p:inputText id="codePostal" value="#{empBean.codePostal}"
+						required="true">
+						<f:validateLength minimum="2" />
+					</p:inputText>
+					<p:message for="codePostal" display="icon" />
+
+					<p:outputLabel for="ville" value="Ville" id="villeLabel" />
+					<p:inputText id="ville" value="#{empBean.ville}" required="true">
+						<f:validateLength minimum="2" />
+					</p:inputText>
+					<p:message for="ville" display="icon" />
+
+					<p:outputLabel for="pays" value="Pays" id="paysLabel" />
+					<p:inputText id="pays" value="#{empBean.pays}" required="true">
+						<f:validateLength minimum="2" />
+					</p:inputText>
+					<p:message for="pays" display="icon" />
+
+					<p:outputLabel for="dateDeNaissance" value="Date de naissance" />
+					<p:calendar id="dateDeNaissance" value="#{empBean.dateDeNaissance}"
+						required="true">
+						<f:validateLength minimum="2" />
+					</p:calendar>
+					<p:message for="dateDeNaissance" display="icon" />
+
+					<p:outputLabel for="salaire" value="Salaire" />
+					<p:inputText id="salaire" value="#{empBean.salaire}"
+						required="true">
+						<f:validateLength minimum="2" />
+					</p:inputText>
+					<p:message for="salaire" display="icon" />
+
+					<p:outputLabel for="role" value="Role" />
+					<p:inputText id="role" value="#{empBean.role}" required="true">
+						<f:validateLength minimum="2" />
+					</p:inputText>
+					<p:message for="role" display="icon" />
+
+
+
+				</h:panelGrid>
+
+				<h:commandButton value="Ajouter" action="#{empBean.add}"
+					icon="ui-icon-check" />
+			</p:panel>
+		</h:form>
+		<!--  ****************** Ajout CDD ****************** -->
+		<h:form>
+			<p:panel header="Nouveaux CDD" rendered="#{empBean.cDDVisibles}">
+
+				<p:messages id="msgs" />
+
+				<h:panelGrid>
+
+					<p:outputLabel for="idHotel" value="Hotel :" />
+					<h:selectOneMenu id="idHotel" value="#{empBean.selectedidHotel}"
+						style="width:125px" onchange="get()">
+						<f:selectItems itemLabel="#{c.nomHotel}" itemValue="#{c.idHotel}"
+							value="#{empBean.hotels}" var="c" />
+					</h:selectOneMenu>
+
+					<p:outputLabel for="prenom" value="Prenom" id="prenomLabel" />
+					<p:inputText id="prenom" value="#{empBean.prenom}" required="true">
+						<f:validateLength minimum="2" />
+					</p:inputText>
+					<p:message for="prenom" display="icon" />
+
+					<p:outputLabel for="nom" value="Nom" id="nomLabel" />
+					<p:inputText id="nom" value="#{empBean.nom}" required="true">
+						<f:validateLength minimum="2" />
+					</p:inputText>
+					<p:message for="nom" display="icon" />
+
+					<p:outputLabel for="dateEmbauuche" value="Date d'embauche" />
+					<p:calendar id="dateEmbauuche" value="#{empBean.dateEmbauuche}"
+						required="true">
+						<f:validateLength minimum="2" />
+					</p:calendar>
+					<p:message for="dateEmbauuche" display="icon" />
+
+					<p:outputLabel for="dateDeSortie" value="Date de sortie" />
+					<p:calendar id="dateDeSortie" value="#{empBean.dateDeSortie}"
+						required="true">
+						<f:validateLength minimum="2" />
+					</p:calendar>
+					<p:message for="dateDeSortie" display="icon" />
+
+					<p:outputLabel for="numero" value="Numero" id="numeroLabel" />
+					<p:inputText id="numero" value="#{empBean.numero}" required="true">
+						<f:validateLength minimum="2" />
+					</p:inputText>
+					<p:message for="numero" display="icon" />
+
+					<p:outputLabel for="voie" value="Voie" id="voieLabel" />
+					<p:inputText id="voie" value="#{empBean.voie}" label="voie"
+						required="true">
+						<f:validateLength minimum="2" />
+					</p:inputText>
+					<p:message for="voie" display="icon" />
+
+					<p:outputLabel for="codePostal" value="Code postal"
+						id="codePostalLabel" />
+					<p:inputText id="codePostal" value="#{empBean.codePostal}"
+						required="true">
+						<f:validateLength minimum="2" />
+					</p:inputText>
+					<p:message for="codePostal" display="icon" />
+
+					<p:outputLabel for="ville" value="Ville" id="villeLabel" />
+					<p:inputText id="ville" value="#{empBean.ville}" required="true">
+						<f:validateLength minimum="2" />
+					</p:inputText>
+					<p:message for="ville" display="icon" />
+
+					<p:outputLabel for="pays" value="Pays" id="paysLabel" />
+					<p:inputText id="pays" value="#{empBean.pays}" required="true">
+						<f:validateLength minimum="2" />
+					</p:inputText>
+					<p:message for="pays" display="icon" />
+
+					<p:outputLabel for="dateDeNaissance" value="Date de naissance" />
+					<p:calendar id="dateDeNaissance" value="#{empBean.dateDeNaissance}"
+						required="true">
+						<f:validateLength minimum="2" />
+					</p:calendar>
+					<p:message for="dateDeNaissance" display="icon" />
+
+					<p:outputLabel for="primePrecarite" value="Prime de Precarite" />
+					<p:inputText id="primePrecarite" value="#{empBean.primePrecarite}"
+						required="true">
+						<f:validateLength minimum="2" />
+					</p:inputText>
+					<p:message for="primePrecarite" display="icon" />
+
+					<p:outputLabel for="salaire" value="Salaire" />
+					<p:inputText id="salaire" value="#{empBean.salaire}"
+						required="true">
+						<f:validateLength minimum="2" />
+					</p:inputText>
+					<p:message for="salaire" display="icon" />
+
+					<p:outputLabel for="role" value="Role" />
+					<p:inputText id="role" value="#{empBean.role}" required="true">
+						<f:validateLength minimum="2" />
+					</p:inputText>
+					<p:message for="role" display="icon" />
+
+				</h:panelGrid>
+
+				<h:commandButton value="Ajouter" action="#{empBean.add}"
+					icon="ui-icon-check" />
+			</p:panel>
+		</h:form>
 		<br />
 
-		<div class="row">
-			<div class="col-lg-12">
-				<div class="panel panel-default">
-					<div class="panel-heading">Gestion employé</div>
-					<div class="panel-body">
+		<!-- ********** Ajout stagiaire  ************** -->
+
+		<h:form>
+			<p:panel header="Nouveaux stagiaire"
+				rendered="#{empBean.stagiaireVisibles}">
 
 
+				<p:messages id="msgs" />
 
-						<h:form>
-							<p:panel id="panel" header="Nouvel employe">
+				<h:panelGrid >
 
-								<p:messages id="msgs" />
-								
-								<h:panelGrid columns="3" cellpadding="5">
-									<p:outputLabel for="idHotel" value="Hotel :" />
-									<h:selectOneMenu id="idHotel"
-										value="#{employeBean.nomHotel}" style="width:125px">
-										<f:selectItems itemLabel="em.nomHotel" itemValue="em.nomHotel" 
-										value="#{employeBean.hotels}" var="em" />
-									</h:selectOneMenu>
-								</h:panelGrid>
-								
-								<h:panelGrid columns="3" cellpadding="5">
-								
-																
-									<p:outputLabel for="firstname" value="Prenom" />
-									<p:inputText id="firstname" value="#{EmployeBean.employe.prenom}"
-										required="true" label="Firstname">
-										<f:validateLength minimum="2" />
-									</p:inputText>
-									<p:message for="firstname" display="icon" />
-
-									<p:outputLabel for="lastname" value="Nom" />
-									<p:inputText id="lastname" value="#{EmployeBean.employe.nom}"
-										label="Lastname" required="true">
-										<f:validateLength minimum="2" />
-										<p:ajax update="msgLastname" event="keyup" />
-									</p:inputText>
-									<p:message for="lastname" id="msgLastname" display="icon" />
-
-									<p:outputLabel for="lastname" value="Adresse" />
-									<p:inputText id="adresse" value="#{EmployeBean.employe.adresse}"
-										label="Lastname" required="true">
-										<f:validateLength minimum="2" />
-										<p:ajax update="msgAdresse" event="keyup" />
-									</p:inputText>
-									<p:message for="lastname" id="msgAdresse" display="icon" />
-
-									<p:outputLabel for="lastname" value="Date de naissance" />
-									<p:inputText id="naissance" value="#{EmployeBean.employe.prenom}"
-										label="Lastname" required="true">
-										<f:validateLength minimum="2" />
-										<p:ajax update="msgNaissance" event="keyup" />
-									</p:inputText>
-									<p:message for="lastname" id="msgNaissance" display="icon" />
-
-									<p:outputLabel for="lastname" value="Salaire" />
-									<p:inputText id="salaire" value="#{EmployeBean.employe.adresse}"
-										label="Lastname" required="true">
-										<f:validateLength minimum="2" />
-										<p:ajax update="msgSalaire" event="keyup" />
-									</p:inputText>
-									<p:message for="lastname" id="msgSalaire" display="icon" />
-
-									<p:outputLabel for="lastname" value="Role" />
-									<p:inputText id="role" value="#{EmployeBean.employe.role}"
-										label="Lastname" required="true">
-										<f:validateLength minimum="2" />
-										<p:ajax update="msgRole" event="keyup" />
-									</p:inputText>
-									<p:message for="lastname" id="msgRole" display="icon" />
-
-									<p:outputLabel for="lastname" value="Type de contract" />
-									<p:inputText id="contract" value="#{EmployeBean.employe.contract}"
-										label="Lastname" required="true">
-										<f:validateLength minimum="2" />
-										<p:ajax update="msgContract" event="keyup" />
-									</p:inputText>
-									<p:message for="lastname" id="msgContract" display="icon" />
-
-								</h:panelGrid>
-
-								<p:commandButton value="Save" update="panel"
-									actionListener="#{userView.save}" icon="ui-icon-check" />
-							</p:panel>
-						</h:form>
-						<br />
-
-						<!-- ********** Liste employe************** -->
-						<h:form>
-							<p:dataTable var="employe" value="#{EmployeBean.employes}"
-								widgetVar="carsTable" emptyMessage="Pas d'employe trouvé"
-								filteredValue="#{dtFilterView.filteredCars}">
-
-								<f:facet name="header">
-									<p:outputPanel>
-										<h:outputText value="Search all fields:" />
-										<p:inputText id="globalFilter"
-											onkeyup="PF('carsTable').filter()" style="width:150px"
-											placeholder="Entrer un mot cle" />
-									</p:outputPanel>
-								</f:facet>
-
-								<p:column filterBy="#{car.id}" headerText="Id"
-									filterMatchMode="contains">
-									<h:outputText value="#{employe.id}" />
-								</p:column>
-
-								<p:column filterBy="#{car.year}" headerText="Nom"
-									filterMatchMode="lte">
-									<f:facet name="filter">
-										<p:spinner onchange="PF('carsTable').filter()"
-											styleClass="year-spinner">
-											<f:converter converterId="javax.faces.Integer" />
-										</p:spinner>
-									</f:facet>
-									<h:outputText value="#{employe.nom}" />
-								</p:column>
-
-								<p:column filterBy="#{car.year}" headerText="Prenom"
-									filterMatchMode="lte">
-									<f:facet name="filter">
-										<p:spinner onchange="PF('carsTable').filter()"
-											styleClass="year-spinner">
-											<f:converter converterId="javax.faces.Integer" />
-										</p:spinner>
-									</f:facet>
-									<h:outputText value="#{employe.prenom}" />
-								</p:column>
-
-								<p:column filterBy="#{car.year}" headerText="Date de naissance"
-									filterMatchMode="lte">
-									<f:facet name="filter">
-										<p:spinner onchange="PF('carsTable').filter()"
-											styleClass="year-spinner">
-											<f:converter converterId="javax.faces.Integer" />
-										</p:spinner>
-									</f:facet>
-									<h:outputText value="#{employe.dateDeNaissance}" />
-								</p:column>
-
-								<p:column filterBy="#{car.year}" headerText="Salaire"
-									filterMatchMode="lte">
-									<f:facet name="filter">
-										<p:spinner onchange="PF('carsTable').filter()"
-											styleClass="year-spinner">
-											<f:converter converterId="javax.faces.Integer" />
-										</p:spinner>
-									</f:facet>
-									<h:outputText value="#{employe.salaire}" />
-								</p:column>
-
-								<p:column filterBy="#{car.sold}" headerText="Status"
-									filterMatchMode="equals">
-									<f:facet name="filter">
-										<p:selectOneButton onchange="PF('carsTable').filter()">
-											<f:converter converterId="javax.faces.Boolean" />
-											<f:selectItem itemLabel="CDI" itemValue="" />
-											<f:selectItem itemLabel="CDD" itemValue="true" />
-											<f:selectItem itemLabel="Stage" itemValue="false" />
-										</p:selectOneButton>
-									</f:facet>
-									<h:outputText value="#{employe.contract}" />
-								</p:column>
-
-								<p:column filterBy="#{car.year}" headerText="Role"
-									filterMatchMode="lte">
-									<f:facet name="filter">
-										<p:spinner onchange="PF('carsTable').filter()"
-											styleClass="year-spinner">
-											<f:converter converterId="javax.faces.Integer" />
-										</p:spinner>
-									</f:facet>
-									<h:outputText value="#{employe.role}" />
-								</p:column>
-							</p:dataTable>
-						</h:form>
-
-						<br /> <br /> <br /> <br />
+					<p:outputLabel for="idHotel" value="Hotel :" />
+					<h:selectOneMenu id="idHotel" value="#{empBean.selectedidHotel}"
+						style="width:125px" onchange="get()">
+						<f:selectItems itemLabel="#{c.nomHotel}" itemValue="#{c.idHotel}"
+							value="#{empBean.hotels}" var="c" />
+					</h:selectOneMenu>
 
 
-					</div>
-				</div>
-			</div>
-		</div>
+					<p:outputLabel for="prenom" value="Prenom" id="prenomLabel" />
+					<p:inputText id="prenom" value="#{empBean.prenom}" required="true">
+						<f:validateLength minimum="2" />
+					</p:inputText>
+					<p:message for="prenom" display="icon" />
+
+					<p:outputLabel for="nom" value="Nom" id="nomLabel" />
+					<p:inputText id="nom" value="#{empBean.nom}" required="true">
+						<f:validateLength minimum="2" />
+					</p:inputText>
+					<p:message for="nom" display="icon" />
+
+					<p:outputLabel for="dateEmbauuche" value="Date d'embauche" />
+					<p:calendar id="dateEmbauuche" value="#{empBean.dateEmbauuche}"
+						required="true">
+						<f:validateLength minimum="2" />
+					</p:calendar>
+					<p:message for="dateEmbauuche" display="icon" />
+
+					<p:outputLabel for="dateDeSortie" value="Date de sortie" />
+					<p:calendar id="dateDeSortie" value="#{empBean.dateDeSortie}"
+						required="true">
+						<f:validateLength minimum="2" />
+					</p:calendar>
+					<p:message for="dateDeSortie" display="icon" />
+
+					<p:outputLabel for="numero" value="Numero" id="numeroLabel" />
+					<p:inputText id="numero" value="#{empBean.numero}" required="true">
+						<f:validateLength minimum="2" />
+					</p:inputText>
+					<p:message for="numero" display="icon" />
+
+					<p:outputLabel for="voie" value="Voie" id="voieLabel" />
+					<p:inputText id="voie" value="#{empBean.voie}" label="voie"
+						required="true">
+						<f:validateLength minimum="2" />
+					</p:inputText>
+					<p:message for="voie" display="icon" />
+
+					<p:outputLabel for="codePostal" value="Code postal"
+						id="codePostalLabel" />
+					<p:inputText id="codePostal" value="#{empBean.codePostal}"
+						required="true">
+						<f:validateLength minimum="2" />
+					</p:inputText>
+					<p:message for="codePostal" display="icon" />
+
+					<p:outputLabel for="ville" value="Ville" id="villeLabel" />
+					<p:inputText id="ville" value="#{empBean.ville}" required="true">
+						<f:validateLength minimum="2" />
+					</p:inputText>
+					<p:message for="ville" display="icon" />
+
+					<p:outputLabel for="pays" value="Pays" id="paysLabel" />
+					<p:inputText id="pays" value="#{empBean.pays}" required="true">
+						<f:validateLength minimum="2" />
+					</p:inputText>
+					<p:message for="pays" display="icon" />
+
+					<p:outputLabel for="dateDeNaissance" value="Date de naissance" />
+					<p:calendar id="dateDeNaissance" value="#{empBean.dateDeNaissance}"
+						required="true">
+						<f:validateLength minimum="2" />
+					</p:calendar>
+					<p:message for="dateDeNaissance" display="icon" />
+
+
+					<p:outputLabel for="salaire" value="Salaire" />
+					<p:inputText id="salaire" value="#{empBean.salaire}"
+						required="true">
+						<f:validateLength minimum="2" />
+					</p:inputText>
+					<p:message for="salaire" display="icon" />
+
+					<p:outputLabel for="role" value="Role" />
+					<p:inputText id="role" value="#{empBean.role}" required="true">
+						<f:validateLength minimum="2" />
+					</p:inputText>
+					<p:message for="role" display="icon" />
+
+				</h:panelGrid>
+
+				<h:commandButton value="Ajouter" action="#{empBean.add}"
+					icon="ui-icon-check" />
+			</p:panel>
+		</h:form>
+
+		<!--  List Employe -->
+		<br/><br/><br/>
+		
+		
+		<h:form>
+			<p:growl id="msgs" showDetail="true" />
+			<p:dataTable id="tbl" var="e" value="#{empBean.employes}"
+				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
+				paginator="true" rows="10" style="margin-bottom:20px">
+
+				<f:facet name="header">
+					<p:outputPanel>
+						<h:outputText value="Employes: " />
+					</p:outputPanel>
+				</f:facet>
+
+				<p:column headerText="Nom">
+					<h:outputText value="#{e.nom}"></h:outputText>
+				</p:column>
+
+				<p:column headerText="Prenom">
+					<h:outputText value="#{e.prenom}"></h:outputText>
+				</p:column>
+
+				<p:column headerText="Date d'embauche">
+					<h:outputText value="#{e.dateEmbauuche}"></h:outputText>
+				</p:column>
+				
+				
+				<p:column headerText="Salaire">
+					<h:outputText value="#{e.salaire}"></h:outputText>
+				</p:column>
+
+				<p:column headerText="Numero">
+					<h:outputText value="#{e.adressePersonne.numero}"></h:outputText>
+				</p:column>
+				<p:column headerText="Voie">
+					<h:outputText value="#{e.adressePersonne.voie}"></h:outputText>
+				</p:column>
+				<p:column headerText="Code postal">
+					<h:outputText value="#{e.adressePersonne.codePostal}"></h:outputText>
+				</p:column>
+				<p:column headerText="Ville">
+					<h:outputText value="#{e.adressePersonne.ville}"></h:outputText>
+				</p:column>
+
+				<p:column headerText="Pays">
+					<h:outputText value="#{e.adressePersonne.pays}"></h:outputText>
+				</p:column>
+
+				<p:column headerText="Date de naissance">
+					<h:outputText value="#{e.dateDeNaissance}"></h:outputText>
+				</p:column>
+
+				<p:column headerText="Voir" style="width:100px;text-align: center">
+					<p:commandButton action="#{empBean.getOneEmploye(e.idPersonne)}"
+						update=":form2:EmployeDetail" oncomplete="PF('EmployeVar').show()"
+						icon="ui-icon-search" />
+				</p:column>
+
+			</p:dataTable>
+
+		</h:form>
+
+		<!-- **** Formulaire update ****  -->
+
+		<p:dialog header="Employe" widgetVar="EmployeVar" modal="true"
+			showEffect="fade" hideEffect="fade" resizable="false">
+			<h:form id="form2">
+				<p:outputPanel id="EmployeDetail" style="text-align:center;">
+					<p:panelGrid columns="2">
+						<h:outputText value="Nom" />
+						<h:outputText value="#{empBean.personne.nom}" />
+						<h:outputText value="Prenom" />
+						<h:outputText value="#{empBean.personne.prenom}" />
+						<h:outputText value="Embauche" />
+						<h:outputText value="#{empBean.personne.dateEmbauuche}" />
+						<h:outputText value="Salaire" />
+						<h:outputText value="#{empBean.personne.salaire}" />
+						<h:outputText value="Numeor" />
+						<h:outputText value="#{empBean.personne.numero}" />
+						<h:outputText value="Voie" />
+						<h:outputText value="#{empBean.personne.voie}" />
+						<h:outputText value="Code Postal" />
+						<h:outputText value="#{empBean.personne.codePostal}" />
+						<h:outputText value="Ville" />
+						<h:outputText value="#{empBean.personne.ville}" />
+						<h:outputText value="Pays" />
+						<h:outputText value="#{empBean.personne.pays}" />
+
+
+					</p:panelGrid>
+					<p:commandButton action="#{empBean.update}"
+						update=":form2:EmployeDetail" icon="ui-icon-pencil"
+						title="Modifier">
+					</p:commandButton>
+				</p:outputPanel>
+			</h:form>
+			<br />
+		</p:dialog>
+
+
 	</div>
-
-
-
-	<!-- ******************************************** -->
-	<h:outputScript name="js/jquery-1.11.1.min.js"></h:outputScript>
-	<h:outputScript name="js/bootstrap.min.js"></h:outputScript>
-	<h:outputScript name="js/chart.min.js"></h:outputScript>
-	<h:outputScript name="js/chart-data.js"></h:outputScript>
-	<h:outputScript name="js/easypiechart.js"></h:outputScript>
-	<h:outputScript name="js/easypiechart-data.js"></h:outputScript>
-	<h:outputScript name="js/bootstrap-datepicker.js"></h:outputScript>
-
-
-	<h:outputScript name="js/lumino.glyphs.js" />
 
 </body>
 </html>

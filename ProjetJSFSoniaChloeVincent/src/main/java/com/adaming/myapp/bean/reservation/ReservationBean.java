@@ -5,14 +5,18 @@ import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 
 import org.jboss.logging.Logger;
+import org.primefaces.model.chart.DateAxis;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import com.adaming.myapp.bean.chambre.ChambreBean;
 import com.adaming.myapp.bean.client.ClientBean;
+import com.adaming.myapp.bean.hotel.gestionHotelBean;
+import com.adaming.myapp.bean.hotel.hotelBean;
 import com.adaming.myapp.entities.Chambre;
 import com.adaming.myapp.entities.ChambreSimple;
 import com.adaming.myapp.entities.Reservation;
@@ -31,7 +35,10 @@ public class ReservationBean {
 	private ClientBean serviceClient;
 	
 	@Inject
-	private ChambreBean serviceChambre;
+	private hotelBean serviceHotel;
+	
+
+	
 	
 	private Reservation reservation;
 
@@ -41,12 +48,17 @@ public class ReservationBean {
 
 	private Date dateSortie;
 	
+	private Date dateMinimum = new Date();
+	
+	
+
+
 	private String typeChambre;
 	
-	private List<Chambre> listeChambres = new ArrayList<Chambre>()		;
+	private List<Chambre> listeChambres = new ArrayList<Chambre>();
 
-	private Long idClient;
-	private Long idHotel;
+	private Long idClient = 1L;
+	private Long idHotel = 2L;
 	private Long idChambre;
 	
 	
@@ -57,7 +69,7 @@ public class ReservationBean {
 
 
 	public void getAll(){
-		listeReservations = new ArrayList<Reservation>(serviceClient.GetClient(1L).getReservations());
+		listeReservations = new ArrayList<Reservation>(serviceClient.GetClient(idClient).getReservations());
 	}
 	
 	@PostConstruct
@@ -65,22 +77,133 @@ public class ReservationBean {
 		getAll();
 		LOGGER.info("Liste de réservations initialisée");
 		
-		Chambre ch1 = new ChambreSimple();
-		Chambre ch2 = new ChambreSimple();
+//		Chambre ch1 = new ChambreSimple();
+//		Chambre ch2 = new ChambreSimple();
+//		
+//		ch1.setIdChambre(1L);
+//		ch2.setIdChambre(2L);
+//		
+//		ch1.setNumChambre(1L);
+//		ch2.setNumChambre(2L);
+//		
+//		listeChambres.add(ch1);
+//		listeChambres.add(ch2);
 		
-		ch1.setIdChambre(1L);
-		ch2.setIdChambre(2L);
 		
-		ch1.setNumChambre(1L);
-		ch2.setNumChambre(2L);
 		
-		listeChambres.add(ch1);
-		listeChambres.add(ch2);
 		System.out.println("Liste de chambres - taille : " + listeChambres.size());
 		
 	}
 	
+	public void setd1(){
+		setDateArrive(dateArrive);
+		System.out.println("d arrivee"+dateArrive);
+	}
+	public void setd2(){
+		setDateSortie(dateSortie);
+		System.out.println("d Sortie"+dateSortie);
+	}
+	public void setd3(){
+		setTypeChambre(typeChambre);
+		System.out.println("typeChambre"+typeChambre);
+	}
 	
+	
+	public void getChambresDispos(){
+		setd3();
+		System.out.println("adel type chambre : "+typeChambre);
+		LOGGER.info("getChambresDispos");
+		LOGGER.info("Type de chambre : " + typeChambre);
+		LOGGER.info("1ère date : " + dateArrive);
+		LOGGER.info("2ème date : " + dateSortie);
+		LOGGER.info("Date minimum : " + dateMinimum);
+
+		
+		listeChambres = new ArrayList<Chambre>();
+		
+		if (dateArrive == null || dateSortie  == null) {
+			System.out.println("Variables non récupérées");
+		} else {
+			if (typeChambre.equalsIgnoreCase("ChambreSimple") ) {
+				listeChambres = new ArrayList<Chambre>(serviceHotel.getChambreSimpleDispo(idHotel, dateArrive , dateSortie));
+			   
+			} else {
+				if (typeChambre.equalsIgnoreCase("ChambreDouble")) {
+					listeChambres = new ArrayList<Chambre>(serviceHotel.getChambreDoubleDispo(idHotel, dateArrive , dateSortie));
+					
+				} else {
+					if (typeChambre.equalsIgnoreCase("Suite")) {
+						listeChambres = new ArrayList<Chambre>(serviceHotel.getChambreSuiteDispo(idHotel, dateArrive , dateSortie));
+						
+					}
+				}
+			}
+		}
+		
+		
+		
+		LOGGER.info("Nombre de chambre : " + listeChambres.size());
+		
+	}
+	
+	public String add(){
+		
+		System.out.println("add lancée");
+		System.out.println("dateArrive : " + dateArrive);
+		System.out.println("dateSortie : " + dateSortie);
+		System.out.println("idClient : " + idClient);
+		System.out.println("idHotel : " + idHotel);
+		System.out.println("idChambre : " + idChambre);
+		
+		if (dateArrive.before(dateSortie)) {
+			Reservation r = new Reservation(dateArrive, dateSortie, 0);
+			
+			service.addReservation(r, idClient, idHotel, idChambre);
+			
+			getAll();
+			
+		} else {
+			LOGGER.info("Date de sortie antérieure à la date d'arrivée");
+		}
+		
+		return "addReservations?redirect-faces=true";
+	}
+	
+	public void getOneReservation(Long idReservation){
+		
+		System.out.println("getOneReservation");
+		System.out.println("idReservation : " + idReservation);
+		
+		reservation = service.getOneReservation(idReservation);
+		
+	}
+	
+	public void annuler(){
+		
+		System.out.println("annuler");
+		
+		System.out.println("Id Réservation : " + reservation.getIdReservation());
+		
+		if (reservation.getFacture() == null) {
+			System.out.println("Réservation non facturée");
+		} else {
+			System.out.println("Réservation déjà facturée");
+		}
+		
+		//service.Annulation(reservation.getIdReservation());
+		
+		getAll();
+	}
+	
+	public String nePasAnnuler(){
+		
+		System.out.println("Ne pas annuler");
+		
+		getAll();
+		
+		return "addReservations?redirect-faces=true";
+		
+	}
 	
 	
 	public Reservation getReservation() {
@@ -177,6 +300,15 @@ public class ReservationBean {
 	}
 	
 	
+	public Date getDateMinimum() {
+		return dateMinimum;
+	}
+
+
+	public void setDateMinimum(Date dateMinimum) {
+		this.dateMinimum = dateMinimum;
+	}
+
 	
 	
 	

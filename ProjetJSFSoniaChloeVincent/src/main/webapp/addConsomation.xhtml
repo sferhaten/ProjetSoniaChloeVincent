@@ -1,175 +1,186 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
- xmlns:h="http://xmlns.jcp.org/jsf/html"
- xmlns:p="http://primefaces.org/ui"
- xmlns:f="http://xmlns.jcp.org/jsf/core">
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:head>
 
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Insert title here</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>Insert title here</title>
 
 
-<h:outputStylesheet name="css/bootstrap.css" rel="stylesheet"/>
+	<h:outputStylesheet name="css/bootstrap.css" rel="stylesheet" />
 
-<h:outputStylesheet name="css/datepicker3.css" rel="stylesheet"/>
-<h:outputStylesheet name="css/styles.css" rel="stylesheet"/>
+	<h:outputStylesheet name="css/datepicker3.css" rel="stylesheet" />
+	<h:outputStylesheet name="css/styles.css" rel="stylesheet" />
 
 </h:head>
 <body>
 
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar-collapse">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="#"><span>Gestion Hotels</span></a>
-				<ul class="user-menu">
-					<li class="dropdown pull-right">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown"> User <span class="caret"></span></a>
-						<ul class="dropdown-menu" role="menu">
-							<li><a href="#">Profile</a></li>
-							<li><a href="#"> Settings</a></li>
-							<li><a href="#"> Logout</a></li>
-						</ul>
-					</li>
-				</ul>
-			</div>
-							
-		</div><!-- /.container-fluid -->
-	</nav>
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed"
+				data-toggle="collapse" data-target="#sidebar-collapse">
+				<span class="sr-only">Toggle navigation</span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#"><span>Gestion Hotels</span></a>
+			<ul class="user-menu">
+				<li class="dropdown pull-right"><a href="#"
+					class="dropdown-toggle" data-toggle="dropdown"> User <span
+						class="caret"></span></a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="#">Profile</a></li>
+						<li><a href="#"> Settings</a></li>
+						<li><a href="#"> Logout</a></li>
+					</ul></li>
+			</ul>
+		</div>
+
+	</div>
+	<!-- /.container-fluid --> </nav>
 	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
-	
+
 		<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
 			<form role="search">
 				<div class="form-group">
-					<h:inputText type="text" class="form-control" placeholder="Search"/>
+					<h:inputText type="text" class="form-control" placeholder="Search" />
 				</div>
 			</form>
 			<ul class="nav menu">
-			<li class="active"><a href="home.html"><svg class="glyph stroked dashboard-dial"></svg> Home</a></li>
-			<li><a href="widgets.html"><svg class="glyph stroked calendar"></svg> Hotel</a></li>
-			
-			
-			<li><a href="charts.html"><i class="fa fa-bank fa-fw"></i><svg class="glyph stroked line-graph"></svg> Personne<span
-							class="fa arrow"/></a>
-						<ul class="nav nav-second-level">
-							<li><a href="toAddBanque">Client</a></li>
-							<li><a href="toGestionBanque">Employe </a></li>
-							</ul></li>
-			<li><a href="tables.html"><svg class="glyph stroked table"></svg> facture</a></li>
-			<li><a href="forms.html"><svg class="glyph stroked pencil"></svg> Payement<span
-							class="fa arrow"/></a>
-							<ul class="nav nav-second-level">
-							<li><a href="toAddBanque">Carte baquaire</a></li>
-							<li><a href="toGestionBanque">Espece </a></li>
-							<li><a href="toGestionBanque">Cheque </a></li>
-							</ul></li>
-			
-			<li><a href="forms.html"><svg class="glyph stroked pencil"></svg> Stock de l'hotel</a></li>
-			
-		</ul>
+				<li class="active"><a href="home.html"><svg
+							class="glyph stroked dashboard-dial"></svg> Home</a></li>
+				<li><a href="widgets.html"><svg
+							class="glyph stroked calendar"></svg> Hotel</a></li>
+
+
+				<li><a href="charts.html"><i class="fa fa-bank fa-fw"></i>
+						<svg class="glyph stroked line-graph"></svg> Personne<span
+						class="fa arrow" /></a>
+					<ul class="nav nav-second-level">
+						<li><a href="toAddBanque">Client</a></li>
+						<li><a href="toGestionBanque">Employe </a></li>
+					</ul></li>
+				<li><a href="tables.html"><svg class="glyph stroked table"></svg>
+						facture</a></li>
+				<li><a href="forms.html"><svg class="glyph stroked pencil"></svg>
+						Payement<span class="fa arrow" /></a>
+					<ul class="nav nav-second-level">
+						<li><a href="toAddBanque">Carte baquaire</a></li>
+						<li><a href="toGestionBanque">Espece </a></li>
+						<li><a href="toGestionBanque">Cheque </a></li>
+					</ul></li>
+
+				<li><a href="forms.html"><svg class="glyph stroked pencil"></svg>
+						Stock de l'hotel</a></li>
+
+			</ul>
+
+		</div>
+		<!--/.sidebar-->
+
+		<h1 class="text-center">Ajouter une consomation pour un client</h1>
+		<br />
+
+		<h:messages style="prenom:red"></h:messages>
+
+
+
+		<h:form id="form">
+			<p:dataTable id="radioDT" paginator="true" rows="5"
+				value="#{addConsomationBean.produitsDispo}"
+				selection="#{addConsomationBean.selectedidProduit}"
+				rowKey="#{P.idProduit}" var="P" editable="true">
+
+				<f:facet name="header">Stock Produit disponible dans l'hotel</f:facet>
+				<p:ajax event="rowEdit" listener="#{addConsomationBean.onRowEdit}" />
+				<p:ajax event="rowEditCancel"
+					listener="#{addConsomationBean.onRowCancel}" />
+
+				<p:column selectionMode="single"
+					style="width:50px;text-align:center" />
+				<p:column headerText="Identifiant">
+					<h:outputText value="#{P.idProduit}"></h:outputText>
+				</p:column>
+
+				<p:column headerText="Nom">
+					<h:outputText value="#{P.nom}"></h:outputText>
+				</p:column>
+
+				<p:column headerText="Quantite">
+					<h:outputText value="#{P.quantite}"></h:outputText>
+				</p:column>
+
+				<p:column headerText="Coût Achat">
+					<h:outputText value="#{P.coutAchat}"></h:outputText>
+				</p:column>
+				<p:column headerText="Coût Vente">
+					<h:outputText value="#{P.coutVente}"></h:outputText>
+				</p:column>
+
+
+
+
+			</p:dataTable>
+
+		
+		<br />
+
 	
-		</div><!--/.sidebar-->
-		
-		<h1 class="text-center">Ajouter une consomation pour un client</h1><br />
-		
- 		<h:messages style="prenom:red"></h:messages>
-   
-   
-   		
-	   	 <h:form id="form1">
-	  		<p:dataTable  id="radioDT" paginator="true" rows="5" selection="#{consomationBean.produits}" var="P" rowKey="#{P.id}">
-	       
-	       		<f:facet name="header">Stock Produit</f:facet>
-	 			 <p:column headerText="Selectionner" selectionMode="single"/>
-		      	<p:column headerText="Identifiant">
-		        	<h:outputText value="#{P.idProduit}"></h:outputText>
-		       	</p:column>
-		       	
-		       <p:column headerText="Nom">
-		       		<h:outputText value="#{P.nomProduit}"></h:outputText>
-		       </p:column>
-		       
-		       <p:column headerText="Quantite">
-		       		<h:outputText value="#{P.quantiteProduit}"></h:outputText>
-		       </p:column>
-		       
-		       <p:column headerText="Coût Achat">
-		       		<h:outputText value="#{P.coutAchat}"></h:outputText>
-		       </p:column>
-		        <p:column headerText="Coût Vente">
-		       		<h:outputText value="#{P.coutVente}"></h:outputText>
-		       </p:column>
-		       
-		       <p:column headerText="Quantite consomee">
-		       		<h:inputText value="#{P.qauntite}"></h:inputText>
-		       </p:column>
- 			
- 			<f:facet name="footer"><h:commandButton process="radioDT" value="Save" action="#{produitBean.addConsomation}"/></f:facet>
- 		
-	   		</p:dataTable>
-	   		
-	  </h:form><br />
-	  
-	  <script type="text/javascript">
-	    	function get(){
-	    		var Produit = document.getElementById("form1:produits").value;
-	    		var idProduit = document.getElementById("form1:idProduit");
-	    		
-	    		
-	    		
-	    		if (typeChambre == "") {
-	    			
-	    			idProduit.style.display = 'none';
-	    			
-	    			
-	    		}else{
-	    			
-	    			idProduit.style.display = 'block';
-	    			
-	    		}
-	    
-	    	}
-	    
-	    
-	    
-	    </script>
+			<p:panel id="panel" header="Choix de la quantite">
 
-  	 <h:form>
-	  		<p:dataTable   paginator="true" rows="5" value="#{consomationBean.consomations}" var="P">
+				<p:messages id="msgs" />
+
+				<h:panelGrid columns="3" cellpadding="5">
+					<p:outputLabel for="quantiteConsomation" value="Quantite consomation:" />
+					<p:inputText id="quantiteConsomation" value="#{addConsomationBean.quantiteConsomation}"
+						required="true" >
+						<f:validateLength minimum="1" />
+					</p:inputText>
+					
+					</h:panelGrid>
+					</p:panel><br/>
+				<h:column style="width:100px">	
+			<h:commandButton process="radioDT" value="Save" action="#{addConsomationBean.addConsomation}" /><br/>
+			</h:column>
+		</h:form>
+		<p:panel id="panel" header="le cout">
+
+			<p:messages id="msgs" />
+
+			<h:panelGrid columns="3" cellpadding="5">
+				<p:outputLabel for="coutClient" value="cout de la consomation:" />
+				<p:inputText id="coutClient"
+					value="#{addConsomationBean.coutClient}" required="true">
+					<f:validateLength minimum="2" />
+				</p:inputText>
+			</h:panelGrid>
+		</p:panel>
+
+		<h:form>
+	  		<p:dataTable  paginator="true" rows="5" value="#{consomationBean.consomations}" var="C">
 	       
-	       		<f:facet name="header">Consomations</f:facet>
-		      	<p:column headerText="Identifiant">
-		        	<h:outputText value="#{P.idProduit}"></h:outputText>
+	       		<f:facet name="header">Liste Consomations</f:facet>
+		      	<p:column headerText="IdentifiantProduit">
+		        	<h:outputText value="#{consomationBean.idProduit}"></h:outputText>
 		       	</p:column>
 		       	
 		       <p:column headerText="Quantite consomee">
-		       		<h:outputText value="#{P.quantite}"></h:outputText>
+		       		<h:outputText value="#{C.quantiteConsomation}"></h:outputText>
 		       </p:column>
-		       
-		       <p:column headerText="Cout consomation">
-		       		<h:outputText value="#{P.coutClient}"></h:outputText>
+		      
+				<p:column headerText="Cout consomation">
+		       		<h:outputText value="#{consomationBean.coutClient}"></h:outputText>
 		       </p:column>
-
 	   		</p:dataTable>
 	   		
 	  </h:form>
-	   
-
-
-
-
-	  
-	   
-
-
+				
 	</div>
 
 	<h:outputScript name="js/jquery-1.11.1.min.js"></h:outputScript>
@@ -179,9 +190,9 @@
 	<h:outputScript name="js/easypiechart.js"></h:outputScript>
 	<h:outputScript name="js/easypiechart-data.js"></h:outputScript>
 	<h:outputScript name="js/bootstrap-datepicker.js"></h:outputScript>
-	
 
-		<h:outputScript name="js/lumino.glyphs.js"/>
-    
+
+	<h:outputScript name="js/lumino.glyphs.js" />
+
 </body>
 </html>

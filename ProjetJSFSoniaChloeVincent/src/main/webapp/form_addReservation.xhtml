@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:fn="http://xmlns.jcp.org/jsp/jstl/functions">
+
+<ui:composition>
+	<br> </br>
+	<br> </br>
+	<br> </br>
+
+         <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+
+		<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+			<h:form role="search">
+				<div class="form-group">
+					<h:inputText type="text" class="form-control" placeholder="Search" />
+				</div>
+			</h:form>
+			<ul class="nav menu">
+				<li class="active"><a href="home.html"><svg
+							class="glyph stroked dashboard-dial"></svg> Home</a></li>
+				<li><a href="widgets.html"><svg
+							class="glyph stroked calendar"></svg> Hotel</a></li>
+				<li><a href="charts.html"><svg
+							class="glyph stroked line-graph"></svg> Personne</a></li>
+				<li><a href="tables.html"><svg class="glyph stroked table"></svg>
+						facture</a></li>
+				<li><a href="forms.html"><svg class="glyph stroked pencil"></svg>
+						Payement</a></li>
+
+			</ul>
+
+		</div>
+		<!--/.sidebar-->
+
+		<h1 class="text-center">Réservations du client Toto</h1>
+		<br />
+
+		<h:messages style="prenom:red"></h:messages>
+
+
+
+		<h:form id="form">
+
+			<p:outputLabel for="dateArrive" value="Date d'arrivée :" />
+			<p:calendar id="dateArrive" value="#{reservationBean.dateArrive}"
+				required="true" label="Date d'arrivée">
+			</p:calendar>
+			<br />
+
+			<p:outputLabel for="dateSortie" value="Date de sortie :" />
+			<p:calendar id="dateSortie" value="#{reservationBean.dateSortie}"
+				required="true" label="Date de sortie"
+				mindate="#{reservationBean.dateMinimum}" />
+			<br />
+
+			<p:outputLabel for="typeChambre" value="Type de chambre :" />
+			<p:selectOneMenu id="typeChambre"
+				value="#{reservationBean.typeChambre}" style="width:200px"
+				required="true">
+				<f:selectItem itemLabel="Select un type" itemValue="#{null}"
+					noSelectionOption="true" />
+				<f:selectItem itemLabel="Chambre simple" itemValue="ChambreSimple" />
+				<f:selectItem itemLabel="Chambre double" itemValue="ChambreDouble" />
+				<f:selectItem itemLabel="Suite" itemValue="Suite" />
+
+			</p:selectOneMenu>
+
+			<h:commandButton value="Rechercher les chambres disponibles"
+				icon="ui-icon-check">
+				<f:ajax event="click"
+					listener="#{reservationBean.getChambresDispos}" />
+			</h:commandButton>
+
+		</h:form>
+
+
+
+
+
+
+
+
+
+
+
+	</div>
+         
+
+
+         
+</ui:composition>
+</html>

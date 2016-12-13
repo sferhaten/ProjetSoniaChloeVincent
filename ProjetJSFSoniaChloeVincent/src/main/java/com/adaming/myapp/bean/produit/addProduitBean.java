@@ -144,21 +144,24 @@ public class addProduitBean {
 		Produit produit = new Produit(nom, quantite, coutAchat, coutVente);
 		serviceProduit.addProduit(produit, selectedidHotel);
 		System.out.println("++++++++++++++++++++++++++++++++++++++++++++++" + produit);
-		initFields();
 		getAllProduits();
+		initFields();
+		
 	}
 		
 	
-		public Produit getOneProduit(Long idProduit){
+		public void getOneProduit(Long idProduit){
 			produit = serviceProduit.getOneProduit(idProduit);
-			return produit;
+			System.out.println("------------------------------------------------------------------" + produit);
 		}
 		
-		public void update(){
+		public String update(){
 			
 			serviceProduit.updateProduit(produit);
+			return "home?redirect-faces=true";
 		}
 		
+		@PostConstruct
 		public void getAllProduits(){
 			produits = serviceProduit.getAllProduit();
 			

@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+<h:head>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>Insert title here</title>
+
+
+	<h:outputStylesheet name="css/bootstrap.css" rel="stylesheet" />
+
+	<h:outputStylesheet name="css/datepicker3.css" rel="stylesheet" />
+	<h:outputStylesheet name="css/styles.css" rel="stylesheet" />
+
+</h:head>
+<body>
+
+
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed"
+				data-toggle="collapse" data-target="#sidebar-collapse">
+				<span class="sr-only">Toggle navigation</span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#"><span>Gestion Hotels</span></a>
+			<ul class="user-menu">
+				<li class="dropdown pull-right"><a href="#"
+					class="dropdown-toggle" data-toggle="dropdown"> User <span
+						class="caret"></span></a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="#">Profile</a></li>
+						<li><a href="#"> Settings</a></li>
+						<li><a href="#"> Logout</a></li>
+					</ul></li>
+			</ul>
+		</div>
+
+	</div>
+	<!-- /.container-fluid --> </nav>
+	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+
+		<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+			<form role="search">
+				<div class="form-group">
+					<h:inputText type="text" class="form-control" placeholder="Search" />
+				</div>
+			</form>
+			<ul class="nav menu">
+				<li class="active"><a href="home.html"><svg
+							class="glyph stroked dashboard-dial"></svg> Home</a></li>
+				<li><a href="widgets.html"><svg
+							class="glyph stroked calendar"></svg> Hotel</a></li>
+				<li><a href="charts.html"><svg
+							class="glyph stroked line-graph"></svg> Personne</a></li>
+				<li><a href="tables.html"><svg class="glyph stroked table"></svg>
+						facture</a></li>
+				<li><a href="forms.html"><svg class="glyph stroked pencil"></svg>
+						Payement</a></li>
+
+			</ul>
+
+		</div>
+		<!--/.sidebar-->
+
+		<h1 class="text-center">Factures Toto</h1>
+		<br />
+
+		<h:messages style="prenom:red"></h:messages>
+
+
+
+		<h:form id="form">
+
+			<p:panel id="panel" header="Choix du client">
+				<p:messages id="msgs" />
+				<h:panelGrid columns="3" cellpadding="5">
+
+					<p:outputLabel id="idHotelLabel" for="idHotel"
+						value="Nom d'hotel :" style="display:block" />
+					<h:selectOneMenu id="idHotel" value="#{factureBean.idHotel}"
+						required="true" style="width:200px; display:block">
+						<f:selectItems value="#{factureBean.listeHotels}" var="h"
+							itemValue="#{h.idHotel}" itemLabel="#{h.nomHotel}" />
+						<f:ajax render="idPersonne"
+							listener="#{factureBean.getClientsHotel}"></f:ajax>
+					</h:selectOneMenu>
+					<br />
+
+					<p:outputLabel id="idClientLabel" for="idPersonne"
+						value="Nom du client :" style="display:block" />
+					<h:selectOneMenu id="idPersonne" value="#{factureBean.idPersonne}"
+						required="true" style="width:200px; display:block">
+						<f:selectItems value="#{factureBean.listePersonnes}" var="p"
+							itemValue="#{p.idPersonne}" itemLabel="#{p.nom}" />
+						<f:ajax render="activites"
+							listener="#{factureBean.getActivites}"></f:ajax>
+					</h:selectOneMenu>
+					<br />
+
+				</h:panelGrid>
+
+
+			</p:panel>
+		
+			<p:panel id="activites" header="Activités non facturées du client">
+
+				<br />
+				<p:dataTable paginator="true" rows="5"
+					value="#{factureBean.listeReservations}" var="r"
+					sortMode="multiple">
+
+					<f:facet name="header">Réservations</f:facet>
+
+					<p:column sortBy="#{r.idReservation}" headerText="Identifiant">
+						<h:outputText value="#{r.idReservation}"></h:outputText>
+					</p:column>
+
+					<p:column sortBy="#{r.dateArrive}" headerText="Date d'arrivée">
+						<h:outputText value="#{r.dateArrive}"></h:outputText>
+					</p:column>
+
+					<p:column sortBy="#{r.dateSortie}" headerText="Date de sortie">
+						<h:outputText value="#{r.dateSortie}"></h:outputText>
+					</p:column>
+
+					<p:column sortBy="#{r.coutResa}"
+						headerText="Coût de la réservation">
+						<h:outputText value="#{r.coutResa}"></h:outputText>
+					</p:column>
+
+					<p:column sortBy="#{r.chambre.idChambre}" headerText="Chambre">
+						<h:outputText value="#{r.chambre.idChambre}"></h:outputText>
+					</p:column>
+
+
+					<f:facet name="footer">
+        			Le client a effectué #{fn:length(factureBean.listeReservations)} réservations.
+    			</f:facet>
+
+				</p:dataTable>
+				<br />
+				<br />
+
+				<p:dataTable paginator="true" rows="5"
+					value="#{factureBean.listeConsommations}" var="c"
+					sortMode="multiple">
+
+					<f:facet name="header">Consommations</f:facet>
+
+					<p:column sortBy="#{r.idConsommation}" headerText="Identifiant">
+						<h:outputText value="#{r.idConsommation}"></h:outputText>
+					</p:column>
+
+					<p:column sortBy="#{r.quantite}" headerText="Quantité">
+						<h:outputText value="#{r.quantite}"></h:outputText>
+					</p:column>
+
+					<p:column sortBy="#{r.produit.nom}" headerText="Produit">
+						<h:outputText value="#{r.produit.nom}"></h:outputText>
+					</p:column>
+
+
+
+
+					<f:facet name="footer">
+        			Le client a effectué #{fn:length(factureBean.listeConsommations)} consommations.
+    			</f:facet>
+
+				</p:dataTable>
+
+			</p:panel>
+
+
+		</h:form>
+
+
+
+
+
+	</div>
+
+	<!-- <h:outputScript name="js/jquery-1.11.1.min.js"></h:outputScript>
+	<h:outputScript name="js/bootstrap.min.js"></h:outputScript>
+	<h:outputScript name="js/chart.min.js"></h:outputScript>
+	<h:outputScript name="js/chart-data.js"></h:outputScript>
+	<h:outputScript name="js/easypiechart.js"></h:outputScript>
+	<h:outputScript name="js/easypiechart-data.js"></h:outputScript>
+	<h:outputScript name="js/bootstrap-datepicker.js"></h:outputScript>
+
+
+	<h:outputScript name="js/lumino.glyphs.js" />
+ -->
+</body>
+</html>
