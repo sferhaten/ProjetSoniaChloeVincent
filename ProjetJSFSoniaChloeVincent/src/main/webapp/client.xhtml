@@ -227,15 +227,15 @@
 						<h:outputText value="Prenom" />
 						<h:inputText value="#{clientBean.client.prenom}" />
 						<h:outputText value="Numero" />
-						<h:inputText value="#{clientBean.client.numero}" />
+						<h:inputText value="#{clientBean.client.adressePersonne.numero}" />
 						<h:outputText value="Voie" />
-						<h:inputText value="#{clientBean.client.voie}" />
+						<h:inputText value="#{clientBean.client.adressePersonne.voie}" />
 						<h:outputText value="Code Postal" />
-						<h:inputText value="#{clientBean.client.codePostal}" />
+						<h:inputText value="#{clientBean.client.adressePersonne.codePostal}" />
 						<h:outputText value="Ville" />
-						<h:inputText value="#{clientBean.client.ville}" />
+						<h:inputText value="#{clientBean.client.adressePersonne.ville}" />
 						<h:outputText value="Pays" />
-						<h:inputText value="#{clientBean.client.pays}" />
+						<h:inputText value="#{clientBean.client.adressePersonne.pays}" />
 					</p:panelGrid>
 
 					<p:commandButton action="#{clientBean.update}"

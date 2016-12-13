@@ -52,6 +52,9 @@ public class FactureBean {
 	private Set<Consomation> listeConsommations = new HashSet<Consomation>();
 	
 	
+	//======================
+	//		les methodes
+	//======================
 	
 	@PostConstruct
 	public void init(){
@@ -84,9 +87,16 @@ public class FactureBean {
 		
 	}
 	
+	public List<Facture> getAllFactures(){
+		return service.getAllFacture();
+	}
 	
 	
 	
+	
+	//========================
+	//		les getter and setter
+	//===========================
 
 	public Facture getFacture() {
 		return facture;

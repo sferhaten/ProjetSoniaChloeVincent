@@ -35,7 +35,7 @@ public class employeBean {
 	@Inject
 	private hotelBean hotelBean;
 
-	
+
 	private Employe employe;
 	private String nom;
 	private String prenom;
@@ -95,6 +95,7 @@ public class employeBean {
 
 	public String update(){
 		servicePersonne.updatePersonne(personne);
+		System.out.println("==================================" + employe);
 		return "home?redirect-faces-true";
 	}
 
@@ -177,12 +178,15 @@ public class employeBean {
 	//=========================================
 	//			methodes que jai rajoute
 	//=========================================
+
 	public void getAllEmployeByHotel(){
 		employes = hotelBean.getEmployeParHotel(selectedidHotel);
+		System.out.println("--------------------------------methode employes" + employes);
 	}
 	
 	public void getOneEmploye(Long idPersonne){
 		personne = servicePersonne.getPersonne(idPersonne);
+		System.out.println("+++++++++++++++++++++++++++++" + personne);
 	}
 	// ===========================
 	// Getter and setter

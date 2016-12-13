@@ -1,5 +1,6 @@
 package com.adaming.myapp.bean.payement;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -12,6 +13,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.stereotype.Component;
 
+import com.adaming.myapp.bean.facture.FactureBean;
 import com.adaming.myapp.bean.produit.addProduitBean;
 import com.adaming.myapp.entities.Adresse;
 import com.adaming.myapp.entities.CarteBancaire;
@@ -34,18 +36,19 @@ public class PayementBean {
 	@Inject
 	private IServicePayement servicepayement;
 	@Inject
-	private factureBean factureBean;
+	private FactureBean factureBean;
 
 	// ===========================
 	// les attribus
 	// ===========================
+
 
 	private List<Payement> payements;
 	private Payement payement;
 	private double coutTotal;
 	private Date date;
 	private String devise;
-	private List<Facture>
+	private List<Facture> factures= new ArrayList<Facture>();
 	private Facture facture;
 	private Facture idFacture;
 	private Long selectidFacture;
@@ -132,7 +135,7 @@ public class PayementBean {
 	
 	@PostConstruct
 	public void getAllFactures() {
-		factures = factureBean.
+		factures = factureBean.getAllFactures();
 	
 	}
 	
@@ -140,7 +143,158 @@ public class PayementBean {
 	//	Getter and Setter
 	//===========================
 	
-	
+
+	public Logger getLOGGER() {
+		return LOGGER;
+	}
+
+	public void setLOGGER(Logger lOGGER) {
+		LOGGER = lOGGER;
+	}
+
+	public FactureBean getFactureBean() {
+		return factureBean;
+	}
+
+	public void setFactureBean(FactureBean factureBean) {
+		this.factureBean = factureBean;
+	}
+
+	public List<Payement> getPayements() {
+		return payements;
+	}
+
+	public void setPayements(List<Payement> payements) {
+		this.payements = payements;
+	}
+
+	public Payement getPayement() {
+		return payement;
+	}
+
+	public void setPayement(Payement payement) {
+		this.payement = payement;
+	}
+
+	public double getCoutTotal() {
+		return coutTotal;
+	}
+
+	public void setCoutTotal(double coutTotal) {
+		this.coutTotal = coutTotal;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	public String getDevise() {
+		return devise;
+	}
+
+	public void setDevise(String devise) {
+		this.devise = devise;
+	}
+
+	public List<Facture> getFactures() {
+		return factures;
+	}
+
+	public void setFactures(List<Facture> factures) {
+		this.factures = factures;
+	}
+
+	public Facture getFacture() {
+		return facture;
+	}
+
+	public void setFacture(Facture facture) {
+		this.facture = facture;
+	}
+
+	public Facture getIdFacture() {
+		return idFacture;
+	}
+
+	public void setIdFacture(Facture idFacture) {
+		this.idFacture = idFacture;
+	}
+
+	public Long getSelectidFacture() {
+		return selectidFacture;
+	}
+
+	public void setSelectidFacture(Long selectidFacture) {
+		this.selectidFacture = selectidFacture;
+	}
+
+	public String getTypeCarte() {
+		return typeCarte;
+	}
+
+	public void setTypeCarte(String typeCarte) {
+		this.typeCarte = typeCarte;
+	}
+
+	public int getNumCarte() {
+		return numCarte;
+	}
+
+	public void setNumCarte(int numCarte) {
+		this.numCarte = numCarte;
+	}
+
+	public int getNumCheque() {
+		return numCheque;
+	}
+
+	public void setNumCheque(int numCheque) {
+		this.numCheque = numCheque;
+	}
+
+	public String getBanqueCheque() {
+		return banqueCheque;
+	}
+
+	public void setBanqueCheque(String banqueCheque) {
+		this.banqueCheque = banqueCheque;
+	}
+
+	public String getOption() {
+		return option;
+	}
+
+	public void setOption(String option) {
+		this.option = option;
+	}
+
+	public boolean isEspeceVisible() {
+		return especeVisible;
+	}
+
+	public void setEspeceVisible(boolean especeVisible) {
+		this.especeVisible = especeVisible;
+	}
+
+	public boolean isCarteBancaireVisible() {
+		return carteBancaireVisible;
+	}
+
+	public void setCarteBancaireVisible(boolean carteBancaireVisible) {
+		this.carteBancaireVisible = carteBancaireVisible;
+	}
+
+	public boolean isChequeVisible() {
+		return chequeVisible;
+	}
+
+	public void setChequeVisible(boolean chequeVisible) {
+		this.chequeVisible = chequeVisible;
+	}
 
 }
 

@@ -70,13 +70,24 @@
 			</ul>
 		</div>
 		<!--/.sidebar-->
-
+		
+		<!-- **************** Select Hotel ****************************** -->
 
 		<!-- **************** Bouton pour choisir le type de contract ****************************** -->
 
 		<h:form>
+		
+		
+		
 			<h1 class="text-center">Employe</h1>
-			<br />
+			
+				<p:outputLabel for="idHotel" value="Hotel :" />
+		<h:selectOneMenu id="idHotel" value="#{empBean.selectedidHotel}"
+			style="width:125px">
+			<f:ajax event="change" listener="#{empBean.getAllEmployeByHotel}" update =":employes:tbl" render=":employes:tbl"></f:ajax>
+			<f:selectItems itemLabel="#{c.nomHotel}" itemValue="#{c.idHotel}"
+				value="#{empBean.hotels}" var="c" />
+		</h:selectOneMenu>
 			<h:panelGrid columns="2" style="margin-bottom:50px" cellpadding="50">
 				<p:outputLabel for="option" value="Choix : " />
 				<p:selectOneRadio id="option" value="#{empBean.option}"
@@ -102,14 +113,6 @@
 				<p:messages id="msgs" />
 
 				<h:panelGrid>
-
-					<p:outputLabel for="idHotel" value="Hotel :" />
-					<h:selectOneMenu id="idHotel" value="#{empBean.selectedidHotel}"
-						style="width:125px" onchange="get()">
-						<f:selectItems itemLabel="#{c.nomHotel}" itemValue="#{c.idHotel}"
-							value="#{empBean.hotels}" var="c" />
-					</h:selectOneMenu>
-
 
 					<p:outputLabel for="prenom" value="Prenom" id="prenomLabel" />
 					<p:inputText id="prenom" value="#{empBean.prenom}" required="true">
@@ -198,13 +201,6 @@
 				<p:messages id="msgs" />
 
 				<h:panelGrid>
-
-					<p:outputLabel for="idHotel" value="Hotel :" />
-					<h:selectOneMenu id="idHotel" value="#{empBean.selectedidHotel}"
-						style="width:125px" onchange="get()">
-						<f:selectItems itemLabel="#{c.nomHotel}" itemValue="#{c.idHotel}"
-							value="#{empBean.hotels}" var="c" />
-					</h:selectOneMenu>
 
 					<p:outputLabel for="prenom" value="Prenom" id="prenomLabel" />
 					<p:inputText id="prenom" value="#{empBean.prenom}" required="true">
@@ -311,14 +307,6 @@
 
 				<h:panelGrid >
 
-					<p:outputLabel for="idHotel" value="Hotel :" />
-					<h:selectOneMenu id="idHotel" value="#{empBean.selectedidHotel}"
-						style="width:125px" onchange="get()">
-						<f:selectItems itemLabel="#{c.nomHotel}" itemValue="#{c.idHotel}"
-							value="#{empBean.hotels}" var="c" />
-					</h:selectOneMenu>
-
-
 					<p:outputLabel for="prenom" value="Prenom" id="prenomLabel" />
 					<p:inputText id="prenom" value="#{empBean.prenom}" required="true">
 						<f:validateLength minimum="2" />
@@ -410,7 +398,7 @@
 		<br/><br/><br/>
 		
 		
-		<h:form>
+		<h:form id="employes">
 			<p:growl id="msgs" showDetail="true" />
 			<p:dataTable id="tbl" var="e" value="#{empBean.employes}"
 				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
@@ -422,6 +410,9 @@
 					</p:outputPanel>
 				</f:facet>
 
+				<p:column headerText="Identifiant">
+					<h:outputText value="#{e.idPersonne}"></h:outputText>
+				</p:column>
 				<p:column headerText="Nom">
 					<h:outputText value="#{e.nom}"></h:outputText>
 				</p:column>
@@ -471,42 +462,43 @@
 		</h:form>
 
 		<!-- **** Formulaire update ****  -->
-
+<h:form id="form2">
 		<p:dialog header="Employe" widgetVar="EmployeVar" modal="true"
 			showEffect="fade" hideEffect="fade" resizable="false">
-			<h:form id="form2">
+			
 				<p:outputPanel id="EmployeDetail" style="text-align:center;">
 					<p:panelGrid columns="2">
 						<h:outputText value="Nom" />
-						<h:outputText value="#{empBean.personne.nom}" />
+						<h:inputText value="#{empBean.personne.nom}" />
 						<h:outputText value="Prenom" />
-						<h:outputText value="#{empBean.personne.prenom}" />
+						<h:inputText value="#{empBean.personne.prenom}" />
 						<h:outputText value="Embauche" />
-						<h:outputText value="#{empBean.personne.dateEmbauuche}" />
+						<h:inputText value="#{empBean.personne.dateEmbauuche}" />
 						<h:outputText value="Salaire" />
-						<h:outputText value="#{empBean.personne.salaire}" />
-						<h:outputText value="Numeor" />
-						<h:outputText value="#{empBean.personne.numero}" />
+						<h:inputText value="#{empBean.personne.salaire}" />
+						<h:outputText value="Numero" />
+						<h:inputText value="#{empBean.personne.adressePersonne.numero}" />
 						<h:outputText value="Voie" />
-						<h:outputText value="#{empBean.personne.voie}" />
+						<h:inputText value="#{empBean.personne.adressePersonne.voie}" />
 						<h:outputText value="Code Postal" />
-						<h:outputText value="#{empBean.personne.codePostal}" />
+						<h:inputText value="#{empBean.personne.adressePersonne.codePostal}" />
 						<h:outputText value="Ville" />
-						<h:outputText value="#{empBean.personne.ville}" />
+						<h:inputText value="#{empBean.personne.adressePersonne.ville}" />
 						<h:outputText value="Pays" />
-						<h:outputText value="#{empBean.personne.pays}" />
-
+						<h:inputText value="#{empBean.personne.adressePersonne.pays}" />
+						
+						<p:commandButton action="#{empBean.update}"
+							update=":form2:EmployeDetail" icon="ui-icon-pencil"
+							title="Modifier">
+						</p:commandButton>
 
 					</p:panelGrid>
-					<p:commandButton action="#{empBean.update}"
-						update=":form2:EmployeDetail" icon="ui-icon-pencil"
-						title="Modifier">
-					</p:commandButton>
+					
 				</p:outputPanel>
-			</h:form>
+			
 			<br />
 		</p:dialog>
-
+</h:form>
 
 	</div>
 
