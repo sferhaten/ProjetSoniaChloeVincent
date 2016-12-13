@@ -14,7 +14,6 @@ import java.util.Set;
 
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
-
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -64,31 +63,48 @@ public Chambre(long numChambre, String description) {
 }
 
 
-
 //=========================
 //	GETTER SETTER
 //=========================
 	
-	public long getIdChambre() {
-		return idChambre;
-	}
+	
 	public Set<Reservation> getReservations() {
 		return reservations;
+	}
+
+	public Long getIdChambre() {
+		return idChambre;
+	}
+
+	public void setIdChambre(Long idChambre) {
+		this.idChambre = idChambre;
 	}
 
 	public void setReservations(Set<Reservation> reservations) {
 		this.reservations = reservations;
 	}
 
-	public void setIdChambre(long idChambre) {
-		this.idChambre = idChambre;
-	}
+
+
+
 	public long getNumChambre() {
 		return numChambre;
 	}
+
+
+
 	public void setNumChambre(long numChambre) {
 		this.numChambre = numChambre;
 	}
+
+
+
+	public void setIdChambre(long idChambre) {
+		this.idChambre = idChambre;
+	}
+
+
+
 	public String getDescription() {
 		return description;
 	}

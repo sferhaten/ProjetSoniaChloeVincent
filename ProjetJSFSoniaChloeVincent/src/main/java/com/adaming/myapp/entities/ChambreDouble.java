@@ -36,10 +36,11 @@ public class ChambreDouble extends Chambre{
 		// TODO Auto-generated constructor stub
 	}
 
-	public ChambreDouble(long numChambre, String description
-		) {
+
+
+
+	public ChambreDouble(long numChambre, String description) {
 		super(numChambre, description);
-		
 		// TODO Auto-generated constructor stub
 	}
 

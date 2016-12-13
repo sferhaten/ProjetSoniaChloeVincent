@@ -29,9 +29,10 @@ public class ChambreSimple extends Chambre {
 	}
 
 
+
 	public ChambreSimple(long numChambre, String description) {
 		super(numChambre, description);
-	
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override

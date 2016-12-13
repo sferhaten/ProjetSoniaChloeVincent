@@ -18,7 +18,6 @@ import com.adaming.myapp.entities.ChambreDouble;
 import com.adaming.myapp.entities.ChambreSimple;
 import com.adaming.myapp.entities.ChambreSuite;
 import com.adaming.myapp.entities.Hotel;
-import com.adaming.myapp.entities.Reservation;
 import com.adaming.myapp.servicechambre.IServiceChambre;
 
 @Component("chambreBean")
@@ -35,7 +34,7 @@ public class ChambreBean {
 
 	private Chambre chambre;
 
-	private Set<Chambre> chambres;
+	private Set<Chambre> chambres = new HashSet<Chambre>();
 	private List<Hotel> hotels;
 	private Long idChambre;
 
@@ -66,9 +65,8 @@ public class ChambreBean {
 		hotels = hotelBean.getAll();
 	}
 
-	
 	public void getChambreByHotel(){
-		chambres =hotelBean.getChambreByHotel(idHotel);
+		chambres = hotelBean.getChambreByHotel(selectedidHotel);
 	}
 	
 
@@ -81,6 +79,7 @@ public class ChambreBean {
 	public void initFields() {
 		numChambre = 0L;
 		description = "";
+		
 	}
 
 	public void choisir() {
@@ -244,6 +243,9 @@ public class ChambreBean {
 		this.suiteVisible = suiteVisible;
 	}
 
+	// ===========================
+	// Getter and setter
+	// ===========================
 
 
 

@@ -24,12 +24,14 @@ public class ChambreSuite extends Chambre{
 		this.prixSuite = prixSuite;
 	}
 
+
+
+
 	public ChambreSuite(long numChambre, String description) {
 		super(numChambre, description);
-		
+		// TODO Auto-generated constructor stub
 	}
 
-	
 	public ChambreSuite() {
 		super();
 	}

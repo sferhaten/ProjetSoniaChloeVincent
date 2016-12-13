@@ -18,6 +18,7 @@ import com.adaming.myapp.entities.Client;
 import com.adaming.myapp.entities.Employe;
 import com.adaming.myapp.entities.Hotel;
 import com.adaming.myapp.entities.Produit;
+import com.adaming.myapp.servicechambre.IServiceChambre;
 import com.adaming.myapp.servicehotel.IServiceHotel;
 
 
@@ -29,6 +30,8 @@ public class gestionHotelBean {
 	private Logger LOGGER = Logger.getLogger(gestionHotelBean.class);
 	@Inject
 	private IServiceHotel serviceHotel;
+	@Inject
+	private IServiceChambre serviceChambre;
 	
 	private Hotel hotel;
 	private Long idHotel;
@@ -53,11 +56,15 @@ public class gestionHotelBean {
 	private String ListeChambres;
 	private String ListeProduits;
 	private String ListeClients;
-	
+	private Double benefice;
+	private Chambre chambre;
+	private long idChambre;
 	private boolean produitsVisibles = false;
 	private boolean chambressVisibles = false;
 	private boolean employesVisibles = false;
 	private boolean clientsVisibles = false;
+	
+	private boolean  beneficeVisible=false;
 	
 	//====================================
 	//	Getter and setter
@@ -67,6 +74,30 @@ public class gestionHotelBean {
 	
 	public Hotel getHotel() {
 		return hotel;
+	}
+	public boolean isBeneficeVisible() {
+		return beneficeVisible;
+	}
+	public void setBeneficeVisible(boolean beneficeVisible) {
+		this.beneficeVisible = beneficeVisible;
+	}
+	public Double getBenefice() {
+		return benefice;
+	}
+	public void setBenefice(Double benefice) {
+		this.benefice = benefice;
+	}
+	public long getIdChambre() {
+		return idChambre;
+	}
+	public void setIdChambre(long idChambre) {
+		this.idChambre = idChambre;
+	}
+	public Chambre getChambre() {
+		return chambre;
+	}
+	public void setChambre(Chambre chambre) {
+		this.chambre = chambre;
 	}
 	public Set<Produit> getProduitsDispoByHotel() {
 		return produitsDispoByHotel;
@@ -251,7 +282,13 @@ public class gestionHotelBean {
 	public Set<Produit> getProduitsDispo(Long idHotel){
 		return produitsDispoByHotel = serviceHotel.produitsDisposByHotel(idHotel);
 	}
-	
+	public void getOneChambre(long idChambre){
+		chambre = serviceChambre.getOneChambre(idChambre);
+	}
+	public void updateChambre(){
+		serviceChambre.updateChambre(chambre);
+	}
+
 
 	public void getAll(){
 		
@@ -263,7 +300,7 @@ public class gestionHotelBean {
 		chambressVisibles = false;
 		employesVisibles = false;
 		clientsVisibles = false;
-		
+		beneficeVisible=false;
 		
 		if(option.equals("ListeProduits")){
 		
@@ -296,6 +333,10 @@ public class gestionHotelBean {
 		}
 		else if (option.equals("ListeChambresSuite")){
 			chambres = serviceHotel.chambreSuiteDisposByHotel(idHotel, dateDemandee1, dateDemandee2);
+		}
+		else if (option.equals("BeneficeAnnuel")){
+			benefice = serviceHotel.beneficeAnnuel(selectedidHotel);
+			beneficeVisible=true;
 		}
 	}
 

@@ -38,7 +38,7 @@ public class ServiceChambreTest {
 	@Test
 	//@Ignore
 	public void testAddChambre() {
-		Chambre c = new ChambreDouble(1, "blue");
+		Chambre c = new ChambreDouble(1L, "cham");
 		serviceChambre.addChambre(c, 1L);
 		assertNotNull(c.getIdChambre());
 	}

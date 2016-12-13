@@ -50,6 +50,7 @@
 				<f:selectItem itemLabel="ListeProduits" itemValue="ListeProduits" />
 				<f:selectItem itemLabel="ListeClients" itemValue="ListeClients" />
 				<f:selectItem itemLabel="ListeEmployes" itemValue="ListeEmployes" />
+				<f:selectItem itemLabel="BeneficeAnnuel" itemValue="BeneficeAnnuel" />
 			</h:selectOneRadio>
 			<br />
 
@@ -62,6 +63,27 @@
 			<br />
 
 		</h:form>
+		
+		<h:form id="form0">
+			<p:dataTable id="tbl" var="b" value="#{gestionHotelBean.benefice}"
+				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+				paginator="true" rows="10" style="margin-bottom:20px"
+				rendered="#{gestionHotelBean.beneficeVisible}">
+
+				<f:facet name="header">Benefice annuel</f:facet>
+
+				<p:column headerText="Identifiant">
+					<h:outputText value="#{gestionHotelBean.selectedidHotel}"></h:outputText>
+				</p:column>
+
+				<p:column headerText="Benefice">
+					<h:outputText value="#{b}"></h:outputText>
+				</p:column>
+
+			</p:dataTable>
+
+		</h:form>
+		<br />
 
 		<h:form id="form1">
 			<p:dataTable id="tbl" var="P" value="#{gestionHotelBean.produits}"
@@ -115,11 +137,40 @@
 				<p:column headerText="Numéro">
 					<h:outputText value="#{ch.numChambre}"></h:outputText>
 				</p:column>
-
+				<p:column headerText="Voir" style="width:100px;text-align: center">
+					<p:commandButton
+						action="#{gestionHotelBean.getOneChambre(ch.idChambre)}"
+						update=":form7:ChambreDetail" oncomplete="PF('ChambreVar').show()"
+						icon="ui-icon-search" />
+				</p:column>
 
 			</p:dataTable>
 
 		</h:form>
+<h:form id="form7">
+		<p:dialog header="Chambre" widgetVar="ChambreVar" modal="true"
+			showEffect="fade" hideEffect="fade" resizable="false">
+			
+				<p:outputPanel id="ChambreDetail" style="text-align:center;">
+					<p:panelGrid columns="2">
+						<h:outputText value="Identifiant" />
+						<h:outputText value="#{gestionHotelBean.chambre.idChambre}" />
+						<h:outputText value="Description" />
+						<h:outputText value="#{gestionHotelBean.chambre.description}" />
+						<h:outputText value="Num chambre" />
+						<h:inputText value="#{gestionHotelBean.chambre.numChambre}" />
+						
+
+					</p:panelGrid>
+					<p:commandButton action="#{gestionHotelBean.updateChambre}"
+						update=":form7:ChambreDetail" icon="ui-icon-pencil"
+						title="Modifier">
+					</p:commandButton>
+				</p:outputPanel>
+			
+			<br />
+		</p:dialog>
+</h:form>
 
 		<h:form id="form3">
 			<p:dataTable id="tbl" var="cl" value="#{gestionHotelBean.clients}"
@@ -235,16 +286,7 @@
 
 	</div>
 
-	<h:outputScript name="js/jquery-1.11.1.min.js"></h:outputScript>
-	<h:outputScript name="js/bootstrap.min.js"></h:outputScript>
-	<h:outputScript name="js/chart.min.js"></h:outputScript>
-	<h:outputScript name="js/chart-data.js"></h:outputScript>
-	<h:outputScript name="js/easypiechart.js"></h:outputScript>
-	<h:outputScript name="js/easypiechart-data.js"></h:outputScript>
-	<h:outputScript name="js/bootstrap-datepicker.js"></h:outputScript>
 	
-
-		<h:outputScript name="js/lumino.glyphs.js"/>
     
 </body>
 </html>

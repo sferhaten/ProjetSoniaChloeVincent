@@ -24,7 +24,7 @@
 	
 	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
 
-		<!-- **************** Bouton pour choisir le type de chambre ****************************** -->
+		<!-- **************** Bouton pour choisir le type de chambre et le select hotel ****************************** -->
 
 		<h:form>
 			<p:outputLabel for="idHotel" value="Hotel :" />
@@ -150,68 +150,7 @@
 			</p:panel>
 		</h:form>
 
-		<!-- *********** Liste chambre   *********************** -->
-		<h:form>
-			<p:growl id="msgs" showDetail="true" />
-			<p:dataTable id="liste" var="ch" value="#{chambreBean.chambres}"
-				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
-				paginator="true" rows="10" style="margin-bottom:20px">
-
-				<f:facet name="header">
-					<p:outputPanel>
-						<h:outputText value="Chambres : " />
-
-					</p:outputPanel>
-				</f:facet>
-
-				<p:column headerText="Identifiant">
-					<h:outputText value="#{ch.idChambre}"></h:outputText>
-				</p:column>
-
-				<p:column headerText="Numeros de chambre">
-					<h:outputText value="#{ch.numChambre}"></h:outputText>
-				</p:column>
-
-				<p:column headerText="Description">
-					<h:outputText value="#{ch.description}"></h:outputText>
-				</p:column>
-
-
-				<p:column headerText="Voir" style="width:100px;text-align: center">
-					<p:commandButton action="#{chambreBean.getChambre(ch.idChambre)}"
-						update=":form2:ChambreDetail" oncomplete="PF('ChambreVar').show()"
-						icon="ui-icon-search" />
-				</p:column>
-
-			</p:dataTable>
-
-		</h:form>
-		<!-- ***********  Update  ******************** -->
-		<p:dialog header="Chambre" widgetVar="ChambreVar" modal="true"
-			showEffect="fade" hideEffect="fade" resizable="false">
-			<h:form id="form2">
-				<p:outputPanel id="ChambreDetail" style="text-align:center;">
-					<p:panelGrid columns="2">
-						<h:outputText value="Identifiant" />
-						<h:outputText value="#{chambreBean.chambre.idChambre}" />
-						<h:outputText value="Numeros de chambre" />
-						<h:inputText value="#{chambreBean.chambre.numChambre}" />
-						<h:outputText value="Description" />
-						<h:inputText value="#{chambreBean.chambre.description}" />
-
-					</p:panelGrid>
-					<p:commandButton action="#{chambreBean.update}"
-						update=":form2:ChambreDetail" icon="ui-icon-pencil"
-						title="Modifier">
-					</p:commandButton>
-				</p:outputPanel>
-			</h:form>
-			<br />
-		</p:dialog>
-
-		<br /> <br /> <br /> <br /> <br />
-
-
+		
 	</div>
 
 
