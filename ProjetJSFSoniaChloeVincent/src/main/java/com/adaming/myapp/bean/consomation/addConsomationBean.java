@@ -12,6 +12,7 @@ import javax.inject.Inject;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 
+import com.adaming.myapp.bean.employe.employeBean;
 import com.adaming.myapp.bean.hotel.gestionHotelBean;
 import com.adaming.myapp.bean.produit.addProduitBean;
 import com.adaming.myapp.entities.Client;
@@ -33,6 +34,11 @@ public class addConsomationBean {
 	@Inject
 	private IServiceHotel serviceHotel;
 	
+	@Inject
+	private employeBean employeBean;
+	
+	
+	
 	//===========================
 	//	Attribus
 	//===========================
@@ -50,7 +56,7 @@ public class addConsomationBean {
 	private Long idConsommation; 
 	private Integer quantiteConsomation;
 	private List<Produit> produits = new ArrayList<Produit>();
-	private List<Consomation> consomations = new ArrayList<Consomation>();
+	private Set<Consomation> consomations = new HashSet<Consomation>();
 	private Set<Produit> produitsDispo = new HashSet<Produit>();
 	private Produit selectedidProduit;
 	private Double coutClient;
@@ -206,11 +212,13 @@ public class addConsomationBean {
 		this.produits = produits;
 	}
 
-	public List<Consomation> getConsomations() {
+
+
+	public Set<Consomation> getConsomations() {
 		return consomations;
 	}
 
-	public void setConsomations(List<Consomation> consomations) {
+	public void setConsomations(Set<Consomation> consomations) {
 		this.consomations = consomations;
 	}
 
@@ -229,7 +237,7 @@ public class addConsomationBean {
 	@PostConstruct
 	public void initFields(){
 		quantiteConsomation = 0;
-
+		
 		
 	}
 	
@@ -239,13 +247,19 @@ public class addConsomationBean {
 	}
 
 	public void addConsomation(){
+		
+		System.out.println("addConsomation lancée");
+		System.out.println("quantiteConsomation" + quantiteConsomation);
+		
+		
+		
 		Consomation consomation = new Consomation(quantiteConsomation);
 		
 		serviceConsomation.addConsommation(consomation, idClient, selectedidProduit.getIdProduit());
 		coutClient = consomation.coutclient();
 		System.out.println("le cout de la consomation" + coutClient);
-		
 		getAllConsomations();
+		getAllProduits();
 		initFields();
 		
 	}
@@ -256,16 +270,18 @@ public class addConsomationBean {
 	
 	public void updateConso(){
 		serviceConsomation.updateConsommation(consomation);
-		getAllConsomations();
+		
 	}
+	
 	@PostConstruct
 	public void getAllConsomations(){
-		consomations = serviceConsomation.consommations();
+		consomations = employeBean.getAllConsomation(idClient);
 		System.out.println("miste des consomations est " + consomations);
 	}
 	
 	public void getAllProduits(){
 		produits = addproduitBean.getProduits();
+		
 	}
 
 	@PostConstruct

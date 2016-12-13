@@ -34,5 +34,7 @@ public interface IServicePersonne {
 	
 	Set<Facture> facturesClient(Long idPersonne);
 	
+	Set<Facture> facturesClientNonPayees(Long idPersonne);
+	
 	
 }

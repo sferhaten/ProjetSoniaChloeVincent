@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:f="http://xmlns.jcp.org/jsf/core">
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 <h:head>
 
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -19,88 +20,62 @@
 
 </h:head>
 <body>
-
-	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-	<div class="container-fluid">
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle collapsed"
-				data-toggle="collapse" data-target="#sidebar-collapse">
-				<span class="sr-only">Toggle navigation</span> <span
-					class="icon-bar"></span> <span class="icon-bar"></span> <span
-					class="icon-bar"></span>
-			</button>
-			<a class="navbar-brand" href="#"><span>Gestion Hotels</span></a>
-			<ul class="user-menu">
-				<li class="dropdown pull-right"><a href="#"
-					class="dropdown-toggle" data-toggle="dropdown"> User <span
-						class="caret"></span></a>
-					<ul class="dropdown-menu" role="menu">
-						<li><a href="#">Profile</a></li>
-						<li><a href="#"> Settings</a></li>
-						<li><a href="#"> Logout</a></li>
-					</ul></li>
-			</ul>
-		</div>
-
-	</div>
-	<!-- /.container-fluid --> </nav>
+<ui:include src="home.xhtml" />
+	
 	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
 
-		<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
-			<form role="search">
-				<div class="form-group">
-					<h:inputText type="text" class="form-control" placeholder="Search" />
-				</div>
-			</form>
-			<ul class="nav menu">
-				<li class="active"><a href="home.html"><svg
-							class="glyph stroked dashboard-dial"></svg> Home</a></li>
-				<li><a href="widgets.html"><svg
-							class="glyph stroked calendar"></svg> Hotel</a></li>
-
-
-				<li><a href="charts.html"><i class="fa fa-bank fa-fw"></i>
-						<svg class="glyph stroked line-graph"></svg> Personne<span
-						class="fa arrow" /></a>
-					<ul class="nav nav-second-level">
-						<li><a href="toAddBanque">Client</a></li>
-						<li><a href="toGestionBanque">Employe </a></li>
-					</ul></li>
-				<li><a href="tables.html"><svg class="glyph stroked table"></svg>
-						facture</a></li>
-				<li><a href="forms.html"><svg class="glyph stroked pencil"></svg>
-						Payement<span class="fa arrow" /></a>
-					<ul class="nav nav-second-level">
-						<li><a href="toAddBanque">Carte baquaire</a></li>
-						<li><a href="toGestionBanque">Espece </a></li>
-						<li><a href="toGestionBanque">Cheque </a></li>
-					</ul></li>
-
-				<li><a href="forms.html"><svg class="glyph stroked pencil"></svg>
-						Stock de l'hotel</a></li>
-
-			</ul>
-
-		</div>
-		<!--/.sidebar-->
-
-
+		
 		<!-- **************** Bouton pour choisir le type de payement ****************************** -->
 
 		<h:form>
 			<h1 class="text-center">Employe</h1>
 			<br />
+
+			<p:panel id="panel" header="Choix du client">
+				<p:messages id="msgs" />
+				<h:panelGrid columns="3" cellpadding="5">
+
+					<p:outputLabel id="idHotelLabel" for="idHotel"
+						value="Nom d'hotel :" style="display:block" />
+					<h:selectOneMenu id="idHotel" value="#{payementBean.idHotel}"
+						required="true" style="width:200px; display:block">
+						<f:selectItems value="#{payementBean.listeHotels}" var="h"
+							itemValue="#{h.idHotel}" itemLabel="#{h.nomHotel}" />
+						<f:ajax render="@form" listener="#{payementBean.getClientsHotel}"></f:ajax>
+					</h:selectOneMenu>
+					<br />
+
+					<p:outputLabel id="idClientLabel" for="idPersonne"
+						value="Nom du client :" style="display:block" />
+					<h:selectOneMenu id="idPersonne" value="#{payementBean.idPersonne}"
+						required="true" style="width:200px; display:block">
+						<f:selectItems value="#{payementBean.listePersonnes}" var="p"
+							itemValue="#{p.idPersonne}" itemLabel="#{p.nom}" />
+						<f:ajax render="@form"
+							listener="#{payementBean.getFacturesClient}"></f:ajax>
+					</h:selectOneMenu>
+					<br />
+
+				</h:panelGrid>
+
+
+			</p:panel>
+
+
+
+
 			<h:panelGrid columns="2" style="margin-bottom:50px" cellpadding="50">
 				<p:outputLabel for="option" value="Choix : " />
 				<p:selectOneRadio id="option" value="#{payementBean.option}"
 					layout="grid" columns="1">
-					<f:selectItem itemLabel="espece" itemValue="espece" />
-					<f:selectItem itemLabel="carteBancaire" itemValue="carteBancaire" />
-					<f:selectItem itemLabel="cheque" itemValue="cheque" />
+					<f:selectItem itemLabel="Espece" itemValue="espece" />
+					<f:selectItem itemLabel="Carte bancaire" itemValue="carteBancaire" />
+					<f:selectItem itemLabel="Chèque" itemValue="cheque" />
 				</p:selectOneRadio>
 
-				<h:commandButton value="Valider"
-					actionListener="#{payementBean.choisir}" icon="ui-icon-check" />
+				<h:commandButton value="Valider" icon="ui-icon-check">
+					<f:ajax render="@form" listener="#{payementBean.choisir}"></f:ajax>
+				</h:commandButton>
 				<br />
 			</h:panelGrid>
 		</h:form>
@@ -121,8 +96,8 @@
 						value="#{payementBean.selectidFacture}" style="width:125px"
 						onchange="get()">
 						<f:selectItems itemLabel="#{p.idFacture}"
-							itemValue="#{p.idFacture}" value="#{payementBean.factures}"
-							var="p" />
+							itemValue="#{p.idFacture}"
+							value="#{payementBean.facturesNonPayees}" var="p" />
 					</h:selectOneMenu>
 
 
@@ -140,10 +115,9 @@
 						<f:validateLength minimum="2" />
 					</p:calendar>
 					<p:message for="date" display="icon" />
-					
 
-					<p:outputLabel for="devise" value="Devise"
-						id="deviseLabel" />
+
+					<p:outputLabel for="devise" value="Devise" id="deviseLabel" />
 					<p:calendar id="devise" value="#{payementfacture.devise}"
 						required="true">
 						<f:validateLength minimum="2" />
@@ -156,8 +130,8 @@
 					icon="ui-icon-check" />
 			</p:panel>
 		</h:form>
-		
-				<!-- ****** Formulaire Carte bancaire ******************** -->
+
+		<!-- ****** Formulaire Carte bancaire ******************** -->
 
 
 
@@ -168,7 +142,7 @@
 				<p:messages id="msgs" />
 
 				<h:panelGrid>
-				<p:outputLabel for="idFacture" value="Facture :" />
+					<p:outputLabel for="idFacture" value="Facture :" />
 					<h:selectOneMenu id="idFacture"
 						value="#{payementBean.selectidFacture}" style="width:125px"
 						onchange="get()">
@@ -176,8 +150,8 @@
 							itemValue="#{p.idFacture}" value="#{payementBean.factures}"
 							var="p" />
 					</h:selectOneMenu>
-					
-				<p:outputLabel for="coutTotal" value="Cout total"
+
+					<p:outputLabel for="coutTotal" value="Cout total"
 						id="coutTotalLabel" />
 					<p:inputText id="coutTotal" value="#{payementfacture.coutTotal}"
 						required="true">
@@ -192,7 +166,7 @@
 					</p:calendar>
 					<p:message for="date" display="icon" />
 
-					
+
 
 
 					<p:outputLabel for="numCarte" value="Numeros de carte"
@@ -203,14 +177,15 @@
 					</p:inputText>
 					<p:message for="numCarte" display="icon" />
 
-					<p:outputLabel for="typeCarte" value="Type de carte" id="typeCarteLabel" />
+					<p:outputLabel for="typeCarte" value="Type de carte"
+						id="typeCarteLabel" />
 					<p:calendar id="typeCarte" value="#{payementfacture.typeCarte}"
 						required="true">
 						<f:validateLength minimum="2" />
 					</p:calendar>
 					<p:message for="typeCarte" display="icon" />
 
-					
+
 
 				</h:panelGrid>
 
@@ -218,8 +193,8 @@
 					icon="ui-icon-check" />
 			</p:panel>
 		</h:form>
-		
-						<!-- ****** Formulaire Cheque ******************** -->
+
+		<!-- ****** Formulaire Cheque ******************** -->
 
 
 
@@ -240,13 +215,13 @@
 							var="p" />
 					</h:selectOneMenu>
 
-						<p:outputLabel for="date" value="Date" id="dateLabel" />
+					<p:outputLabel for="date" value="Date" id="dateLabel" />
 					<p:calendar id="date" value="#{payementfacture.date}"
 						required="true">
 						<f:validateLength minimum="2" />
 					</p:calendar>
 					<p:message for="date" display="icon" />
-					
+
 					<p:outputLabel for="coutTotal" value="Cout total"
 						id="coutTotalLabel" />
 					<p:inputText id="coutTotal" value="#{payementfacture.coutTotal}"
@@ -254,8 +229,8 @@
 						<f:validateLength minimum="2" />
 					</p:inputText>
 					<p:message for="coutTotal" display="icon" />
-					
-					
+
+
 					<p:outputLabel for="numCheque" value="Numeros de cheque"
 						id="numChequeLabel" />
 					<p:inputText id="numCheque" value="#{payementfacture.numCheque}"
@@ -264,20 +239,21 @@
 					</p:inputText>
 					<p:message for="numCheque" display="icon" />
 
-					<p:outputLabel for="banqueCheque" value="Banque du cheque" id="banqueChequeLabel" />
-					<p:calendar id="banqueCheque" value="#{payementfacture.banqueCheque}"
-						required="true">
+					<p:outputLabel for="banqueCheque" value="Banque du cheque"
+						id="banqueChequeLabel" />
+					<p:calendar id="banqueCheque"
+						value="#{payementfacture.banqueCheque}" required="true">
 						<f:validateLength minimum="2" />
 					</p:calendar>
 					<p:message for="banqueCheque" display="icon" />
 
-									
+
 				</h:panelGrid>
 
 				<h:commandButton value="Ajouter" action="#{payementfacture.add}"
 					icon="ui-icon-check" />
 			</p:panel>
 		</h:form>
-		
+	</div>
 </body>
 </html>

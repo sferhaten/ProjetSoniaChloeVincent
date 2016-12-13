@@ -81,12 +81,14 @@ public class ClientBean {
 		codePostal = "";
 		ville = "";
 		pays = "";
+		getAllHotels();
+		
 	}
 
-
+/*
 	public void getAllClient(){
 		clients= servicePersonne.getAll();
-	}
+	}*/
 	
 	
 	public void getAllClientByHotel(){
@@ -110,10 +112,11 @@ public class ClientBean {
 
 	}
 	
-	public String update(){
+	public void update(){
 		servicePersonne.updatePersonne(personne);
-		return "home?redirect-faces-true";
+		
 	}
+
 
 	public void getAllHotels() {
 		hotels = hotelBean.getAll();
@@ -147,8 +150,9 @@ public Set<Consomation> getConsommationsNonFacturees(Long idPersonne){
 		return factures = servicePersonne.facturesClient(idPersonne);   
 		
 	}
-	
-	
+	public Set<Facture> factureClientNonPayees(Long idPersonne){        
+		return factures = servicePersonne.facturesClientNonPayees(idPersonne);
+	}
 	//=====================================
 	//		Getter and setters
 	//=====================================

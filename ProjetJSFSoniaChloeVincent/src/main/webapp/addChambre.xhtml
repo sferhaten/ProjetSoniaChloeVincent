@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:f="http://xmlns.jcp.org/jsf/core">
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 <h:head>
 
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -19,192 +20,198 @@
 
 </h:head>
 <body>
-
-	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-	<div class="container-fluid">
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle collapsed"
-				data-toggle="collapse" data-target="#sidebar-collapse">
-				<span class="sr-only">Toggle navigation</span> <span
-					class="icon-bar"></span> <span class="icon-bar"></span> <span
-					class="icon-bar"></span>
-			</button>
-			<a class="navbar-brand" href="#"><span>Gestion Hotels</span></a>
-			<ul class="user-menu">
-				<li class="dropdown pull-right"><a href="#"
-					class="dropdown-toggle" data-toggle="dropdown"> User <span
-						class="employeet"></span></a>
-					<ul class="dropdown-menu" role="menu">
-						<li><a href="#">Profile</a></li>
-						<li><a href="#"> Settings</a></li>
-						<li><a href="#"> Logout</a></li>
-					</ul></li>
-			</ul>
-		</div>
-
-	</div>
-	</nav>
-	<!-- /.container-fluid -->
-
-
+<ui:include src="home.xhtml" />
+	
 	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
 
-		<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
-			<form role="search">
-				<div class="form-group">
-					<h:inputText type="text" class="form-control" placeholder="Search" />
-				</div>
-			</form>
-			<ul class="nav menu">
-				<li class="active"><a href="home.html"><svg
-							class="glyph stroked dashboard-dial"></svg> Home</a></li>
+		<!-- **************** Bouton pour choisir le type de chambre ****************************** -->
+
+		<h:form>
+			<p:outputLabel for="idHotel" value="Hotel :" />
+			<h:selectOneMenu id="idHotel" value="#{chambreBean.selectedidHotel}"
+				style="width:125px">
+				<f:selectItems itemLabel="#{c.nomHotel}" itemValue="#{c.idHotel}"
+					value="#{chambreBean.hotels}" var="c" />
+			</h:selectOneMenu>
+
+			<h:panelGrid columns="2" style="margin-bottom:50px" cellpadding="50">
+				<p:outputLabel for="option" value="Choix : " />
+				<p:selectOneRadio id="option" value="#{chambreBean.option}"
+					layout="grid" columns="1">
+					<f:selectItem itemLabel="ChambreSimple" itemValue="ChambreSimple" />
+					<f:selectItem itemLabel="ChambreDouble" itemValue="ChambreDouble" />
+					<f:selectItem itemLabel="Suite" itemValue="Suite" />
+				</p:selectOneRadio>
+
+				<h:commandButton value="Valider"
+					actionListener="#{chambreBean.choisir}" icon="ui-icon-check" />
+				<br />
+			</h:panelGrid>
+		</h:form>
+
+		<!-- ****** Formulaire ajout Chambre Simple ******************** -->
+
+		<h:form id="formSimple">
+			<p:panel header="Nouvel Chambre Simple"
+				rendered="#{chambreBean.simpleVisible}">
+
+				<p:messages id="msgs" />
+
+				<h:panelGrid>
 
 
-				<li><h:link value="Employe" outcome="employe.xhtml"
-						onclick="#{empBean.redirect()}">
-						<svg class="glyph stroked line-graph"></svg>
-					</h:link></li>
-				<li><h:link value="Client" outcome="client.xhtml"
-						onclick="#{clientBean.redirect()}">
-						<svg class="glyph stroked line-graph"></svg>
-					</h:link></li>
-				<li><h:link value="Chambre" outcome="addChambre.xhtml"
-						onclick="#{chambreBean.redirect()}">
-						<svg class="glyph stroked line-graph"></svg>
-					</h:link></li>
-				<li><h:link value="Produit" outcome="addProduit.xhtml"
-						onclick="#{addProduitBean.redirect()}">
-						<svg class="glyph stroked line-graph"></svg>
-					</h:link></li>
-				<li><h:link value="Consommation" outcome="addConsomation.xhtml"
-						onclick="#{addConsomationBean.redirect()}">
-						<svg class="glyph stroked line-graph"></svg>
-					</h:link></li>
+					<p:outputLabel for="numChambre" value="Numero de chambre"
+						id="numChambreLabel" />
+					<p:inputText id="numChambre" value="#{chambreBean.numChambre}"
+						required="true">
+						<f:validateLength minimum="1" />
+					</p:inputText>
+					<p:message for="numChambre" display="icon" />
 
-				<li><h:link value="Reservation" outcome="addReservation.xhtml"
-						onclick="#{reservationBean.redirect()}">
-						<svg class="glyph stroked line-graph"></svg>
-					</h:link></li>
-				<li><h:link value="Payement" outcome="payement.xhtml"
-						onclick="#{payementBean.redirect()}">
-						<svg class="glyph stroked line-graph"></svg>
-					</h:link></li>
-			</ul>
-		</div>
-		<!--/.sidebar-->
+					<p:outputLabel for="description" value="Nom" id="descriptionLabel" />
+					<p:inputText id="description" value="#{chambreBean.description}"
+						required="true">
+						<f:validateLength minimum="2" />
+					</p:inputText>
+					<p:message for="description" display="icon" />
 
-		<!-- ********** Formulaire ajout Chambre************** -->
+				</h:panelGrid>
 
-		<h1 class="text-center">Client</h1>
-		<br />
-
-		<div class="row">
-			<div class="col-lg-12">
-				<div class="panel panel-default">
-					<div class="panel-heading">Ajout d'un client</div>
-					<div class="panel-body">
+				<h:commandButton value="Ajouter" action="#{chambreBean.add}"
+					icon="ui-icon-check" />
+			</p:panel>
+		</h:form>
 
 
+		<!-- ****** Formulaire ajout Chambre Double ******************** -->
 
-						<h:form>
-							<p:panel id="panel" header="Nouvel Chambre Simple">
+		<h:form id="formDouble">
+			<p:panel header="Nouvel Chambre Double"
+				rendered="#{chambreBean.doubleVisible}">
 
-								<p:messages id="msgs" />
+				<p:messages id="msgs" />
 
-								<h:panelGrid columns="3" cellpadding="5">
-									<p:outputLabel for="console" value="Hotel" />
-									<h:selectOneMenu id="console"
-										value="#{selectOneMenuView.console}" style="width:125px">
-										<f:selectItem itemLabel="Hotel 1" itemValue="" />
-										<f:selectItem itemLabel="Hotel 2" itemValue="Xbox One" />
-										<f:selectItem itemLabel="Hotel 3" itemValue="PS4" />
-										<f:selectItem itemLabel="Hotel 4" itemValue="Wii U" />
-									</h:selectOneMenu>
-								</h:panelGrid>
-
-								<h:panelGrid columns="3" cellpadding="5">
+				<h:panelGrid>
 
 
-									<p:outputLabel for="firstname" value="Prenom" />
-									<p:inputText id="firstname" value="#{ClientBean.prenom}"
-										required="true" label="Firstname">
-										<f:validateLength minimum="2" />
-									</p:inputText>
-									<p:message for="firstname" display="icon" />
+					<p:outputLabel for="numChambre" value="Numero de chambre"
+						id="numChambreLabel" />
+					<p:inputText id="numChambre" value="#{chambreBean.numChambre}"
+						required="true">
+						<f:validateLength minimum="1" />
+					</p:inputText>
+					<p:message for="numChambre" display="icon" />
 
-									<p:outputLabel for="lastname" value="Nom" />
-									<p:inputText id="lastname" value="#{ClientBean.nom}"
-										label="Lastname" required="true">
-										<f:validateLength minimum="2" />
-										<p:ajax update="msgLastname" event="keyup" />
-									</p:inputText>
-									<p:message for="lastname" id="msgLastname" display="icon" />
+					<p:outputLabel for="description" value="Nom" id="descriptionLabel" />
+					<p:inputText id="description" value="#{chambreBean.description}"
+						required="true">
+						<f:validateLength minimum="2" />
+					</p:inputText>
+					<p:message for="description" display="icon" />
 
-									<p:outputLabel for="lastname" value="Numero" />
-									<p:inputText id="numero" value="#{ClientBean.numero}"
-										label="Numero" required="true">
-										<f:validateLength minimum="2" />
-										<p:ajax update="msgNumero" event="keyup" />
-									</p:inputText>
-									<p:message for="numero" id="msgNumero" display="icon" />
+				</h:panelGrid>
 
-									<p:outputLabel for="lastname" value="Voie" />
-									<p:inputText id="voie" value="#{ClientBean.voie}" label="voie"
-										required="true">
-										<f:validateLength minimum="2" />
-										<p:ajax update="msgVoie" event="keyup" />
-									</p:inputText>
-									<p:message for="voie" id="msgVoie" display="icon" />
-
-									<p:outputLabel for="lastname" value="Code postal" />
-									<p:inputText id="codePostal"
-										value="#{ClientBean.adressePersonne.codePostal}"
-										label="codePostal" required="true">
-										<f:validateLength minimum="2" />
-										<p:ajax update="msgcodePostal" event="keyup" />
-									</p:inputText>
-									<p:message for="codePostal" id="msgcodePostal" display="icon" />
-
-									<p:outputLabel for="lastname" value="Ville" />
-									<p:inputText id="ville"
-										value="#{ClientBean.adressePersonne.ville}" label="ville"
-										required="true">
-										<f:validateLength minimum="2" />
-										<p:ajax update="msgVille" event="keyup" />
-									</p:inputText>
-									<p:message for="ville" id="msgVille" display="icon" />
-
-									<p:outputLabel for="lastname" value="Pays" />
-									<p:inputText id="codePays"
-										value="#{ClientBean.adressePersonne.pays}" label="pays"
-										required="true">
-										<f:validateLength minimum="2" />
-										<p:ajax update="msgcodePostal" event="keyup" />
-									</p:inputText>
-									<p:message for="codePays" id="msgPays" display="icon" />
-
-									<p:outputLabel for="lastname" value="Date de naissance" />
-									<p:inputText id="naissance"
-										value="#{ClientBean.dateDeNaissance}" label="Lastname"
-										required="true">
-										<f:validateLength minimum="2" />
-										<p:ajax update="msgNaissance" event="keyup" />
-									</p:inputText>
-									<p:message for="lastname" id="msgNaissance" display="icon" />
+				<h:commandButton value="Ajouter" action="#{chambreBean.add}"
+					icon="ui-icon-check" />
+			</p:panel>
+		</h:form>
 
 
-									<p:commandButton value="Save" update="panel"
-										actionListener="#{ClientBean.addChambre}" icon="ui-icon-check" />
-								</h:panelGrid>
-							</p:panel>
-						</h:form>
-						<br /> <br /> <br /> <br /> <br />
 
 
-					</div>
-				</div>
-			</div>
-		</div>
+		<!-- ****** Formulaire ajout Suite ******************** -->
+
+		<h:form id="formSuite">
+			<p:panel header="Nouvel Suite" rendered="#{chambreBean.suiteVisible}">
+
+				<p:messages id="msgs" />
+
+				<h:panelGrid>
+
+					<p:outputLabel for="numChambre" value="Numero de chambre"
+						id="numChambreLabel" />
+					<p:inputText id="numChambre" value="#{chambreBean.numChambre}"
+						required="true">
+						<f:validateLength minimum="1" />
+					</p:inputText>
+					<p:message for="numChambre" display="icon" />
+
+					<p:outputLabel for="description" value="Nom" id="descriptionLabel" />
+					<p:inputText id="description" value="#{chambreBean.description}"
+						required="true">
+						<f:validateLength minimum="2" />
+					</p:inputText>
+					<p:message for="description" display="icon" />
+
+				</h:panelGrid>
+
+				<h:commandButton value="Ajouter" action="#{chambreBean.add}"
+					icon="ui-icon-check" />
+			</p:panel>
+		</h:form>
+
+		<!-- *********** Liste chambre   *********************** -->
+		<h:form>
+			<p:growl id="msgs" showDetail="true" />
+			<p:dataTable id="liste" var="ch" value="#{chambreBean.chambres}"
+				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
+				paginator="true" rows="10" style="margin-bottom:20px">
+
+				<f:facet name="header">
+					<p:outputPanel>
+						<h:outputText value="Chambres : " />
+
+					</p:outputPanel>
+				</f:facet>
+
+				<p:column headerText="Identifiant">
+					<h:outputText value="#{ch.idChambre}"></h:outputText>
+				</p:column>
+
+				<p:column headerText="Numeros de chambre">
+					<h:outputText value="#{ch.numChambre}"></h:outputText>
+				</p:column>
+
+				<p:column headerText="Description">
+					<h:outputText value="#{ch.description}"></h:outputText>
+				</p:column>
+
+
+				<p:column headerText="Voir" style="width:100px;text-align: center">
+					<p:commandButton action="#{chambreBean.getChambre(ch.idChambre)}"
+						update=":form2:ChambreDetail" oncomplete="PF('ChambreVar').show()"
+						icon="ui-icon-search" />
+				</p:column>
+
+			</p:dataTable>
+
+		</h:form>
+		<!-- ***********  Update  ******************** -->
+		<p:dialog header="Chambre" widgetVar="ChambreVar" modal="true"
+			showEffect="fade" hideEffect="fade" resizable="false">
+			<h:form id="form2">
+				<p:outputPanel id="ChambreDetail" style="text-align:center;">
+					<p:panelGrid columns="2">
+						<h:outputText value="Identifiant" />
+						<h:outputText value="#{chambreBean.chambre.idChambre}" />
+						<h:outputText value="Numeros de chambre" />
+						<h:inputText value="#{chambreBean.chambre.numChambre}" />
+						<h:outputText value="Description" />
+						<h:inputText value="#{chambreBean.chambre.description}" />
+
+					</p:panelGrid>
+					<p:commandButton action="#{chambreBean.update}"
+						update=":form2:ChambreDetail" icon="ui-icon-pencil"
+						title="Modifier">
+					</p:commandButton>
+				</p:outputPanel>
+			</h:form>
+			<br />
+		</p:dialog>
+
+		<br /> <br /> <br /> <br /> <br />
+
+
 	</div>
 
 

@@ -2,7 +2,9 @@ package com.adaming.myapp.bean.payement;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ViewScoped;
@@ -13,18 +15,24 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.stereotype.Component;
 
+import com.adaming.myapp.bean.client.ClientBean;
 import com.adaming.myapp.bean.facture.FactureBean;
+import com.adaming.myapp.bean.hotel.hotelBean;
 import com.adaming.myapp.bean.produit.addProduitBean;
 import com.adaming.myapp.entities.Adresse;
 import com.adaming.myapp.entities.CarteBancaire;
 import com.adaming.myapp.entities.Cdd;
 import com.adaming.myapp.entities.Cdi;
 import com.adaming.myapp.entities.Cheque;
+import com.adaming.myapp.entities.Client;
+import com.adaming.myapp.entities.Consomation;
 import com.adaming.myapp.entities.Espece;
 import com.adaming.myapp.entities.Facture;
+import com.adaming.myapp.entities.Hotel;
 import com.adaming.myapp.entities.Payement;
 import com.adaming.myapp.entities.Personne;
 import com.adaming.myapp.entities.Produit;
+import com.adaming.myapp.entities.Reservation;
 import com.adaming.myapp.entities.Stagiaire;
 import com.adaming.myapp.servicepayement.IServicePayement;
 
@@ -37,18 +45,38 @@ public class PayementBean {
 	private IServicePayement servicepayement;
 	@Inject
 	private FactureBean factureBean;
+	@Inject
+	private hotelBean serviceHotel;
+	@Inject
+	private ClientBean serviceClient;
+	
+	
 
 	// ===========================
 	// les attribus
 	// ===========================
 
+	private Set<Reservation> listeReservations = new HashSet<Reservation>();
 
+	private Set<Consomation> listeConsommations = new HashSet<Consomation>();
+	
+	private Set<Client> listePersonnes = new HashSet<Client>();
+	
+	private Long idHotel;
+
+	
+
+	private List<Hotel> listeHotels = new ArrayList<Hotel>();
+	private Long idPersonne;
 	private List<Payement> payements;
 	private Payement payement;
 	private double coutTotal;
 	private Date date;
 	private String devise;
-	private List<Facture> factures= new ArrayList<Facture>();
+	private List<Facture> factures = new ArrayList<Facture>();
+	
+	private List<Facture> facturesPayees = new ArrayList<Facture>();
+	private List<Facture> facturesNonPayees = new ArrayList<Facture>();
 	private Facture facture;
 	private Facture idFacture;
 	private Long selectidFacture;
@@ -64,7 +92,7 @@ public class PayementBean {
 
 	// ===========================
 	// Les methodes
-	// ===========================
+	// ===========================.
 	public PayementBean() {
 		super();
 		LOGGER.info(" <--------- employe been crée ----------------------> ");
@@ -84,8 +112,39 @@ public class PayementBean {
 		numCarte = 0;
 		numCheque = 0;
 		banqueCheque = "";
+		getHotel();
 
 	}
+	
+	public void getHotel() {
+
+		listeHotels = serviceHotel.getHotels();
+		idPersonne = 0L;
+
+	}
+
+	public void getClientsHotel() {
+
+		listePersonnes = serviceHotel.clientsByHotel(idHotel);
+
+		listeReservations = new HashSet<Reservation>();
+
+		listeConsommations = new HashSet<Consomation>();
+
+		idPersonne = 0L;
+
+	}
+	
+	public void getFacturesClient(){
+			
+		facturesNonPayees = new ArrayList<Facture>(serviceClient.factureClientNonPayees(idPersonne));
+		
+		
+		
+	}
+	
+	
+	
 	public void choisir() {
 
 		System.out.println("choisir lancée");
@@ -93,8 +152,10 @@ public class PayementBean {
 		especeVisible = false;
 		carteBancaireVisible = false;
 		chequeVisible = false;
-
-		if (option.equals("espece")) {
+		
+		if (option == null) {
+			
+		}else if (option.equals("espece")) {
 			initFields();
 			especeVisible = true;
 		} else if (option.equals("carteBancaire")) {
@@ -301,5 +362,61 @@ public class PayementBean {
 		this.chequeVisible = chequeVisible;
 	}
 
+	public List<Facture> getFacturesPayees() {
+		return facturesPayees;
+	}
+
+	public void setFacturesPayees(List<Facture> facturesPayees) {
+		this.facturesPayees = facturesPayees;
+	}
+
+	public Set<Reservation> getListeReservations() {
+		return listeReservations;
+	}
+
+	public void setListeReservations(Set<Reservation> listeReservations) {
+		this.listeReservations = listeReservations;
+	}
+
+	public Set<Consomation> getListeConsommations() {
+		return listeConsommations;
+	}
+
+	public void setListeConsommations(Set<Consomation> listeConsommations) {
+		this.listeConsommations = listeConsommations;
+	}
+
+	public Set<Client> getListePersonnes() {
+		return listePersonnes;
+	}
+
+	public void setListePersonnes(Set<Client> listePersonnes) {
+		this.listePersonnes = listePersonnes;
+	}
+
+	public Long getIdHotel() {
+		return idHotel;
+	}
+
+	public void setIdHotel(Long idHotel) {
+		this.idHotel = idHotel;
+	}
+
+	public List<Hotel> getListeHotels() {
+		return listeHotels;
+	}
+
+	public void setListeHotels(List<Hotel> listeHotels) {
+		this.listeHotels = listeHotels;
+	}
+
+	public Long getIdPersonne() {
+		return idPersonne;
+	}
+
+	public void setIdPersonne(Long idPersonne) {
+		this.idPersonne = idPersonne;
+	}
+	
 }
 

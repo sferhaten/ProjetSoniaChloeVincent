@@ -153,4 +153,21 @@ public class ServicePersonneImpl implements IServicePersonne {
 
 		return facturesClient;
 	}
+
+	@Override
+	public Set<Facture> facturesClientNonPayees(Long idPersonne) {
+		
+		Set<Facture> facturesClient = facturesClient(idPersonne);
+		
+		Set<Facture> facturesClientNonPayees = new HashSet<Facture>();
+		
+		for (Facture f : facturesClient) {
+			if (f.getPayement() == null) {
+				facturesClientNonPayees.add(f);
+			}
+		}
+		
+		
+		return facturesClientNonPayees;
+	}
 }

@@ -44,56 +44,132 @@
 							
 		</div><!-- /.container-fluid -->
 	</nav>
-	
-	
+	<br/>
+	<h:form>
 	<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
 		<form role="search">
 			<div class="form-group">
 				<h:inputText type="text" class="form-control" placeholder="Search"/>
 			</div>
 		</form>
-		<ul class="nav menu">
-			<li class="active"><a href="home.html"><svg class="glyph stroked dashboard-dial"></svg> Home</a></li>
-			<li><a href="widgets.html"><svg class="glyph stroked calendar"></svg> Hotel</a></li>
-			
-			
-			<li><a href="charts.html"><i class="fa fa-bank fa-fw"></i><svg class="glyph stroked line-graph"></svg> Personne<span
-							class="fa arrow"/></a>
-						<ul class="nav nav-second-level">
-							<li><a href="toAddBanque">Client</a></li>
-							<li><a href="toGestionBanque">Employe </a></li>
-							</ul></li>
-			<li><a href="tables.html"><svg class="glyph stroked table"></svg> facture</a></li>
-			<li><a href="forms.html"><svg class="glyph stroked pencil"></svg> Payement<span
-							class="fa arrow"/></a>
-							<ul class="nav nav-second-level">
-							<li><a href="toAddBanque">Carte baquaire</a></li>
-							<li><a href="toGestionBanque">Espece </a></li>
-							<li><a href="toGestionBanque">Cheque </a></li>
-							</ul></li>
-			
-			<li><a href="forms.html"><svg class="glyph stroked pencil"></svg> Stock de l'hotel</a></li>
-			
-		</ul>
-		
-		
+			<ul class="nav menu">
+				<ul class="nav menu">
+					<li class="active"><h:link outcome="home.html"><svg
+								class="glyph stroked dashboard-dial"></svg> Home</h:link></li><br/>
+<br/>
+					<p:growl autoUpdate="true" />
 
-	</div><!--/.sidebar-->
+
+
+
+					<p:panelMenu style="width:300px">
+						<p:submenu label="Hotel">
+							<p:menuitem>
+								<li><h:link value="Ajouter des hotels" outcome="addHotel.xhtml"
+										onclick="#{hotelBean.redirect()}">
+										<svg class="glyph stroked line-graph"></svg>
+									</h:link></li>
+							</p:menuitem>
+							<p:menuitem>
+								<li><h:link value="Gestion des hotels" outcome="gestionHotel.xhtml"
+										onclick="#{gestionHotelBean.redirect()}">
+										<svg class="glyph stroked line-graph"></svg>
+									</h:link></li>
+							</p:menuitem>
+						</p:submenu>
+					</p:panelMenu>
+					<br />
+<br/>
+
+					<p:panelMenu style="width:300px">
+
+						<p:submenu label="Chambre">
+							<p:menuitem>
+								<li><h:link value="Ajouter des chambres"
+										outcome="addChambre.xhtml" onclick="#{chambreBean.redirect()}">
+										<svg class="glyph stroked line-graph"></svg>
+									</h:link></li>
+							</p:menuitem>
+						</p:submenu>
+					</p:panelMenu>
+					<br />
+					<br />
+					
+					
+					
+					<p:panelMenu style="width:300px">
+
+						<p:submenu label="Stock">
+							<p:menuitem>
+								<li><h:link value="Gestion Stock" outcome="addProduit.xhtml"
+										onclick="#{addProduitBean.redirect()}">
+										<svg class="glyph stroked line-graph"></svg>
+									</h:link></li>
+							</p:menuitem>
+						</p:submenu>
+					</p:panelMenu><br/>
+					<br/>
+
+					<p:panelMenu style="width:300px">
+						<p:submenu label="Personne">
+							<p:menuitem>
+								<li><h:link value="Employe" outcome="employe.xhtml"
+										onclick="#{empBean.redirect()}">
+										<svg class="glyph stroked line-graph"></svg>
+									</h:link></li>
+							</p:menuitem>
+							<p:menuitem>
+								<li><h:link value="Client" outcome="client.xhtml"
+										onclick="#{clientBean.redirect()}">
+										<svg class="glyph stroked line-graph"></svg>
+									</h:link></li>
+							</p:menuitem>
+						</p:submenu>
+					</p:panelMenu><br/>
+					<br/>
+					
+					<p:panelMenu style="width:300px">
+						<p:submenu label="Facture">
+							<p:menuitem>
+
+								<li><h:link value="Editer une facture" outcome="facture.xhtml"
+										onclick="#{FactureBean.redirect()}">
+										<svg class="glyph stroked line-graph"></svg>
+									</h:link></li>
+							</p:menuitem>
+						</p:submenu>
+					</p:panelMenu>
+					<br />
+<br/>
+					<p:panelMenu style="width:300px">
+						<p:submenu label="Payement">
+							<p:menuitem>
+
+								<li><h:link value="Effectuer un payement" outcome="payement.xhtml"
+										onclick="#{payementBean.redirect()}">
+										<svg class="glyph stroked line-graph"></svg>
+									</h:link></li>
+							</p:menuitem>
+						</p:submenu>
+					</p:panelMenu>
+					<br />
+				
+				
+				
+				
+				</ul>
+
+			</ul>
+
+
+
+		</div><!--/.sidebar-->
+	</h:form>
+
+
+
+
 	
-
-
-
-
-	<h:outputScript name="js/jquery-1.11.1.min.js"></h:outputScript>
-	<h:outputScript name="js/bootstrap.min.js"></h:outputScript>
-	<h:outputScript name="js/chart.min.js"></h:outputScript>
-	<h:outputScript name="js/chart-data.js"></h:outputScript>
-	<h:outputScript name="js/easypiechart.js"></h:outputScript>
-	<h:outputScript name="js/easypiechart-data.js"></h:outputScript>
-	<h:outputScript name="js/bootstrap-datepicker.js"></h:outputScript>
-	
-
-		<h:outputScript name="js/lumino.glyphs.js"/>
     
 </body>
 </html>

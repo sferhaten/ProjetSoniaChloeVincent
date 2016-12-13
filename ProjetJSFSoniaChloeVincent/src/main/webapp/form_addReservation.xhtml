@@ -6,37 +6,17 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:fn="http://xmlns.jcp.org/jsp/jstl/functions">
+	xmlns:fn="http://xmlns.jcp.org/jsp/jstl/functions"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
 <ui:composition>
 	<br> </br>
 	<br> </br>
 	<br> </br>
-
+<ui:include src="home.xhtml" />
          <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
 
-		<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
-			<h:form role="search">
-				<div class="form-group">
-					<h:inputText type="text" class="form-control" placeholder="Search" />
-				</div>
-			</h:form>
-			<ul class="nav menu">
-				<li class="active"><a href="home.html"><svg
-							class="glyph stroked dashboard-dial"></svg> Home</a></li>
-				<li><a href="widgets.html"><svg
-							class="glyph stroked calendar"></svg> Hotel</a></li>
-				<li><a href="charts.html"><svg
-							class="glyph stroked line-graph"></svg> Personne</a></li>
-				<li><a href="tables.html"><svg class="glyph stroked table"></svg>
-						facture</a></li>
-				<li><a href="forms.html"><svg class="glyph stroked pencil"></svg>
-						Payement</a></li>
-
-			</ul>
-
-		</div>
-		<!--/.sidebar-->
+		
 
 		<h1 class="text-center">Réservations du client Toto</h1>
 		<br />

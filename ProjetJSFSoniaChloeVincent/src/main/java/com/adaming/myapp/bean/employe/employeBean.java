@@ -17,6 +17,7 @@ import com.adaming.myapp.bean.hotel.hotelBean;
 import com.adaming.myapp.entities.Adresse;
 import com.adaming.myapp.entities.Cdd;
 import com.adaming.myapp.entities.Cdi;
+import com.adaming.myapp.entities.Consomation;
 import com.adaming.myapp.entities.Employe;
 import com.adaming.myapp.entities.Hotel;
 import com.adaming.myapp.entities.Personne;
@@ -59,6 +60,7 @@ public class employeBean {
 	private Long selectedidHotel;
 
 	private List<Hotel> hotels = new ArrayList<Hotel>();
+	private Set<Consomation> consomations = new HashSet<Consomation>();
 	//===
 	//
 	//===
@@ -189,11 +191,16 @@ public class employeBean {
 		System.out.println("+++++++++++++++++++++++++++++" + personne);
 	}
 	
+	public Set<Consomation> getAllConsomation(Long idPersonne){
+		return consomations = servicePersonne.consomations(idPersonne);
+	}
 
 public String redirect(){
 		initFields();
 		return "employe?faces-redirect=true";
 	}
+
+
 	// ===========================
 	// Getter and setter
 	// ===========================
@@ -203,6 +210,16 @@ public String redirect(){
 	public Logger getLOGGER() {
 		return LOGGER;
 	}
+
+	public Set<Consomation> getConsomations() {
+		return consomations;
+	}
+
+
+	public void setConsomations(Set<Consomation> consomations) {
+		this.consomations = consomations;
+	}
+
 
 	public Personne getPersonne() {
 		return personne;
