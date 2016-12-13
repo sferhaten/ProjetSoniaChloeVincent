@@ -244,9 +244,6 @@ public class ChambreBean {
 		this.suiteVisible = suiteVisible;
 	}
 
-	// ===========================
-	// Getter and setter
-	// ===========================
 
 
 

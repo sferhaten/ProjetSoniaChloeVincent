@@ -121,7 +121,7 @@ public class FactureBean {
 		initFields();
 		return "factures?faces-redirect=true";
 	}
-	
+
 	public void initFields(){
 		 coutResa = 0.0;
 	 coutConso = 0.0;
